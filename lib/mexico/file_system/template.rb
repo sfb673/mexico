@@ -16,16 +16,8 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
-
-# This is the main module for the MExiCO gem.
-
-require 'nokogiri'
-require 'roxml'
-require 'fileutils'
-
-module Mexico
+# A template class doing nothing.
+class Mexico::FileSystem::Template
+  
   
 end
-
-require "mexico/core.rb"
-require "mexico/file_system.rb"

@@ -16,16 +16,22 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
+# XML bound elements know the corpus object, the corpus file, and
+# the nokogiri element they come from and can write changes back to
+# that file.
 
-# This is the main module for the MExiCO gem.
-
-require 'nokogiri'
-require 'roxml'
-require 'fileutils'
-
-module Mexico
+module Mexico::FileSystem::BoundToCorpus
   
+  attr_accessor :corpus
+  
+  #sets up the bound between the object and the corpus elements
+  def bind_to_corpus(param_corpus)
+    @corpus = param_corpus
+    
+    if self.respond_to?(:when_bound_to_corpus)
+      self.when_bound_to_corpus
+    end
+    
+  end
+    
 end
-
-require "mexico/core.rb"
-require "mexico/file_system.rb"

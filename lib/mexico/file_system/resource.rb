@@ -16,16 +16,20 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
+# A template class doing nothing.
+class Mexico::FileSystem::Resource
+  
+  include ::ROXML
+  
+  xml_accessor :identifier,     :from => '@identifier' 
+  xml_accessor :name,           :from => '@name' 
+  xml_accessor :description,    :from => 'Description' 
 
-# This is the main module for the MExiCO gem.
-
-require 'nokogiri'
-require 'roxml'
-require 'fileutils'
-
-module Mexico
+  #@ media_type
+  #@ associated with trial
+  #@ associated with design_component
+  #@ deleted? BRAUCHEN WIR HIER NICHT
+  #@ status (of conversions)
+  #@ cached_disk_usage
   
 end
-
-require "mexico/core.rb"
-require "mexico/file_system.rb"

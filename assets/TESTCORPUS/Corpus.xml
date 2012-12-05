@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<Corpus identifier="example-corpus" name="Example Corpus">
+	<Description>This is an example corpus.</Description>
+	<Designs>
+		<Design identifier="example-design" name="Example Design">
+			<Description>Design Description</Description>
+		</Design>
+	</Designs>
+	<Trials>
+		<Trial identifier="example-trial" name="Example Trial" cue="V0?1" runningnumber="1">
+			<Description>Trial Description</Description>
+		</Trial>
+	</Trials>
+</Corpus>

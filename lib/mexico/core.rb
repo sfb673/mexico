@@ -17,15 +17,9 @@
 # <http://www.gnu.org/licenses/>.
 
 
-# This is the main module for the MExiCO gem.
-
-require 'nokogiri'
-require 'roxml'
-require 'fileutils'
-
-module Mexico
+module Mexico::Core
   
 end
 
-require "mexico/core.rb"
-require "mexico/file_system.rb"
+require 'mexico/core/corpus_core.rb'
+require 'mexico/core/design_core.rb'

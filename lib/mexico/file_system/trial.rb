@@ -16,16 +16,27 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
-
-# This is the main module for the MExiCO gem.
-
-require 'nokogiri'
-require 'roxml'
-require 'fileutils'
-
-module Mexico
+# A template class doing nothing.
+class Mexico::FileSystem::Trial
+  
+  include Mexico::FileSystem::BoundToCorpus
+  
+  include ::ROXML
+  
+  xml_accessor :identifier,     :from => '@identifier' 
+  xml_accessor :name,           :from => '@name' 
+  xml_accessor :cue,            :from => '@cue'
+  xml_accessor :running_number, :from => '@runningnumber', :as => Integer
+  
+  xml_accessor :description, :from => "Description"     
+  
+  attr_accessor :corpus
+  
+  def initialize(opts={})
+    # @corpus = corpus
+    [:identifier,:name,:description,:cue,:running_number].each do |att|
+      send("#{att}=", opts[att]) if opts.has_key?(att)
+    end
+  end
   
 end
-
-require "mexico/core.rb"
-require "mexico/file_system.rb"

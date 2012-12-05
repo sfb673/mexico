@@ -15,10 +15,10 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "mexico"
-  gem.homepage = "http://github.com/pmenke/mexico"
-  gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.homepage = "http://github.com/sfb673/mexico"
+  gem.license = "LPGL Version 3"
+  gem.summary = %Q{MExiCo is a library and API for the management of multimodal experimental corpora.}
+  gem.description = %Q{MExiCo is a library and API for the management of multimodal experimental corpora.}
   gem.email = "pmenke@googlemail.com"
   gem.authors = ["Peter Menke"]
   # dependencies defined in Gemfile
@@ -32,18 +32,26 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-require 'rcov/rcovtask'
-Rcov::RcovTask.new do |test|
-  test.libs << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-  test.rcov_opts << '--exclude "gems/*"'
-end
+#require 'rcov/rcovtask'
+#Rcov::RcovTask.new do |test|
+#  test.libs << 'test'
+#  test.pattern = 'test/**/test_*.rb'
+#  test.verbose = true
+#  test.rcov_opts << '--exclude "gems/*"'
+#end
 
 require 'cucumber/rake/task'
 Cucumber::Rake::Task.new(:features)
 
 task :default => :test
 
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new('spec') do |t|
+  # t.rspec_opts = '-f html -o assets/spec.html'
+  t.rspec_opts = '-f nested'
+end
+
 require 'yard'
-YARD::Rake::YardocTask.new
+YARD::Rake::YardocTask.new :doc do |t|
+  t.options = %w(--private --protected)
+end
