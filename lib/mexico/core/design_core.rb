@@ -17,15 +17,20 @@
 # <http://www.gnu.org/licenses/>.
 
 
-# This is the main module for the MExiCO gem.
-
-require 'nokogiri'
-require 'roxml'
-require 'fileutils'
-
-module Mexico
+module Mexico::Core::DesignCore
+  
+  def included(x)
+    puts "DesignCore is now included in #{x}."  
+  end
+  
+  def extended(x)
+    puts "DesignCore now extends #{x}."  
+  end
+  
+  def core_included?
+    true
+  end  
   
 end
 
-require "mexico/core.rb"
-require "mexico/file_system.rb"
+
