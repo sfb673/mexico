@@ -120,7 +120,7 @@ describe Mexico::FileSystem::Corpus do
     
     it 'should have one design' do
       @corpus.designs.should_not be nil
-      @corpus.designs.size.should be 1
+      @corpus.designs.size.should be 2
     end
 
     it 'should have a first design with the correct data' do
