@@ -27,6 +27,7 @@ end
 require 'mexico/file_system/bound_to_corpus.rb'
 require 'mexico/file_system/id_ref.rb'
 
+require 'mexico/file_system/participant_role.rb'
 require 'mexico/file_system/resource.rb'
 require 'mexico/file_system/trial.rb'
 require 'mexico/file_system/design_component.rb'
