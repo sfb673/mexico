@@ -16,10 +16,15 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
-# A template class doing nothing.
+# Trials model the events from reality that form the ultimate substrate
+# of a corpus. Trials are usually numbered sequentially. A trial
+# stands for a specific clip or segment of reality, e.g., a time span
+# and a location in space where the events under observation occurred.
 class Mexico::FileSystem::Trial
   
   include Mexico::FileSystem::BoundToCorpus
+  extend Mexico::FileSystem::IdRef
+  
   
   include ::ROXML
   
@@ -31,6 +36,9 @@ class Mexico::FileSystem::Trial
   xml_accessor :description, :from => "Description"     
   
   attr_accessor :corpus
+  
+  xml_accessor :design_id
+  id_ref :design
   
   def initialize(opts={})
     # @corpus = corpus
