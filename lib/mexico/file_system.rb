@@ -25,6 +25,7 @@ end
 #require 'mexico/file_system/xml_based_collection.rb'
 
 require 'mexico/file_system/bound_to_corpus.rb'
+require 'mexico/file_system/id_ref.rb'
 
 require 'mexico/file_system/resource.rb'
 require 'mexico/file_system/trial.rb'

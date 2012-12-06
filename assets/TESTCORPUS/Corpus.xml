@@ -5,9 +5,12 @@
 		<Design identifier="example-design" name="Example Design">
 			<Description>Design Description</Description>
 		</Design>
+		<Design identifier="other-design" name="Other Design">
+			<Description>Yet another design</Description>
+		</Design>
 	</Designs>
 	<Trials>
-		<Trial identifier="example-trial" name="Example Trial" cue="V0?1" runningnumber="1">
+		<Trial identifier="example-trial" name="Example Trial" cue="V0?1" runningnumber="1" design_id="example-design">
 			<Description>Trial Description</Description>
 		</Trial>
 	</Trials>
