@@ -17,25 +17,29 @@
 # <http://www.gnu.org/licenses/>.
 
 class Mexico::FileSystem::Design
-  
+
   include Mexico::FileSystem::BoundToCorpus
-  
+
   include Mexico::Core::DesignCore
-  
+
   include ::ROXML
-  
-  xml_accessor :identifier, :from => '@identifier' 
-  xml_accessor :name,       :from => '@name' 
-  xml_accessor :description, :from => "Description"       
+
+  xml_accessor :identifier, :from => '@identifier'
+  xml_accessor :name,       :from => '@name'
+  xml_accessor :description, :from => "Description"
 
   #xml_bind :identifier,  :attribute => 'identifier'
   #xml_bind :name,        :attribute => 'name',       :default => ''
   #xml_bind :description, :attribute => 'description'
-  
+
+  # Creates a new design object.
+  # @option opts [String] :identifier The identifier of the new design (required).
+  # @option opts [String] :name The name of the new design. (required).
+  # @option opts [String] :description A description of the new design (optional).
   def initialize(opts={})
     [:identifier,:name,:description].each do |att|
       send("#{att}=", opts[att]) if opts.has_key?(att)
     end
   end
-  
+
 end

@@ -122,6 +122,13 @@ describe Mexico::FileSystem::Corpus do
         @corpus.participants[0].participant_role.should eq(::Mexico::Constants::ParticipantRoles::NAIVE)
       end
       
+      
+      it 'should reflect addition of a new participant' do
+        @corpus.participants << ::Mexico::FileSystem::Participant.new(:identifier=>"vp02",:participant_role=>"confederate")
+        @corpus.participants.size.should be 2
+        write_corpus
+      end
+      
     end
     
     context "Designs: " do
@@ -162,7 +169,6 @@ describe Mexico::FileSystem::Corpus do
         @corpus.trials.size.should be 1
         @corpus.trials << Mexico::FileSystem::Trial.new(:identifier=>"second-example-trial", :name=>"Second Example Trial", :description=>"This is an example trial.",:cue=>"V0?2",:running_number=>2)
         @corpus.trials.size.should be 2
-        write_corpus
       end
     end
 

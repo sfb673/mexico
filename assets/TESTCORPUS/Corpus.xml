@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <Corpus identifier="example-corpus" name="Example Corpus">
 	<Description>This is an example corpus.</Description>
+	<Participants>
+		<Participant identifier="vp01" name="VP01" participant_role_id="naive"/>
+	</Participants>
 	<Designs>
 		<Design identifier="example-design" name="Example Design">
 			<Description>Design Description</Description>
