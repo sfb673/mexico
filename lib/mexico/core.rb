@@ -16,10 +16,14 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
-
+# In this module, central methods for all classes in future 
+# MExiCO implementations are gathered that should remain the
+# same - they can simply be included in future implementations.
 module Mexico::Core
   
 end
+
+require 'mexico/core/media_type.rb'
 
 require 'mexico/core/corpus_core.rb'
 require 'mexico/core/design_core.rb'

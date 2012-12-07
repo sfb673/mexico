@@ -22,6 +22,9 @@
 # object.
 module Mexico::FileSystem::IdRef
 
+  # Defines a foreign key reference for an object. By default, it will
+  # refer to the corresponding collection in the top-level corpus, and
+  # it will retrieve the object via its +identifier+ field.
   def id_ref(field_name)
     
     pluralized_field_name = "#{field_name}s"
