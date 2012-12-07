@@ -29,19 +29,13 @@ class Mexico::FileSystem::ParticipantRole
   
   xml_accessor :identifier,     :from => '@identifier' 
   xml_accessor :name,           :from => '@name' 
-  xml_accessor :cue,            :from => '@cue'
-  xml_accessor :running_number, :from => '@runningnumber', :as => Integer
   
   xml_accessor :description, :from => "Description"     
   
-  attr_accessor :corpus
-  
-  xml_accessor :design_id
-  id_ref :design
   
   def initialize(opts={})
     # @corpus = corpus
-    [:identifier,:name,:description,:cue,:running_number].each do |att|
+    [:identifier,:name,:description].each do |att|
       send("#{att}=", opts[att]) if opts.has_key?(att)
     end
   end
