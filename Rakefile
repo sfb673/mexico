@@ -55,3 +55,7 @@ require 'yard'
 YARD::Rake::YardocTask.new :doc do |t|
   t.options = %w(--private --protected)
 end
+
+task :undoc do |t|
+  YARD::CLI::Stats.run('--list-undoc')
+end
