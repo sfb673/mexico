@@ -12,7 +12,7 @@ gem 'roxml'
 group :development do
   gem "minitest", ">= 0"
   gem "bluecloth"
-  gem "yard", "~> 0.6.0"
+  gem "yard", "~> 0.8.3"
   gem "cucumber", ">= 0"
   gem "bundler" #, "~> 1.0.0"
   gem "jeweler", "~> 1.6.4"
