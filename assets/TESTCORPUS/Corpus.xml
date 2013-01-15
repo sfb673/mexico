@@ -17,4 +17,9 @@
 			<Description>Trial Description</Description>
 		</Trial>
 	</Trials>
+	<Resources>
+		<Resource identifier="example-resource" name="Example Resource">
+			<Description>Resource Description</Description>
+		</Resource>
+	</Resources>
 </Corpus>
