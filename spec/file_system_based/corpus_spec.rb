@@ -172,6 +172,24 @@ describe Mexico::FileSystem::Corpus do
       end
     end
 
+    
+    context "Resources: " do
+      it 'should respond to resources methods' do
+        @corpus.should respond_to(:resources)
+      end
+      
+      it 'should have one resource' do
+        @corpus.resources.should_not be nil
+        @corpus.resources.size.should be 1
+      end
+      
+      it 'after adding a resource, it should have two resources' do
+        @corpus.resources.size.should be 1
+        @corpus.resources << Mexico::FileSystem::Resource.new(:identifier=>"second-example-resource", :name=>"Second Example Resource", :description=>"This is an example resource.")
+        @corpus.resources.size.should be 2
+      end
+    end
+
   end
   
 end

@@ -27,3 +27,10 @@ require 'mexico/core/media_type.rb'
 
 require 'mexico/core/corpus_core.rb'
 require 'mexico/core/design_core.rb'
+
+
+module Mexico::Constants
+
+	module MediaTypes
+	end
+end
