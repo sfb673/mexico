@@ -6,6 +6,8 @@ MExiCo (short for "Multimodal Experiment Corpora") is a library for the
 modeling and management of large, heterogeneous data collections from 
 the field of linguistics, psycholinguistics, and related disciplines.
 
+Its central organising unit is the **Corpus** class which allows researchers to bundle resources from an experiment with related background data, conceptual data, and metadata.
+
 ## Contributing to mexico
  
 - Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
@@ -18,7 +20,7 @@ the field of linguistics, psycholinguistics, and related disciplines.
 
 ## Copyright
 
-Copyright (c) 2012 Peter Menke, SFB 673, Universität Bielefeld.
+Copyright (c) 2012, 2013 Peter Menke, SFB 673, Universität Bielefeld.
 
 MExiCo is free software: you can redistribute it and/or modify
 it under the terms of the **GNU Lesser General Public License** as
