@@ -28,6 +28,7 @@ end
 
 require 'mexico/file_system/bound_to_corpus.rb'
 require 'mexico/file_system/id_ref.rb'
+require 'mexico/file_system/static_collection_ref.rb'
 
 require 'mexico/file_system/participant_role.rb'
 require 'mexico/file_system/participant.rb'

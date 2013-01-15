@@ -27,3 +27,32 @@ class Mexico::Core::MediaType
   end
   
 end
+
+
+# This module lists all participant roles
+# that are part of the current MExiCo model.
+module Mexico::Constants
+
+  module MediaTypes
+
+	# Digital recordings of moving pictures, usually along with sound.
+	VIDEO      = Mexico::Core::MediaType.new :identifier => "video",      :name => "Video",      :extensions => %w(mov avi mpg mpeg m4v webm mts)
+
+	# Digital sound recordings.
+	AUDIO      = Mexico::Core::MediaType.new :identifier => "audio",      :name => "Audio",      :extensions => %w(wav ogg aac mp3)
+
+	# Different transcription and annotation file formats.
+	ANNOTATION = Mexico::Core::MediaType.new :identifier => "annotation", :name => "Annotation", :extensions => %w(toe ShortTextGrid TextGrid eaf)
+
+	# Placeholder for all other (yet unsupported) types.
+	OTHER      = Mexico::Core::MediaType.new(:identifier => "other",      :name => "Other",      :extensions => %w())
+
+	ALL = Array.new
+	ALL << ::Mexico::Constants::MediaTypes::VIDEO
+	ALL << ::Mexico::Constants::MediaTypes::AUDIO
+	ALL << ::Mexico::Constants::MediaTypes::ANNOTATION
+	ALL << ::Mexico::Constants::MediaTypes::OTHER
+
+  end
+
+end
