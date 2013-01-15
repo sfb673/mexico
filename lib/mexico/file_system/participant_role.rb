@@ -16,11 +16,10 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
-# Trials model the events from reality that form the ultimate substrate
-# of a corpus. Trials are usually numbered sequentially. A trial
-# stands for a specific clip or segment of reality, e.g., a time span
-# and a location in space where the events under observation occurred.
-class Mexico::FileSystem::Trial
+# Participant Roles describe the nature of the associated participant:
+# Possible values are, e.g., naive participants, confederates, 
+# experimenters, etc.
+class Mexico::FileSystem::ParticipantRole
   
   include Mexico::FileSystem::BoundToCorpus
   extend Mexico::FileSystem::IdRef
@@ -30,19 +29,13 @@ class Mexico::FileSystem::Trial
   
   xml_accessor :identifier,     :from => '@identifier' 
   xml_accessor :name,           :from => '@name' 
-  xml_accessor :cue,            :from => '@cue'
-  xml_accessor :running_number, :from => '@runningnumber', :as => Integer
   
   xml_accessor :description, :from => "Description"     
   
-  attr_accessor :corpus
-  
-  xml_accessor :design_id
-  id_ref :design
   
   def initialize(opts={})
     # @corpus = corpus
-    [:identifier,:name,:description,:cue,:running_number].each do |att|
+    [:identifier,:name,:description].each do |att|
       send("#{att}=", opts[att]) if opts.has_key?(att)
     end
   end

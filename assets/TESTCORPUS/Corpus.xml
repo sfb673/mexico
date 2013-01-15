@@ -1,14 +1,25 @@
 <?xml version="1.0"?>
 <Corpus identifier="example-corpus" name="Example Corpus">
 	<Description>This is an example corpus.</Description>
+	<Participants>
+		<Participant identifier="vp01" name="VP01" participant_role_id="naive"/>
+	</Participants>
 	<Designs>
 		<Design identifier="example-design" name="Example Design">
 			<Description>Design Description</Description>
 		</Design>
+		<Design identifier="other-design" name="Other Design">
+			<Description>Yet another design</Description>
+		</Design>
 	</Designs>
 	<Trials>
-		<Trial identifier="example-trial" name="Example Trial" cue="V0?1" runningnumber="1">
+		<Trial identifier="example-trial" name="Example Trial" cue="V0?1" runningnumber="1" design_id="example-design">
 			<Description>Trial Description</Description>
 		</Trial>
 	</Trials>
+	<Resources>
+		<Resource identifier="example-resource" name="Example Resource">
+			<Description>Resource Description</Description>
+		</Resource>
+	</Resources>
 </Corpus>

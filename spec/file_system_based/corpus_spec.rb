@@ -96,58 +96,100 @@ describe Mexico::FileSystem::Corpus do
   
   
   context "Aggregated components" do
-    
-    context "designs" do
-      
-      it 'collection method present' do
-       @corpus.should respond_to(:designs)
+
+    context "Participants: " do
+
+      it 'should respond to participant methods' do
+        @corpus.should respond_to(:participants)
+      end
+  
+      it 'collection accessor returns collection' do
+       @corpus.participants.should be_kind_of(Array)
       end
       
+      it 'should have one member' do
+        @corpus.participants.should_not be nil
+        @corpus.participants.size.should be 1
+      end
+  
+      it 'should have a first member with the correct data' do
+        @corpus.participants[0].identifier.should eq "vp01"
+        @corpus.participants[0].should respond_to("corpus")
+        @corpus.participants[0].corpus.identifier.should eq "example-corpus"
+      end
+
+      it 'should have a first member with the correct participant role' do
+        @corpus.participants[0].participant_role.should eq(::Mexico::Constants::ParticipantRoles::NAIVE)
+      end
+      
+      
+      it 'should reflect addition of a new participant' do
+        @corpus.participants << ::Mexico::FileSystem::Participant.new(:identifier=>"vp02",:participant_role=>"confederate")
+        @corpus.participants.size.should be 2
+        write_corpus
+      end
+      
+    end
+    
+    context "Designs: " do
+  
+      it 'should respond to design methods' do
+        @corpus.should respond_to(:designs)
+      end
+  
       it 'collection accessor returns collection' do
        @corpus.designs.should be_kind_of(Array)
       end
       
-      
-    end
+      it 'should have one design' do
+        @corpus.designs.should_not be nil
+        @corpus.designs.size.should be 2
+      end
   
-  end
-  
-  
-  context "Designs: " do
-    it 'should respond to design methods' do
-      @corpus.should respond_to(:designs)
+      it 'should have a first design with the correct data' do
+        @corpus.designs[0].identifier.should eq "example-design"
+        @corpus.designs[0].should respond_to("corpus")
+        @corpus.designs[0].corpus.identifier.should eq "example-corpus"
+      end
+    
     end
     
-    it 'should have one design' do
-      @corpus.designs.should_not be nil
-      @corpus.designs.size.should be 1
+    
+    context "Trials: " do
+      it 'should respond to trials methods' do
+        @corpus.should respond_to(:trials)
+      end
+      
+      it 'should have one trial' do
+        @corpus.trials.should_not be nil
+        @corpus.trials.size.should be 1
+      end
+      
+      it 'after adding a trial, it should have two trials' do
+        @corpus.trials.size.should be 1
+        @corpus.trials << Mexico::FileSystem::Trial.new(:identifier=>"second-example-trial", :name=>"Second Example Trial", :description=>"This is an example trial.",:cue=>"V0?2",:running_number=>2)
+        @corpus.trials.size.should be 2
+      end
     end
 
-    it 'should have a first design with the correct data' do
-      @corpus.designs[0].identifier.should eq "example-design"
-      @corpus.designs[0].should respond_to("corpus")
-      @corpus.designs[0].corpus.identifier.should eq "example-corpus"
-    end
-  
-  end
-  
-  
-  context "Trials: " do
-    it 'should respond to trials methods' do
-      @corpus.should respond_to(:trials)
-    end
     
-    it 'should have one trial' do
-      @corpus.trials.should_not be nil
-      @corpus.trials.size.should be 1
+    context "Resources: " do
+      it 'should respond to resources methods' do
+        @corpus.should respond_to(:resources)
+      end
+      
+      it 'should have one resource' do
+        @corpus.resources.should_not be nil
+        @corpus.resources.size.should be 1
+      end
+      
+      it 'after adding a resource, it should have two resources' do
+        @corpus.resources.size.should be 1
+        @corpus.resources << Mexico::FileSystem::Resource.new(:identifier=>"second-example-resource", :name=>"Second Example Resource", :description=>"This is an example resource.")
+        @corpus.resources.size.should be 2
+      end
     end
-    
-    it 'after adding a trial, it should have two trials' do
-      @corpus.trials.size.should be 1
-      @corpus.trials << Mexico::FileSystem::Trial.new(:identifier=>"second-example-trial", :name=>"Second Example Trial", :description=>"This is an example trial.",:cue=>"V0?2",:running_number=>2)
-      @corpus.trials.size.should be 2
-      write_corpus
-    end
+
   end
   
 end

@@ -16,7 +16,9 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
-
+# The FileSystem module contains an implementation of the MExiCo
+# library that works locally with a set of folders and files as
+# its backend.
 module Mexico::FileSystem
   
 end
@@ -25,7 +27,11 @@ end
 #require 'mexico/file_system/xml_based_collection.rb'
 
 require 'mexico/file_system/bound_to_corpus.rb'
+require 'mexico/file_system/id_ref.rb'
+require 'mexico/file_system/static_collection_ref.rb'
 
+require 'mexico/file_system/participant_role.rb'
+require 'mexico/file_system/participant.rb'
 require 'mexico/file_system/resource.rb'
 require 'mexico/file_system/trial.rb'
 require 'mexico/file_system/design_component.rb'

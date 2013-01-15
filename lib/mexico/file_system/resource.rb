@@ -19,6 +19,10 @@
 # A template class doing nothing.
 class Mexico::FileSystem::Resource
   
+  include Mexico::FileSystem::BoundToCorpus
+  extend Mexico::FileSystem::IdRef
+  extend Mexico::FileSystem::StaticCollectionRef
+  
   include ::ROXML
   
   xml_accessor :identifier,     :from => '@identifier' 
@@ -26,10 +30,22 @@ class Mexico::FileSystem::Resource
   xml_accessor :description,    :from => 'Description' 
 
   #@ media_type
-  #@ associated with trial
-  #@ associated with design_component
-  #@ deleted? BRAUCHEN WIR HIER NICHT
-  #@ status (of conversions)
-  #@ cached_disk_usage
+
+  xml_accessor :media_type_id,  :from => '@media_type_id'
+
+  collection_ref :media_type, ::Mexico::Core::MediaType, ::Mexico::Constants::MediaTypes::ALL, ::Mexico::Constants::MediaTypes::OTHER
+
+  # docme
+
+  def initialize(opts={})
+    # @corpus = corpus
+    [:identifier,:name,:description].each do |att|
+      send("#{att}=", opts[att]) if opts.has_key?(att)
+    end
+  end
+
+  # @todo Resource must, upon creation, be bound to a physical resource
+  # somewhere in the file system. 
+
   
 end

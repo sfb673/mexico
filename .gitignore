@@ -53,3 +53,5 @@ tmp
 .yardoc
 _yardoc
 doc/
+
+/assets/TESTCORPUS/Corpus.OUT.xml

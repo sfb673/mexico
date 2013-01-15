@@ -16,19 +16,20 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
-
+# The Corpus core module contains methods for implementations of the
+# corpus class that are independent of the implementation.
 module Mexico::Core::CorpusCore
   
-  puts "INCLUDING CORE"
+  #def included(x)
+  #  puts "CorpusCore is now included in #{x}."  
+  #end
   
-  def included(x)
-    puts "CorpusCore is now included in #{x}."  
-  end
+  #def extended(x)
+  #  puts "CorpusCore now extends #{x}."  
+  #end
   
-  def extended(x)
-    puts "CorpusCore now extends #{x}."  
-  end
-  
+  # simple test method that can be called to see whether the module
+  # was included successfully
   def core_included?
     true
   end  

@@ -25,6 +25,8 @@ describe Mexico::FileSystem::Trial do
     @basepath = File.join(File.dirname(__FILE__), '..','..','assets','TESTCORPUS')
     @xml = File.open(File.join(@basepath,'Corpus.xml'),'rb') { |f| f.read }
     @corpus = Mexico::FileSystem::Corpus.from_xml(@xml, {:path => @basepath})
+    @design = @corpus.designs.first
+    @other_design = @corpus.designs[1]
     @trial = @corpus.trials.first
   end
   
@@ -101,6 +103,26 @@ describe Mexico::FileSystem::Trial do
 
 
   context "Aggregated components" do
+    
+    it "should respond to id method" do
+      @trial.should respond_to(:design_id)
+    end
+    
+    it "should respond to object getter method" do
+      @trial.should respond_to(:design)
+    end
+    
+    it "should deliver the correct design object" do
+      @trial.design.identifier.should eq @design.identifier
+      @trial.design.name.should eq @design.name
+      @trial.design.description.should eq @design.description
+    end
+    
+    it "should, upon change, use the correct design object" do
+      @trial.design.identifier.should eq @design.identifier
+      @trial.design=@other_design
+      @trial.design.identifier.should eq @other_design.identifier
+    end
     
   end
 

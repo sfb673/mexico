@@ -32,12 +32,14 @@ class Mexico::FileSystem::Corpus
   
   xml_name 'Corpus'
   
-  xml_accessor :identifier,  :from => '@identifier' 
-  xml_accessor :name,        :from => '@name' 
-  xml_accessor :description, :from => "Description"       
-  xml_accessor :designs,     :as => [::Mexico::FileSystem::Design],   :from => "Design",   :in => "Designs"
-  xml_accessor :trials,      :as => [::Mexico::FileSystem::Trial],    :from => "Trial",    :in => "Trials"
-  xml_accessor :resources,   :as => [::Mexico::FileSystem::Resource], :from => "Resource", :in => "Resources"
+  xml_accessor :identifier,        :from => '@identifier' 
+  xml_accessor :name,              :from => '@name' 
+  xml_accessor :description,       :from => "Description"
+  # xml_accessor :participant_roles, :as => [::Mexico::FileSystem::ParticipantRole], :from => "ParticipantRole", :in => "ParticipantRoles"
+  xml_accessor :participants,      :as => [::Mexico::FileSystem::Participant],     :from => "Participant",     :in => "Participants"       
+  xml_accessor :designs,           :as => [::Mexico::FileSystem::Design],          :from => "Design",          :in => "Designs"
+  xml_accessor :trials,            :as => [::Mexico::FileSystem::Trial],           :from => "Trial",           :in => "Trials"
+  xml_accessor :resources,         :as => [::Mexico::FileSystem::Resource],        :from => "Resource",        :in => "Resources"
   
   public
   
@@ -58,6 +60,8 @@ class Mexico::FileSystem::Corpus
     f.close
   end
   
+  # Saves the current data structure to the current file handle.
+  # @return [void]
   def save_xml
     doc = Nokogiri::XML::Document.new
     doc.root = @corpus.to_xml
@@ -67,12 +71,27 @@ class Mexico::FileSystem::Corpus
     # File.open(@corpus_file, 'w') {|f| f.write(doc.to_xml) }
   end
   
+  # Creates a new design object and binds it to this corpus object.
+  # @option opts [String] :identifier The identifier of the new design (required).
+  # @option opts [String] :name The name of the new design. (required).
+  # @option opts [String] :description A description of the new design (optional).
+  def create_design(opts={})
+    d = ::Mexico::FileSystem::Design.new(opts)
+    d.bind_to_corpus(self)
+    d
+  end
+  
   
   
   private
 
-  # a
+  # after parsing a XML corpus representation, this method binds all components
+  # to the corpus object. 
   def after_parse
+    
+    participants.each do |participant|
+      participant.bind_to_corpus(self)
+    end
     
     designs.each do |design|
       design.bind_to_corpus(self)
@@ -89,7 +108,10 @@ class Mexico::FileSystem::Corpus
   end
     
   # This method inits a new corpus folder in the file system.
-  # @return true if all operations were successful, false otherwise.
+  # @param [String] path The path where the folder should be initialized.
+  # @param [Hash] opts A hash with additional options and parameters.
+  # @option opts [String] :identifier The identifier of the new corpus (required).
+  # @return +true+ if all operations were successful, false otherwise.
   def init_folder(path, opts = {})
     
     # check whether the given folder does not exist and is writable
