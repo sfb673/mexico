@@ -1,0 +1,3 @@
+[submodule "assets/mexico-testcorpus"]
+	path = assets/mexico-testcorpus
+	url = https://github.com/sfb673/mexico-testcorpus.git
