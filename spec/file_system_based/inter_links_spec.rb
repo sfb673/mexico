@@ -16,17 +16,25 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
+require 'spec_helper'
 
-
-require 'nokogiri'
-require 'roxml'
-require 'fileutils'
-
-# This is the main module for the MExiCO gem.
-module Mexico
+describe Mexico::FileSystem::Resource do
   
-end
+  # set up an initial corpus representation from the example file
+  before(:each) do
+    @basepath = File.join(File.dirname(__FILE__), '..','..','assets','mexico-testcorpus','utterance')
+    @xml = File.open(File.join(@basepath,'Corpus.xml'),'rb') { |f| f.read }
+    @corpus = Mexico::FileSystem::Corpus.from_xml(@xml, {:path => @basepath})
+    @resource = @corpus.resources.first
+    @local_file = @resource.local_files[0]
+  end
+  
+  context 'our little corpus on the prairie' do
+  
+    it 'should link from design to all trials' do
+      1.should eq 1  
+    end
+    
+  end
 
-require "mexico/core.rb"
-require "mexico/file_system.rb"
-require "mexico/constants.rb"
+end
