@@ -37,7 +37,8 @@ class Mexico::FileSystem::Trial
   
   attr_accessor :corpus
   
-  xml_accessor :design_id
+  xml_accessor :design_id, :from => '@design_id'
+
   id_ref :design
   
   def initialize(opts={})
@@ -45,6 +46,15 @@ class Mexico::FileSystem::Trial
     [:identifier,:name,:description,:cue,:running_number].each do |att|
       send("#{att}=", opts[att]) if opts.has_key?(att)
     end
+    
+  end
+
+  def resources
+    @corpus.resources.select{ |i| i.trial === self }
+  end
+
+  def linked_to_design?
+    return design!=nil
   end
   
 end

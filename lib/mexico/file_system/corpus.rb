@@ -95,6 +95,9 @@ class Mexico::FileSystem::Corpus
     
     designs.each do |design|
       design.bind_to_corpus(self)
+      design.design_components.each do |dc|
+        dc.bind_to_corpus(self)
+      end
     end
     
     trials.each do |trial|
@@ -138,6 +141,12 @@ class Mexico::FileSystem::Corpus
     end
     # create
     
+  end
+
+
+  # helping method to retrieve all existing design components
+  def design_components
+    @designs.collect{|d| d.design_components}.flatten
   end
   
 end

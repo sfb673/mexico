@@ -18,7 +18,9 @@
 
 # A template class doing nothing.
 class Mexico::FileSystem::DesignComponent
-  
+
+  include Mexico::FileSystem::BoundToCorpus
+
   include ::ROXML
   
   xml_accessor :identifier,     :from => '@identifier' 
@@ -32,4 +34,8 @@ class Mexico::FileSystem::DesignComponent
   #@todo content_structure
   #@todo belongs to Design
   
+  def resources
+    @corpus.resources.select{ |i| i.design_component === self }
+  end
+
 end
