@@ -53,7 +53,7 @@ class Mexico::FileSystem::Corpus
   # @option opts [String] :description The path where to create the new corpus. Required.
   def initialize(opts = {})
     init_folder(opts[:path], opts)
-    @base_path = opts[:path]
+    @base_path = File.expand_path(opts[:path])
     @corpus_file_name = File.join(@base_path, "Corpus.xml")
     f = File.open(@corpus_file_name, 'r')
     @xml_doc = ::Nokogiri::XML(f)
@@ -103,6 +103,13 @@ class Mexico::FileSystem::Corpus
 
     resources.each do |resource|
       resource.bind_to_corpus(self)
+      resource.local_files.each do |loc|
+        loc.bind_to_corpus(self)
+      end
+      resource.urls.each do |url|
+        url.bind_to_corpus(self)
+      end
+      
     end
         
   end

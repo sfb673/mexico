@@ -39,4 +39,27 @@ class Mexico::FileSystem::LocalFile
     end
   end
   
+  def absolute_path
+    if path.starts_with? "."
+      return File.expand_path(File.join(@corpus.base_path, path))
+    end
+    return path
+  end
+
+  def file_exists?
+    return false if path.blank?
+    puts " File exists? %s" % File.exists?(absolute_path) 
+    File.exists?(absolute_path)
+  end
+
+  def file_handle
+    return nil if path.blank?
+    return File.open(absolute_path)
+  end
+
+  def file_size
+    return nil if path.blank?
+    return File.size(absolute_path)
+  end
+
 end
