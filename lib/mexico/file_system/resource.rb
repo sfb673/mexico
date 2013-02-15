@@ -38,6 +38,14 @@ class Mexico::FileSystem::Resource
   xml_accessor :local_files, :as => [::Mexico::FileSystem::LocalFile], :from => "LocalFile", :in => "."
   xml_accessor :urls,        :as => [::Mexico::FileSystem::URL],       :from => "URL" # ,  :in => "."
   
+
+  xml_accessor :trial_id, :from => "@trial_id"
+  id_ref :trial
+
+
+  xml_accessor :design_component_id, :from => "@design_component_id"
+  id_ref :design_component
+  
   # docme
 
   def initialize(opts={})
