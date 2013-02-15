@@ -42,4 +42,8 @@ class Mexico::FileSystem::Design
     end
   end
 
+  def trials
+    @corpus.trials.select{ |i| i.design == self }
+  end
+
 end
