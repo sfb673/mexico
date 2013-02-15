@@ -16,7 +16,7 @@ Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "mexico"
   gem.homepage = "http://github.com/sfb673/mexico"
-  gem.license = "LPGL Version 3"
+  gem.license = "LGPL Version 3"
   gem.summary = %Q{MExiCo is a library and API for the management of multimodal experimental corpora.}
   gem.description = %Q{MExiCo is a library and API for the management of multimodal experimental corpora.}
   gem.email = "pmenke@googlemail.com"

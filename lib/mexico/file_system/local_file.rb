@@ -17,7 +17,7 @@
 # <http://www.gnu.org/licenses/>.
 
 # A template class doing nothing.
-class Mexico::FileSystem::Resource
+class Mexico::FileSystem::LocalFile
   
   include Mexico::FileSystem::BoundToCorpus
   extend Mexico::FileSystem::IdRef
@@ -29,16 +29,8 @@ class Mexico::FileSystem::Resource
   xml_accessor :name,           :from => '@name' 
   xml_accessor :description,    :from => 'Description' 
 
-  #@ media_type
+  xml_accessor :path, :from => "@path"
 
-  xml_accessor :media_type_id,  :from => '@media_type_id'
-
-  collection_ref :media_type, ::Mexico::Core::MediaType, ::Mexico::Constants::MediaTypes::ALL, ::Mexico::Constants::MediaTypes::OTHER
-
-  xml_accessor :local_files, :as => [::Mexico::FileSystem::LocalFile], :from => "LocalFile", :in => "."
-  xml_accessor :urls,        :as => [::Mexico::FileSystem::URL],       :from => "URL" # ,  :in => "."
-  
-  # docme
 
   def initialize(opts={})
     # @corpus = corpus
@@ -46,9 +38,28 @@ class Mexico::FileSystem::Resource
       send("#{att}=", opts[att]) if opts.has_key?(att)
     end
   end
-
-  # @todo Resource must, upon creation, be bound to a physical resource
-  # somewhere in the file system. 
-
   
+  def absolute_path
+    if path.starts_with? "."
+      return File.expand_path(File.join(@corpus.base_path, path))
+    end
+    return path
+  end
+
+  def file_exists?
+    return false if path.blank?
+    puts " File exists? %s" % File.exists?(absolute_path) 
+    File.exists?(absolute_path)
+  end
+
+  def file_handle
+    return nil if path.blank?
+    return File.open(absolute_path)
+  end
+
+  def file_size
+    return nil if path.blank?
+    return File.size(absolute_path)
+  end
+
 end

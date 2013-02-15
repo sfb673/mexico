@@ -8,6 +8,27 @@ the field of linguistics, psycholinguistics, and related disciplines.
 
 Its central organising unit is the **Corpus** class which allows researchers to bundle resources from an experiment with related background data, conceptual data, and metadata.
 
+## Last Changes
+
+### 0.0.3
+
++ **File system integration**: Resource Objects now have first versions of local files and urls.
++ **ResourceFile model**: Model ResourceFile was rejected and is superseded by LocalFile and URL objects.
++ **Schema for storage paths**: Relative paths are now resolved based on the corpus home folder.
+
+### 0.0.2
+
++ **Resource model**: Created first, minimal version of resource model
++ **Participant Role model**: Created first, minimal model for release notes.
++ **Media Types**: Created first media types (video, audio, other), along with collection helpers.
+
+### 0.0.1
+
++ **Create fundamental gem structure**: Created the basic gem structure and initial Gemfile entries for the library.
++ **Decide upon a license**: Decided to use the LGPL as license.
++ **Implement basic Nokogiri XML read and write functionality for XML Corpus Engine**: Chose ROXML (based on Nokogiri) for XML (de)serialisation
+
+
 ## Contributing to mexico
  
 - Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet

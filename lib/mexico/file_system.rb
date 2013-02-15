@@ -32,6 +32,8 @@ require 'mexico/file_system/static_collection_ref.rb'
 
 require 'mexico/file_system/participant_role.rb'
 require 'mexico/file_system/participant.rb'
+require 'mexico/file_system/local_file.rb'
+require 'mexico/file_system/url.rb'
 require 'mexico/file_system/resource.rb'
 require 'mexico/file_system/trial.rb'
 require 'mexico/file_system/design_component.rb'
