@@ -22,10 +22,11 @@ describe Mexico::FileSystem::Resource do
   
   # set up an initial corpus representation from the example file
   before(:each) do
-    @basepath = File.join(File.dirname(__FILE__), '..','..','assets','GenialDanebenKorpus')
+    @basepath = File.join(File.dirname(__FILE__), '..','..','assets','mexico-testcorpus','utterance')
     @xml = File.open(File.join(@basepath,'Corpus.xml'),'rb') { |f| f.read }
     @corpus = Mexico::FileSystem::Corpus.from_xml(@xml, {:path => @basepath})
     @resource = @corpus.resources.first
+    @local_file = @resource.local_files[0]
   end
   
   context 'any resource' do
@@ -50,8 +51,8 @@ describe Mexico::FileSystem::Resource do
   
 context 'the first example resource' do
 
-  it 'should have one local file' do
-    @resource.local_files.count.should eq(1)
+  it 'should have four local files' do
+    @resource.local_files.count.should eq(4)
     puts "LOCAL FILES"
     puts @resource.local_files
     puts @resource.local_files[0]
@@ -66,13 +67,34 @@ context 'the first example resource' do
     end
 
     it 'should have the correct path value' do
-      @resource.local_files[0].path.should eq './resources/video_files/Nullaustauscher.mov'
+      @resource.local_files[0].path.should eq './video_files/utterance.mov'
+    end
+
+    it 'should resolve relative paths correctly' do
+      @local_file.should respond_to :absolute_path
+      @local_file.absolute_path.should match /^\/.*$/
+      puts "ABSPATH: %s " % @local_file.absolute_path
+    end
+
+    it 'should tell whether there is an actual file at this path' do
+      @local_file.should respond_to :file_exists?
+      @local_file.file_exists?.should eq true
+    end
+
+    it 'should return a file handle for this path if there is an actual file' do
+       @local_file.should respond_to :file_handle
+       @local_file.file_handle.should be_kind_of(File)
+    end
+
+    it 'should tell the size of the actual file' do
+       @local_file.should respond_to :file_size
+       @local_file.file_size.should be_kind_of(Integer)
     end
 
   end
 
   it 'should have one url' do
-    @resource.urls.count.should eq(1)
+    @resource.urls.count.should eq(0)
   end
   
 end
