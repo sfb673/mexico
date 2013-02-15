@@ -54,6 +54,9 @@ describe Mexico::FileSystem::Resource do
       it 'should return a collection with 2 elements' do
         @design_b.trials.size.should eq 2
       end
+      it 'a linked trial should say true when asked for linkage to design' do
+        @trial_f.linked_to_design?.should eq true
+      end
     end
     
     context 'resource <j> should link to trial <f>' do

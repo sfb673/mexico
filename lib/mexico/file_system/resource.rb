@@ -45,7 +45,7 @@ class Mexico::FileSystem::Resource
 
   xml_accessor :design_component_id, :from => "@design_component_id"
   id_ref :design_component
-  
+
   # docme
 
   def initialize(opts={})
@@ -57,6 +57,14 @@ class Mexico::FileSystem::Resource
 
   # @todo Resource must, upon creation, be bound to a physical resource
   # somewhere in the file system. 
+
+  def linked_to_trial?
+    return trial!=nil
+  end
+
+  def linked_to_design_component?
+    return design_component!=nil
+  end
 
   
 end

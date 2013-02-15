@@ -52,5 +52,9 @@ class Mexico::FileSystem::Trial
   def resources
     @corpus.resources.select{ |i| i.trial === self }
   end
+
+  def linked_to_design?
+    return design!=nil
+  end
   
 end
