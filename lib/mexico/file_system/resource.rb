@@ -66,5 +66,9 @@ class Mexico::FileSystem::Resource
     return design_component!=nil
   end
 
+
+  def complete_file_size
+    local_files.collect{ |f| f.file_size }.inject(:+)
+  end
   
 end
