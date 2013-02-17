@@ -33,8 +33,7 @@ describe Mexico::FileSystem::Corpus do
   # set up an initial corpus representation from the example file
   before(:each) do
     @basepath = File.join(File.dirname(__FILE__), '..','..','assets','TESTCORPUS')
-    @xml = File.open(File.join(@basepath,'Corpus.xml'),'rb') { |f| f.read }
-    @corpus = Mexico::FileSystem::Corpus.from_xml(@xml, {:path => @basepath})
+    @corpus = Mexico::FileSystem::Corpus.open(@basepath)
   end
   
   context 'Attributes' do
