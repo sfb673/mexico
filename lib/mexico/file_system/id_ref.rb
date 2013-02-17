@@ -1,5 +1,5 @@
 # This file is part of the MExiCo gem.
-# Copyright (c) 2012 Peter Menke, SFB 673, Universität Bielefeld
+# Copyright (c) 2012, 2013 Peter Menke, SFB 673, Universität Bielefeld
 # http://www.sfb673.org
 #
 # MExiCo is free software: you can redistribute it and/or modify
@@ -32,7 +32,13 @@ module Mexico::FileSystem::IdRef
     
     define_method field_name do
       inst_var = instance_variable_get("@#{field_name}")
-      inst_var = instance_variable_set("@#{field_name}", @corpus.send(pluralized_field_name).first{|x| x.identifier==instance_variable_get("@#{field_name_id}") }) if inst_var.nil?
+      #@corpus.send(pluralized_field_name).each do |i|
+      #  puts "  %s. Looking for %s.  ID: %s // %s" % [pluralized_field_name, instance_variable_get("@#{field_name_id}"), i.identifier, (i.identifier==instance_variable_get("@#{field_name_id}"))]
+      #end
+      #puts "Search via first{} yields:   %s" % @corpus.send(pluralized_field_name).first{|x| x.identifier==instance_variable_get("@#{field_name_id}") }.identifier
+      #puts "Search via find{}  yields:   %s" % @corpus.send(pluralized_field_name).find{|x| x.identifier==instance_variable_get("@#{field_name_id}") }.identifier
+      #puts "Get %s : found in %s" % [instance_variable_get("@#{field_name_id}"), @corpus.send(pluralized_field_name).first{|x| x.identifier==instance_variable_get("@#{field_name_id}") }.identifier]
+      inst_var = instance_variable_set("@#{field_name}", @corpus.send(pluralized_field_name).find{|x| x.identifier==instance_variable_get("@#{field_name_id}") }) if inst_var.nil?
       return inst_var
     end
     

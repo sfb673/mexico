@@ -1,5 +1,5 @@
 # This file is part of the MExiCo gem.
-# Copyright (c) 2012 Peter Menke, SFB 673, Universität Bielefeld
+# Copyright (c) 2012, 2013 Peter Menke, SFB 673, Universität Bielefeld
 # http://www.sfb673.org
 #
 # MExiCo is free software: you can redistribute it and/or modify
@@ -38,6 +38,14 @@ class Mexico::FileSystem::Resource
   xml_accessor :local_files, :as => [::Mexico::FileSystem::LocalFile], :from => "LocalFile", :in => "."
   xml_accessor :urls,        :as => [::Mexico::FileSystem::URL],       :from => "URL" # ,  :in => "."
   
+
+  xml_accessor :trial_id, :from => "@trial_id"
+  id_ref :trial
+
+
+  xml_accessor :design_component_id, :from => "@design_component_id"
+  id_ref :design_component
+
   # docme
 
   def initialize(opts={})
@@ -50,5 +58,17 @@ class Mexico::FileSystem::Resource
   # @todo Resource must, upon creation, be bound to a physical resource
   # somewhere in the file system. 
 
+  def linked_to_trial?
+    return trial!=nil
+  end
+
+  def linked_to_design_component?
+    return design_component!=nil
+  end
+
+
+  def complete_file_size
+    local_files.collect{ |f| f.file_size }.inject(:+)
+  end
   
 end

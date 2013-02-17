@@ -1,5 +1,5 @@
 # This file is part of the MExiCo gem.
-# Copyright (c) 2012 Peter Menke, SFB 673, Universität Bielefeld
+# Copyright (c) 2012, 2013 Peter Menke, SFB 673, Universität Bielefeld
 # http://www.sfb673.org
 #
 # MExiCo is free software: you can redistribute it and/or modify
@@ -28,9 +28,7 @@ class Mexico::FileSystem::Design
   xml_accessor :name,       :from => '@name'
   xml_accessor :description, :from => "Description"
 
-  #xml_bind :identifier,  :attribute => 'identifier'
-  #xml_bind :name,        :attribute => 'name',       :default => ''
-  #xml_bind :description, :attribute => 'description'
+  xml_accessor :design_components, :as => [::Mexico::FileSystem::DesignComponent], :from => "DesignComponent" #, :in => "Designs"
 
   # Creates a new design object.
   # @option opts [String] :identifier The identifier of the new design (required).
@@ -40,6 +38,15 @@ class Mexico::FileSystem::Design
     [:identifier,:name,:description].each do |att|
       send("#{att}=", opts[att]) if opts.has_key?(att)
     end
+  end
+
+  def trials
+
+    @corpus.trials.each do |t|
+      puts "Trial: %s, DesignID: %s, Design: %s" % [t, t.design_id, t.design]
+    end
+
+    @corpus.trials.select{ |i| i.design === self }
   end
 
 end

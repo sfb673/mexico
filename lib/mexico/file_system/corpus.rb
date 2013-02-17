@@ -1,5 +1,5 @@
 # This file is part of the MExiCo gem.
-# Copyright (c) 2012 Peter Menke, SFB 673, Universität Bielefeld
+# Copyright (c) 2012, 2013 Peter Menke, SFB 673, Universität Bielefeld
 # http://www.sfb673.org
 #
 # MExiCo is free software: you can redistribute it and/or modify
@@ -45,7 +45,22 @@ class Mexico::FileSystem::Corpus
   
   # corpus_file  : the XML file
   # corpus_doc   : the nokogiri xml document based on that file
-    
+
+  def self.open(path, opts={})
+    xml = File.open(File.join(path,'Corpus.xml'),'rb') { |f| f.read }
+    c = Mexico::FileSystem::Corpus.from_xml(xml, opts.merge({:path=>path}))
+    return c
+  end
+
+  def initialize(path, opts={})
+    init_folder(path, opts)
+    @base_path = File.expand_path(path)
+    @corpus_file_name = File.join(@base_path, "Corpus.xml")
+    f = File.open(@corpus_file_name, 'r')
+    @xml_doc = ::Nokogiri::XML(f)
+    f.close
+  end
+
   # Creates a new corpus object
   # @option opts [String] :path The path where to create the new corpus. Required.
   # @option opts [String] :identifier The path where to create the new corpus. Required.
@@ -80,8 +95,10 @@ class Mexico::FileSystem::Corpus
     d.bind_to_corpus(self)
     d
   end
-  
-  
+
+  def complete_file_size
+    resources.collect{ |r| r.complete_file_size }.inject(:+)
+  end
   
   private
 
@@ -95,6 +112,9 @@ class Mexico::FileSystem::Corpus
     
     designs.each do |design|
       design.bind_to_corpus(self)
+      design.design_components.each do |dc|
+        dc.bind_to_corpus(self)
+      end
     end
     
     trials.each do |trial|
@@ -138,6 +158,12 @@ class Mexico::FileSystem::Corpus
     end
     # create
     
+  end
+
+
+  # helping method to retrieve all existing design components
+  def design_components
+    @designs.collect{|d| d.design_components}.flatten
   end
   
 end

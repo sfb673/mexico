@@ -1,5 +1,5 @@
 # This file is part of the MExiCo gem.
-# Copyright (c) 2012 Peter Menke, SFB 673, Universität Bielefeld
+# Copyright (c) 2012, 2013 Peter Menke, SFB 673, Universität Bielefeld
 # http://www.sfb673.org
 #
 # MExiCo is free software: you can redistribute it and/or modify
@@ -30,3 +30,4 @@ end
 require "mexico/core.rb"
 require "mexico/file_system.rb"
 require "mexico/constants.rb"
+require 'mexico/cmd.rb'

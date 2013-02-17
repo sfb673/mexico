@@ -21,6 +21,7 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{MExiCo is a library and API for the management of multimodal experimental corpora.}
   gem.email = "pmenke@googlemail.com"
   gem.authors = ["Peter Menke"]
+  gem.executables = ['mexico']
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
@@ -40,8 +41,8 @@ end
 #  test.rcov_opts << '--exclude "gems/*"'
 #end
 
-require 'cucumber/rake/task'
-Cucumber::Rake::Task.new(:features)
+#require 'cucumber/rake/task'
+#Cucumber::Rake::Task.new(:features)
 
 task :default => :test
 

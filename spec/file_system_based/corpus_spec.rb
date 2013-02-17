@@ -1,5 +1,5 @@
 # This file is part of the MExiCo gem.
-# Copyright (c) 2012 Peter Menke, SFB 673, Universität Bielefeld
+# Copyright (c) 2012, 2013 Peter Menke, SFB 673, Universität Bielefeld
 # http://www.sfb673.org
 #
 # MExiCo is free software: you can redistribute it and/or modify
@@ -33,8 +33,7 @@ describe Mexico::FileSystem::Corpus do
   # set up an initial corpus representation from the example file
   before(:each) do
     @basepath = File.join(File.dirname(__FILE__), '..','..','assets','TESTCORPUS')
-    @xml = File.open(File.join(@basepath,'Corpus.xml'),'rb') { |f| f.read }
-    @corpus = Mexico::FileSystem::Corpus.from_xml(@xml, {:path => @basepath})
+    @corpus = Mexico::FileSystem::Corpus.open(@basepath)
   end
   
   context 'Attributes' do
