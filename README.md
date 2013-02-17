@@ -10,6 +10,12 @@ Its central organising unit is the **Corpus** class which allows researchers to 
 
 ## Last Changes
 
+### 0.0.4
+
++ **Internal Links**: implemented initial version for internal links
++ **Binary, first version**: Implemented first version of gem executable.
++ **Binary subcommand: info**: Subcommand "info" is implemented in a first version
+
 ### 0.0.3
 
 + **File system integration**: Resource Objects now have first versions of local files and urls.
