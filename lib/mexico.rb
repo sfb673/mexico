@@ -30,3 +30,4 @@ end
 require "mexico/core.rb"
 require "mexico/file_system.rb"
 require "mexico/constants.rb"
+require 'mexico/cmd.rb'
