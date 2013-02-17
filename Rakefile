@@ -41,8 +41,8 @@ end
 #  test.rcov_opts << '--exclude "gems/*"'
 #end
 
-require 'cucumber/rake/task'
-Cucumber::Rake::Task.new(:features)
+#require 'cucumber/rake/task'
+#Cucumber::Rake::Task.new(:features)
 
 task :default => :test
 
