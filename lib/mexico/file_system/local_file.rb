@@ -48,7 +48,6 @@ class Mexico::FileSystem::LocalFile
 
   def file_exists?
     return false if path.blank?
-    puts " File exists? %s" % File.exists?(absolute_path) 
     File.exists?(absolute_path)
   end
 

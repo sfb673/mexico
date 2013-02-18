@@ -53,11 +53,6 @@ context 'the first example resource' do
 
   it 'should have four local files' do
     @resource.local_files.count.should eq(4)
-    puts "LOCAL FILES"
-    puts @resource.local_files
-    puts @resource.local_files[0]
-    puts @resource.local_files[0].path
-    
   end
 
   context 'its design component links' do
@@ -81,7 +76,6 @@ context 'the first example resource' do
     it 'should resolve relative paths correctly' do
       @local_file.should respond_to :absolute_path
       @local_file.absolute_path.should match /^\/.*$/
-      puts "ABSPATH: %s " % @local_file.absolute_path
     end
 
     it 'should tell whether there is an actual file at this path' do

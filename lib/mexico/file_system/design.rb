@@ -41,11 +41,6 @@ class Mexico::FileSystem::Design
   end
 
   def trials
-
-    @corpus.trials.each do |t|
-      puts "Trial: %s, DesignID: %s, Design: %s" % [t, t.design_id, t.design]
-    end
-
     @corpus.trials.select{ |i| i.design === self }
   end
 
