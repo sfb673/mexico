@@ -60,6 +60,14 @@ context 'the first example resource' do
     
   end
 
+  context 'its design component links' do
+
+    it 'should link to correct dcs' do
+      @resource.design_component.should eq @corpus.designs[0].design_components[0]
+    end
+
+  end
+
   context 'its local file' do
 
     it 'should have some path' do

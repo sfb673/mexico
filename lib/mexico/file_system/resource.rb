@@ -70,5 +70,31 @@ class Mexico::FileSystem::Resource
   def complete_file_size
     local_files.collect{ |f| f.file_size }.inject(:+)
   end
-  
+
+  def is_video?
+    return media_type==::Mexico::Constants::MediaTypes::VIDEO
+  end
+
+  def is_audio?
+    return media_type==::Mexico::Constants::MediaTypes::AUDIO
+  end
+
+  def is_annotation?
+    return media_type==::Mexico::Constants::MediaTypes::ANNOTATION
+  end
+
+  # Attempts to load the contents of the resource from an appropriate source into an appropriate
+  # data structure (for annotation files, into the ToE format, etc.)
+  def load
+
+    # @todo create a loader interface in a separate package
+    #       load() then takes a file or url, gets the contents as a stream,
+    #              and puts it into appropriate data structures.
+    #       choice depends on: MediaType. Whether LocalFile or URL are available.
+    #       What kinds of LF / URL are available, and which one is the newest.
+    # first goal: When document is of mediatype ANNOTATION, and there is one
+    # LocalFile, and it is of a matching type (now: ToE import), then import that
+    # one and make the resulting objects available below the resource.
+  end
+
 end
