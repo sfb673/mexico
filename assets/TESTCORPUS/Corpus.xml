@@ -7,6 +7,7 @@
 	<Designs>
 		<Design identifier="example-design" name="Example Design">
 			<Description>Design Description</Description>
+            <DesignComponent identifier="example-design-component" name="Example Design Component" media_type_id="video"/>
 		</Design>
 		<Design identifier="other-design" name="Other Design">
 			<Description>Yet another design</Description>
