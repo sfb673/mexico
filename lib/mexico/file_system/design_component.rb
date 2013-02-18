@@ -20,6 +20,8 @@
 class Mexico::FileSystem::DesignComponent
 
   include Mexico::FileSystem::BoundToCorpus
+  extend Mexico::FileSystem::IdRef
+  extend Mexico::FileSystem::StaticCollectionRef
 
   include ::ROXML
   
@@ -28,7 +30,11 @@ class Mexico::FileSystem::DesignComponent
   xml_accessor :description,    :from => 'Description'
   xml_accessor :cue,            :from => '@cue'
   xml_accessor :required?,      :from => '@required'
-  
+
+  xml_accessor :media_type_id,  :from => '@media_type_id'
+
+  collection_ref :media_type, ::Mexico::Core::MediaType, ::Mexico::Constants::MediaTypes::ALL, ::Mexico::Constants::MediaTypes::OTHER
+
   #@todo media_type
   #@todo data_type
   #@todo content_structure

@@ -83,7 +83,18 @@ describe Mexico::FileSystem::Design do
 
 
   context "Aggregated components" do
-    
+
+    it 'should have one or more design components' do
+      @design.should respond_to(:design_components)
+      @design.design_components.size.should eq 1
+    end
+
+    it 'should return correct values for the first design component' do
+      @design.design_components[0].identifier.should eq 'example-design-component'
+      @design.design_components[0].name.should eq 'Example Design Component'
+      @design.design_components[0].media_type.should eq ::Mexico::Constants::MediaTypes::VIDEO
+    end
+
   end
 
 end
