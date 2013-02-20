@@ -29,8 +29,6 @@ class Mexico::FileSystem::Resource
   xml_accessor :name,           :from => '@name' 
   xml_accessor :description,    :from => 'Description' 
 
-  #@ media_type
-
   xml_accessor :media_type_id,  :from => '@media_type_id'
 
   collection_ref :media_type, ::Mexico::Core::MediaType, ::Mexico::Constants::MediaTypes::ALL, ::Mexico::Constants::MediaTypes::OTHER
@@ -95,6 +93,31 @@ class Mexico::FileSystem::Resource
     # first goal: When document is of mediatype ANNOTATION, and there is one
     # LocalFile, and it is of a matching type (now: ToE import), then import that
     # one and make the resulting objects available below the resource.
+
+    # first version:
+    # if resource is annotation, and there is a toe file, then: load that toe file
+    # as a document, and define the appropriate member variable.
+
+    # puts "Is anno? %s" % is_annotation?
+    if is_annotation?
+
+      # puts "Toe File? %s" % local_files.find{ |f| f.path=~/toe$/ }
+      toe_file = local_files.find{ |f| f.path=~/toe$/ }
+
+      unless toe_file.nil?
+
+        @document = ::Mexico::FileSystem::ToeDocument.open(toe_file.absolute_path)
+
+      end
+
+    end
+
+
+  end
+
+
+  def document
+   defined?(@document) ? @document : nil
   end
 
 end

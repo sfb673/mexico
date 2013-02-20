@@ -29,9 +29,18 @@ class Mexico::FileSystem::ToeDocument
   include ::ROXML
   xml_name 'ToeDocument'
 
-  xml_accessor :identifier, :from => '@identifier'
+  xml_accessor :identifier, :from => '@id'
   xml_accessor :name,       :from => '@name'
 
   xml_accessor :head,       :from => "Description", :as => [Mexico::FileSystem::Head]
+
+  xml_accessor :scales, :as => [::Mexico::FileSystem::Scale],     :from => "Scale",     :in => "ScaleSet"
+  xml_accessor :layers, :as => [::Mexico::FileSystem::Layer],     :from => "Layer",     :in => "LayerStructure"
+
+  def self.open(filename)
+
+    return self.from_xml(File.open(filename))
+
+  end
 
 end
