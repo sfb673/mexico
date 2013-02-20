@@ -37,6 +37,8 @@ require 'mexico/file_system/url.rb'
 require 'mexico/file_system/resource.rb'
 
 require 'mexico/file_system/head.rb'
+require 'mexico/file_system/scale.rb'
+require 'mexico/file_system/layer.rb'
 require 'mexico/file_system/toe_document.rb'
 
 require 'mexico/file_system/trial.rb'

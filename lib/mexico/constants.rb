@@ -50,5 +50,12 @@ module Mexico::Constants
     end
     
   end
-  
+
+  module ScaleModes
+    NOMINAL  = "nominal"
+    ORDINAL  = "ordinal"
+    CARDINAL = "cardinal"
+    RATIO    = "ratio"
+  end
+
 end
