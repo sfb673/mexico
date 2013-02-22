@@ -37,7 +37,7 @@ class Mexico::FileSystem::ToeDocument
   xml_accessor :scales, :as => [::Mexico::FileSystem::Scale],     :from => "Scale",     :in => "ScaleSet"
   xml_accessor :layers, :as => [::Mexico::FileSystem::Layer],     :from => "Layer",     :in => "LayerStructure"
 
-  xml_accessor :items, :as => [::Mexico::FileSystem::Item],     :from => "I",     :in => "ItemSet"
+  xml_accessor :items, :as => [::Mexico::FileSystem::Item],     :from => "Item",     :in => "ItemSet"
 
 
   def self.resolve(xml_id)

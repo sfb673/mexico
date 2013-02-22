@@ -31,7 +31,7 @@ class Mexico::FileSystem::Item
   # 0-n other-item links
   # data
 
-  xml_accessor :data, :as => Mexico::FileSystem::Data, :from => "D"
+  xml_accessor :data, :as => Mexico::FileSystem::Data, :from => "Data"
 
   def after_parse
     # resolve links
