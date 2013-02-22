@@ -105,9 +105,8 @@ class Mexico::FileSystem::Resource
       toe_file = local_files.find{ |f| f.path=~/toe$/ }
 
       unless toe_file.nil?
-
         @document = ::Mexico::FileSystem::ToeDocument.open(toe_file.absolute_path)
-
+        return @document
       end
 
     end

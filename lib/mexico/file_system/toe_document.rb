@@ -41,19 +41,48 @@ class Mexico::FileSystem::ToeDocument
 
 
   def self.resolve(xml_id)
-    @@CACHE[xml_id]
+    @@CACHE["#{Thread.current.__id__}.#{xml_id}"]
+  end
+
+  def self.knows?(xml_id)
+    @@CACHE.has_key?("#{Thread.current.__id__}.#{xml_id}")
   end
 
   def self.store(xml_id, ruby_object)
     @@CACHE = {} unless defined?(@@CACHE)
-    @@CACHE[xml_id] = ruby_object
-    puts "Stored '%s' at '%s', cache size is now %i" % [ruby_object, xml_id, @@CACHE.size]
+    @@CACHE["#{Thread.current.__id__}.#{xml_id}"] = ruby_object
+    puts "Stored '%s' at '%s', cache size is now %i" % [ruby_object, "#{Thread.current.__id__}.#{xml_id}", @@CACHE.size]
+    ::Mexico::FileSystem::ToeDocument.check_watch(xml_id, ruby_object)
+    @@CACHE.each_pair do |i,j|
+      puts "  %32s %32s %32s" % [i, j.class.name, j.__id__]
+    end
+  end
+
+  def self.watch(needed_id, object, method)
+    @@WATCHLIST = {} unless defined?(@@WATCHLIST)
+    @@WATCHLIST["#{Thread.current.__id__}.#{needed_id}"] = [] unless @@WATCHLIST.has_key?("#{Thread.current.__id__}.#{needed_id}")
+    @@WATCHLIST["#{Thread.current.__id__}.#{needed_id}"] << [object, method]
+    puts "Watching out for ID %s, to call %s object's method %s" % [needed_id, object.to_s, method.to_s]
+  end
+
+  def self.check_watch(needed_id, needed_object)
+    if defined?(@@WATCHLIST)
+      if @@WATCHLIST.has_key?("#{Thread.current.__id__}.#{needed_id}")
+        puts ""
+        puts "   Watchlist has key %s" % needed_id
+        puts "   iterate %i elements." % @@WATCHLIST["#{Thread.current.__id__}.#{needed_id}"].size
+        @@WATCHLIST["#{Thread.current.__id__}.#{needed_id}"].each do |entry|
+          puts "      entry: %s :: %s,   %s :: %s, %s" % [entry[0].class.name, entry[0].to_s, entry[1].class.name, entry[1].to_s, entry.__id__]
+          puts "      calling %s on %s object with value %s" % [ entry[1].to_s, entry[0].identifier, needed_object.identifier ]
+          entry[0].send(entry[1], needed_object)
+        end
+        @@WATCHLIST.delete("#{Thread.current.__id__}.#{needed_id}")
+      end
+    end
   end
 
   def self.open(filename)
-
-    return self.from_xml(File.open(filename))
-
+    self.from_xml(File.open(filename))
   end
 
   def after_parse
