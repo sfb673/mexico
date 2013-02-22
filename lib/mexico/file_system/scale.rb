@@ -41,4 +41,11 @@ class Mexico::FileSystem::Scale
   # OK role : String (free text)
   # continuous? : Boolean
 
+  # overrides method in ROXML
+  # callback after xml parsing process, to store this element in the
+  # document cache.
+  def after_parse
+    ::Mexico::FileSystem::ToeDocument.store(self.identifier, self)
+  end
+
 end

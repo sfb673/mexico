@@ -27,4 +27,11 @@ class ::Mexico::FileSystem::Layer
   # data type
   # content structure
 
+  # overrides method in ROXML
+  # callback after xml parsing process, to store this element in the
+  # document cache.
+  def after_parse
+    ::Mexico::FileSystem::ToeDocument.store(self.identifier, self)
+  end
+
 end
