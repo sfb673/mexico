@@ -24,17 +24,18 @@ class Mexico::FileSystem::Item
 
   xml_accessor :identifier, :from => '@id'
 
-  # 1-n layer links
-  # 0-n interval links
-  # 0-n point links
-  # 0-n compound links (later)
-  # 0-n other-item links
-  # data
+  # @todo compound links (later)
+
+  xml_accessor :item_links,     :as => [Mexico::FileSystem::ItemLink],     :from => "Links/ItemLink"
+  xml_accessor :layer_links,    :as => [Mexico::FileSystem::LayerLink],    :from => "Links/LayerLink"
+  xml_accessor :point_links,    :as => [Mexico::FileSystem::PointLink],    :from => "Links/PointLink"
+  xml_accessor :interval_links, :as => [Mexico::FileSystem::IntervalLink], :from => "Links/IntervalLink"
 
   xml_accessor :data, :as => Mexico::FileSystem::Data, :from => "Data"
 
   def after_parse
-    # resolve links
+    # store self
+    ::Mexico::FileSystem::ToeDocument.store(self.identifier, self)
   end
 
 end
