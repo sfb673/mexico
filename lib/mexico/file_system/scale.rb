@@ -16,32 +16,36 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
-class Mexico::FileSystem::Design
-
-  include Mexico::FileSystem::BoundToCorpus
-
-  include Mexico::Core::DesignCore
+# A generic scale.
+class Mexico::FileSystem::Scale
 
   include ::ROXML
+  xml_name 'Scale'
 
-  xml_accessor :identifier, :from => '@identifier'
+  xml_accessor :identifier, :from => '@id'
   xml_accessor :name,       :from => '@name'
-  xml_accessor :description, :from => "Description"
 
-  xml_accessor :design_components, :as => [::Mexico::FileSystem::DesignComponent], :from => "DesignComponent" #, :in => "Designs"
+  xml_accessor :unit, :from => '@unit'
+  xml_accessor :dimension, :from => '@dimension'
+  xml_accessor :role, :from => '@role'
+  xml_accessor :continuous?, :from => '@continuous'
 
-  # Creates a new design object.
-  # @option opts [String] :identifier The identifier of the new design (required).
-  # @option opts [String] :name The name of the new design. (required).
-  # @option opts [String] :description A description of the new design (optional).
-  def initialize(opts={})
-    [:identifier,:name,:description].each do |att|
-      send("#{att}=", opts[att]) if opts.has_key?(att)
-    end
-  end
+  xml_accessor :mode, :from => '@mode'
 
-  def trials
-    @corpus.trials.select{ |i| i.design === self }
+  # static collection of MODES
+  # mode : MODES collection
+  # @todo collection of scale elements (if not continuous)
+
+  # OKunit : SI units or custom units
+  # OK dimension : String (x,y,z,t, etc.)
+  # OK role : String (free text)
+  # continuous? : Boolean
+
+  # overrides method in ROXML
+  # callback after xml parsing process, to store this element in the
+  # document cache.
+  def after_parse
+    ::Mexico::FileSystem::ToeDocument.store(self.identifier, self)
   end
 
 end
