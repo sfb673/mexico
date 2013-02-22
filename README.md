@@ -10,7 +10,20 @@ Its central organising unit is the **Corpus** class which allows researchers to 
 
 ## Last Changes
 
+### 0.0.5
+
+Completed on 22 Feb 2013.
+
++ **Annotation microstructure**: Created code for all subcomponents of this first version of the toe microstructure.
++ **Atomic data structures**: Selected appropriate classes for the atomic data structures
++ **Scale sets, scales, points, intervals**: Created model, test data and specs for scales and scale links.
++ **Events**: Created model, test data and specs for events, which are now called items.
++ **Layers and layer links**: Created model, test data and specs for layers and layer links (connectors postponed to later version)
++ **Event links**: Created model, test data and specs for event links
+
 ### 0.0.4
+
+Completed on 17 Feb 2013.
 
 + **Internal Links**: implemented initial version for internal links
 + **Binary, first version**: Implemented first version of gem executable.
@@ -18,17 +31,23 @@ Its central organising unit is the **Corpus** class which allows researchers to 
 
 ### 0.0.3
 
+Completed on 15 Feb 2013.
+
 + **File system integration**: Resource Objects now have first versions of local files and urls.
 + **ResourceFile model**: Model ResourceFile was rejected and is superseded by LocalFile and URL objects.
 + **Schema for storage paths**: Relative paths are now resolved based on the corpus home folder.
 
 ### 0.0.2
 
+Completed on 15 Jan 2013.
+
 + **Resource model**: Created first, minimal version of resource model
 + **Participant Role model**: Created first, minimal model for release notes.
 + **Media Types**: Created first media types (video, audio, other), along with collection helpers.
 
 ### 0.0.1
+
+Completed on 5 Dec 2012.
 
 + **Create fundamental gem structure**: Created the basic gem structure and initial Gemfile entries for the library.
 + **Decide upon a license**: Decided to use the LGPL as license.
