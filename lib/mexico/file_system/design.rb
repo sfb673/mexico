@@ -24,10 +24,16 @@ class Mexico::FileSystem::Design
 
   include ::ROXML
 
+  # identifier
   xml_accessor :identifier, :from => '@identifier'
+
+  # type String
   xml_accessor :name,       :from => '@name'
+
+  # type String
   xml_accessor :description, :from => "Description"
 
+  # collection of ::Mexico::FileSystem::DesignComponent
   xml_accessor :design_components, :as => [::Mexico::FileSystem::DesignComponent], :from => "DesignComponent" #, :in => "Designs"
 
   # Creates a new design object.
@@ -40,6 +46,8 @@ class Mexico::FileSystem::Design
     end
   end
 
+  # Returns a collection of trials that are associated with this design.
+  # @return [Array<Trial>] an array of trials associated with this design.
   def trials
     @corpus.trials.select{ |i| i.design === self }
   end

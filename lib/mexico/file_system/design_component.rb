@@ -24,22 +24,34 @@ class Mexico::FileSystem::DesignComponent
   extend Mexico::FileSystem::StaticCollectionRef
 
   include ::ROXML
-  
+
+  # identifier
   xml_accessor :identifier,     :from => '@identifier' 
-  xml_accessor :name,           :from => '@name' 
+
+  # type String
+  xml_accessor :name,           :from => '@name'
+
+  # type String
   xml_accessor :description,    :from => 'Description'
+
+  # type String
   xml_accessor :cue,            :from => '@cue'
+
+  # type [true,false]
   xml_accessor :required?,      :from => '@required'
 
+  # type Mexico::Core::MediaType
   xml_accessor :media_type_id,  :from => '@media_type_id'
 
+  # type Mexico::Core::MediaType
   collection_ref :media_type, ::Mexico::Core::MediaType, ::Mexico::Constants::MediaTypes::ALL, ::Mexico::Constants::MediaTypes::OTHER
 
-  #@todo media_type
   #@todo data_type
   #@todo content_structure
   #@todo belongs to Design
-  
+
+  # Returns a collection of resources that are associated with this design component.
+  # @return [Array<Resource>] an array of resources associated with this design component.
   def resources
     @corpus.resources.select{ |i| i.design_component === self }
   end

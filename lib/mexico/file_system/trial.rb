@@ -24,31 +24,44 @@ class Mexico::FileSystem::Trial
   
   include Mexico::FileSystem::BoundToCorpus
   extend Mexico::FileSystem::IdRef
-  
-  
+
   include ::ROXML
   
-  xml_accessor :identifier,     :from => '@identifier' 
-  xml_accessor :name,           :from => '@name' 
+  # identifier
+  xml_accessor :identifier,     :from => '@identifier'
+
+  # type String
+  xml_accessor :name,           :from => '@name'
+
+  # type String
   xml_accessor :cue,            :from => '@cue'
+
+  # type Integer
   xml_accessor :running_number, :from => '@runningnumber', :as => Integer
-  
+
+  # type String
   xml_accessor :description, :from => "Description"     
-  
-  attr_accessor :corpus
-  
+
+  # attr_accessor :corpus
   xml_accessor :design_id, :from => '@design_id'
 
+  # type Mexico::FileSystem::Design
   id_ref :design
-  
+
+  # creates a new Trial object.
+  # @option opts [String] :identifier The identifier of the new trial object.
+  # @option opts [String] :description The identifier of the new trial object.
+  # @option opts [String] :cue The cue for the new trial object.
+  # @option opts [Integer] :running_number The running number for the new trial object.
   def initialize(opts={})
     # @corpus = corpus
     [:identifier,:name,:description,:cue,:running_number].each do |att|
       send("#{att}=", opts[att]) if opts.has_key?(att)
     end
-    
   end
 
+  # Returns a collection of resources that are associated with this trial.
+  # @return [Array<Resource>] an array of resources associated with this trial.
   def resources
     @corpus.resources.select{ |i| i.trial === self }
   end

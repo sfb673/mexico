@@ -24,28 +24,46 @@ class Mexico::FileSystem::Resource
   extend Mexico::FileSystem::StaticCollectionRef
   
   include ::ROXML
-  
-  xml_accessor :identifier,     :from => '@identifier' 
-  xml_accessor :name,           :from => '@name' 
-  xml_accessor :description,    :from => 'Description' 
 
+  # identifier
+  xml_accessor :identifier,     :from => '@identifier' 
+
+  # type String
+  xml_accessor :name,           :from => '@name'
+
+  # type String
+  xml_accessor :description,    :from => 'Description'
+
+  # type String
   xml_accessor :media_type_id,  :from => '@media_type_id'
 
+  # type Mexico::Core::MediaType
   collection_ref :media_type, ::Mexico::Core::MediaType, ::Mexico::Constants::MediaTypes::ALL, ::Mexico::Constants::MediaTypes::OTHER
 
+  # type Array<Mexico::FileSystem::LocalFile>
   xml_accessor :local_files, :as => [::Mexico::FileSystem::LocalFile], :from => "LocalFile", :in => "."
-  xml_accessor :urls,        :as => [::Mexico::FileSystem::URL],       :from => "URL" # ,  :in => "."
-  
 
+  # type Array<Mexico::FileSystem::URL>
+  # xml_accessor :urls,        :as => [::Mexico::FileSystem::URL],       :from => "URL" # ,  :in => "."
+
+  # type String
   xml_accessor :trial_id, :from => "@trial_id"
+
+  # type Mexico::FileSystem::Trial
   id_ref :trial
 
-
+  # type String
   xml_accessor :design_component_id, :from => "@design_component_id"
+
+  # type Mexico::FileSystem::DesignComponent
   id_ref :design_component
 
   # docme
 
+  # creates a new Trial object.
+  # @option opts [String] :identifier The identifier of the new trial object.
+  # @option opts [String] :name The name of the new trial object.
+  # @option opts [String] :description The identifier of the new trial object.
   def initialize(opts={})
     # @corpus = corpus
     [:identifier,:name,:description].each do |att|
@@ -53,36 +71,46 @@ class Mexico::FileSystem::Resource
     end
   end
 
-  # @todo Resource must, upon creation, be bound to a physical resource
-  # somewhere in the file system. 
 
+  # Indicates whether this resource is associated with a trial.
+  # @return [true,false] +true+ if this resource belongs to a trial, +false+ otherwise.
   def linked_to_trial?
     return trial!=nil
   end
 
+  # Indicates whether this resource is associated with a design component.
+  # @return [true,false] +true+ if this resource belongs to a design component, +false+ otherwise.
   def linked_to_design_component?
     return design_component!=nil
   end
 
-
+  # Returns the disk space in bytes used by all local files of this resource.
+  # @return (Integer) disk space in bytes used by all local files of this resource.
   def complete_file_size
     local_files.collect{ |f| f.file_size }.inject(:+)
   end
 
+  # Indicates whether this resource is of the video media type.
+  # @return (Boolean) +true+ if this resource has media type video, +false+ otherwise.
   def is_video?
     return media_type==::Mexico::Constants::MediaTypes::VIDEO
   end
 
+  # Indicates whether this resource is of the audio media type.
+  # @return (Boolean) +true+ if this resource has media type audio, +false+ otherwise.
   def is_audio?
     return media_type==::Mexico::Constants::MediaTypes::AUDIO
   end
 
+  # Indicates whether this resource is of the annotation media type.
+  # @return (Boolean) +true+ if this resource has media type annotation, +false+ otherwise.
   def is_annotation?
     return media_type==::Mexico::Constants::MediaTypes::ANNOTATION
   end
 
   # Attempts to load the contents of the resource from an appropriate source into an appropriate
   # data structure (for annotation files, into the ToE format, etc.)
+  # @return (Mexico::FileSystem::ToeDocument) the document, or +nil+ if no document could be loaded.
   def load
 
     # @todo create a loader interface in a separate package
@@ -108,15 +136,17 @@ class Mexico::FileSystem::Resource
         @document = ::Mexico::FileSystem::ToeDocument.open(toe_file.absolute_path)
         return @document
       end
-
     end
-
-
   end
 
-
+  # Returns the annotation document previously loaded in {#load} (this is only the case
+  # if resource has media type video, and if an appropriate local file is present).
+  # @return (Mexico::FileSystem::ToeDocument) the document, or +nil+ if no document has been loaded.
   def document
    defined?(@document) ? @document : nil
   end
+
+
+  # @todo Resource must, upon creation, be bound to a physical resource somewhere in the file system.
 
 end

@@ -29,25 +29,42 @@ class Mexico::FileSystem::ToeDocument
   include ::ROXML
   xml_name 'ToeDocument'
 
+  # identifier
   xml_accessor :identifier, :from => '@id'
+
+  # type String
   xml_accessor :name,       :from => '@name'
 
+  # type Mexico::FileSystem::Head
   xml_accessor :head,       :from => "Description", :as => [Mexico::FileSystem::Head]
 
+  # collection of Mexico::FileSystem::Scale
   xml_accessor :scales, :as => [::Mexico::FileSystem::Scale],     :from => "Scale",     :in => "ScaleSet"
+
+  # collection of Mexico::FileSystem::Layer
   xml_accessor :layers, :as => [::Mexico::FileSystem::Layer],     :from => "Layer",     :in => "LayerStructure"
 
+  # collection of Mexico::FileSystem::Item
   xml_accessor :items, :as => [::Mexico::FileSystem::Item],     :from => "Item",     :in => "ItemSet"
 
-
+  # Retrieves a stored object from the temporary import cache.
+  # @param (String) xml_id The xml id of the needed object.
+  # @return (Object) The needed object, or +nil+ if nothing could be found.
   def self.resolve(xml_id)
     @@CACHE["#{Thread.current.__id__}.#{xml_id}"]
   end
 
+  # Retrieves a stored object from the temporary import cache.
+  # @param (String) xml_id The xml id of the needed object.
+  # @return (Boolean) +true+ if there is an entry for the given id, +false+ otherwise.
   def self.knows?(xml_id)
     @@CACHE.has_key?("#{Thread.current.__id__}.#{xml_id}")
   end
 
+  # Retrieves a stored object from the temporary import cache.
+  # @param (String) xml_id The xml id of the needed object.
+  # @param (String) ruby_object The ruby object to be stored.
+  # @return (void)
   def self.store(xml_id, ruby_object)
     @@CACHE = {} unless defined?(@@CACHE)
     @@CACHE["#{Thread.current.__id__}.#{xml_id}"] = ruby_object
@@ -58,6 +75,7 @@ class Mexico::FileSystem::ToeDocument
     end
   end
 
+  # Put an xml id into the watch list, along with an object and a method
   def self.watch(needed_id, object, method)
     @@WATCHLIST = {} unless defined?(@@WATCHLIST)
     @@WATCHLIST["#{Thread.current.__id__}.#{needed_id}"] = [] unless @@WATCHLIST.has_key?("#{Thread.current.__id__}.#{needed_id}")
