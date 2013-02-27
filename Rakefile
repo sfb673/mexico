@@ -53,8 +53,12 @@ RSpec::Core::RakeTask.new('spec') do |t|
 end
 
 require 'yard'
+# @todo require also my custom method things
+require File.join(File.dirname(__FILE__), "assets", "helpers", "roxml_attribute_handler.rb")
+require File.join(File.dirname(__FILE__), "assets", "helpers", "id_ref_handler.rb")
+require File.join(File.dirname(__FILE__), "assets", "helpers", "collection_ref_handler.rb")
 YARD::Rake::YardocTask.new :doc do |t|
-  t.options = %w(--private --protected)
+  t.options = %w(--private --protected --charset utf-8)
 end
 
 task :undoc do |t|
