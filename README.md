@@ -10,6 +10,12 @@ Its central organising unit is the **Corpus** class which allows researchers to 
 
 ## Last Changes
 
+### 0.0.6
+
+Completed on 20 Mar 2013.
+
++ **Yard compatible, complete documentation**: Completed yardoc-compatible documentation for all code components
+
 ### 0.0.5
 
 Completed on 22 Feb 2013.

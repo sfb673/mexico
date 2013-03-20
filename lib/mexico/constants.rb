@@ -36,25 +36,46 @@ module Mexico::Constants
     # container for all other roles
     OTHER = Mexico::FileSystem::ParticipantRole.new :identifier =>'other-participant-role', :name => 'Other'
     
-  
+    # A collection of all participant roles currently predefined.
     ALL = Array.new
     ALL << ::Mexico::Constants::ParticipantRoles::NAIVE
     ALL << ::Mexico::Constants::ParticipantRoles::CONFEDERATE
-    
+
+    # retrieves a participant role object by its key.
+    # @param [String] key The key of the needed participant role.
+    # @return [Mexico::FileSystem::ParticipantRole,nil] the participant role object, or nil, if no object was found.
     def self.get(key)
       ::Mexico::Constants::ParticipantRoles::ALL.first{ |x| x.identifier==key}  
     end
-    
+
+    # checks for the existence of a predefined participant role object.
+    # @param [String] key The key of the needed participant role.
+    # @return [true,false] true iff such a participant role object exists, false otherwise.
     def self.has?(key)
       ::Mexico::Constants::ParticipantRoles::ALL.select{ |x| x.identifier==key}.size>0
     end
     
   end
 
+  # Scale modes are categories of scales based on the publication by S. S. Stevens
+  # (Stevens, S. S. (1946). On the Theory of Scales of Measurement. Science, 103(2684), pp.677-680).
+  # scales have different properties and allow different operations depending on their
+  # level.
   module ScaleModes
+
+    # The nominal scale is the simplest scale mode. It makes equality / inequality operations available.
     NOMINAL  = "nominal"
+
+    # The ordinal scale mode is the next mode after the nominal mode. Besides all operations of the
+    # nominal mode, it makes an ordering operations and comparisons available.
     ORDINAL  = "ordinal"
+
+    # The cardinal scale mode is the next mode after the ordinal mode. Besides all operations of the
+    # ordinal mode, it makes operations and comparisons based on distances or metrics available.
     CARDINAL = "cardinal"
+
+    # The ratio scale mode is the next mode after the cardinal mode. Besides all operations of the
+    # cardinal mode, it makes operations and comparisons based on a zero point available.
     RATIO    = "ratio"
   end
 

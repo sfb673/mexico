@@ -22,32 +22,46 @@ class Mexico::FileSystem::ItemLink
   include ::ROXML
   xml_name 'ItemLink'
 
-  xml_accessor :identifier, :from => '@id'
+  # identifier
+  # xml_accessor :identifier, :from => '@id'
+
+  # type String
   xml_accessor :role, :from => '@role'
 
+  # type String
   xml_accessor :target, :from => "@target"
 
+  attr_accessor :item
+
+  # returns the target object, in this case, an Item.
+  # @return (Mexico::FileSystem::Item) the scale this interval link points to.
   def target_object
     @target_object
   end
 
+  # Sets a new target object (and updates the corresponding identifier)
+  # @param (Mexico::FileSystem::Item) new_target The new target object to set
+  # @return (void)
   def target_object=(new_target)
     puts "SETTING target object to %s, %s" % [new_target.identifier, new_target]
     @target_object=new_target
     target=target_object.identifier
   end
 
+  # This method attempts to link objects from other locations of the XML/object tree
+  # into position inside this object, by following the xml ids given in the
+  # appropriate fields of this class.
   def after_parse
-    puts "item link after parse. What is the situation?"
-
-    if ::Mexico::FileSystem::ToeDocument.knows?(target)
-      puts "  store knows the needed target. fetch it and set it."
-      @target_object=::Mexico::FileSystem::ToeDocument.resolve(target)
-      puts "    %s" % @target_object
-    else
-      # store i in watch list
-      ::Mexico::FileSystem::ToeDocument.watch(target, self, :target_object=)
-    end
+    # puts "item link after parse. What is the situation?"
+    #
+    # if ::Mexico::FileSystem::ToeDocument.knows?(target)
+    #   puts "  store knows the needed target. fetch it and set it."
+    #   @target_object=::Mexico::FileSystem::ToeDocument.resolve(target)
+    #   puts "    %s" % @target_object
+    # else
+    #   # store i in watch list
+    #   ::Mexico::FileSystem::ToeDocument.watch(target, item, :target_object=)
+    # end
   end
 
 end

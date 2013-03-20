@@ -31,14 +31,26 @@ class Mexico::FileSystem::Corpus
   include ::ROXML
   
   xml_name 'Corpus'
-  
-  xml_accessor :identifier,        :from => '@identifier' 
-  xml_accessor :name,              :from => '@name' 
+
+  # identifier
+  xml_accessor :identifier,        :from => '@identifier'
+
+  # type String
+  xml_accessor :name,              :from => '@name'
+
+  # type String
   xml_accessor :description,       :from => "Description"
-  # xml_accessor :participant_roles, :as => [::Mexico::FileSystem::ParticipantRole], :from => "ParticipantRole", :in => "ParticipantRoles"
-  xml_accessor :participants,      :as => [::Mexico::FileSystem::Participant],     :from => "Participant",     :in => "Participants"       
+
+  # collection of ::Mexico::FileSystem::Participant
+  xml_accessor :participants,      :as => [::Mexico::FileSystem::Participant],     :from => "Participant",     :in => "Participants"
+
+  # collection of ::Mexico::FileSystem::Design
   xml_accessor :designs,           :as => [::Mexico::FileSystem::Design],          :from => "Design",          :in => "Designs"
+
+  # collection of ::Mexico::FileSystem::Trial
   xml_accessor :trials,            :as => [::Mexico::FileSystem::Trial],           :from => "Trial",           :in => "Trials"
+
+  # collection of ::Mexico::FileSystem::Resource
   xml_accessor :resources,         :as => [::Mexico::FileSystem::Resource],        :from => "Resource",        :in => "Resources"
   
   public
@@ -46,12 +58,19 @@ class Mexico::FileSystem::Corpus
   # corpus_file  : the XML file
   # corpus_doc   : the nokogiri xml document based on that file
 
+  # Opens the corpus folder and its manifest file at the given path.
+  # @param [String] path the path where the corpus is
+  # @option opts [String] :identifier The identifier that will be given if a new corpus is created
+  # @return [Mexico::FileSystem::Corpus] the new or opened Corpus object
   def self.open(path, opts={})
     xml = File.open(File.join(path,'Corpus.xml'),'rb') { |f| f.read }
     c = Mexico::FileSystem::Corpus.from_xml(xml, opts.merge({:path=>path}))
     return c
   end
 
+  # Creates a new instance of the {Corpus} class.
+  # @param [String] path the path where the corpus is
+  # @option opts [String] :identifier The identifier that will be given if a new corpus is created
   def initialize(path, opts={})
     init_folder(path, opts)
     @base_path = File.expand_path(path)
@@ -63,9 +82,9 @@ class Mexico::FileSystem::Corpus
 
   # Creates a new corpus object
   # @option opts [String] :path The path where to create the new corpus. Required.
-  # @option opts [String] :identifier The path where to create the new corpus. Required.
-  # @option opts [String] :name The path where to create the new corpus. Required.
-  # @option opts [String] :description The path where to create the new corpus. Required.
+  # @option opts [String] :identifier The identifier for the new corpus. Required.
+  # @option opts [String] :name The name for the new corpus.
+  # @option opts [String] :description A description for the new corpus. Required.
   def initialize(opts = {})
     init_folder(opts[:path], opts)
     @base_path = File.expand_path(opts[:path])
@@ -96,6 +115,8 @@ class Mexico::FileSystem::Corpus
     d
   end
 
+  # Returns the disk usage in bytes for the whole corpus.
+  # @return [Integer] the number of bytes used by files of this corpus
   def complete_file_size
     resources.collect{ |r| r.complete_file_size }.inject(:+)
   end

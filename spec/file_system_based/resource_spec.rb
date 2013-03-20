@@ -23,8 +23,8 @@ describe Mexico::FileSystem::Resource do
   # set up an initial corpus representation from the example file
   before(:each) do
     @basepath = File.join(File.dirname(__FILE__), '..','..','assets','mexico-testcorpus','utterance')
-    @xml = File.open(File.join(@basepath,'Corpus.xml'),'rb') { |f| f.read }
-    @corpus = Mexico::FileSystem::Corpus.from_xml(@xml, {:path => @basepath})
+    # @xml = File.open(File.join(@basepath,'Corpus.xml'),'rb') { |f| f.read }
+    @corpus = Mexico::FileSystem::Corpus.open(@basepath)
     @resource = @corpus.resources.first
     @local_file = @resource.local_files[0]
   end
@@ -52,6 +52,13 @@ describe Mexico::FileSystem::Resource do
 context 'the first example resource' do
 
   it 'should have four local files' do
+    # puts '/\\/\\/\\/\\'
+    # puts @resource
+    # puts @resource.identifier
+    # puts @resource.local_files
+    # puts @resource.local_files.count
+    #
+
     @resource.local_files.count.should eq(4)
   end
 

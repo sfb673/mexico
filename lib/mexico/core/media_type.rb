@@ -29,10 +29,12 @@ class Mexico::Core::MediaType
 end
 
 
-# This module lists all participant roles
+# This module lists all constants
 # that are part of the current MExiCo model.
 module Mexico::Constants
 
+  # This module contains constants for the different media types
+  # available in the MExiCo context.
   module MediaTypes
 
 	# Digital recordings of moving pictures, usually along with sound.
@@ -47,6 +49,7 @@ module Mexico::Constants
 	# Placeholder for all other (yet unsupported) types.
 	OTHER      = Mexico::Core::MediaType.new(:identifier => "other",      :name => "Other",      :extensions => %w())
 
+  # This is a collection of all media types currently implemented.
 	ALL = Array.new
 	ALL << ::Mexico::Constants::MediaTypes::VIDEO
 	ALL << ::Mexico::Constants::MediaTypes::AUDIO
