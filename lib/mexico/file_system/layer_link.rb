@@ -27,22 +27,27 @@ class Mexico::FileSystem::LayerLink
 
   xml_accessor :target, :from => "@target"
 
+  attr_accessor :item
+
+  # returns the target object, in this case, a Layer.
+  # @return (Mexico::FileSystem::Layer) the scale this interval link points to.
   def target_object
     @target_object
   end
 
+  # Sets a new target object (and updates the corresponding identifier)
+  # @param (Mexico::FileSystem::Layer) new_target The new target object to set
+  # @return (void)
   def target_object=(new_target)
     @target_object=new_target
     target=target_object.identifier
   end
 
+  # This method attempts to link objects from other locations of the XML/object tree
+  # into position inside this object, by following the xml ids given in the
+  # appropriate fields of this class.
   def after_parse
-    if ::Mexico::FileSystem::ToeDocument.knows?(target)
-      @target_object=::Mexico::FileSystem::ToeDocument.resolve(target)
-    else
-      # store i in watch list
-      ::Mexico::FileSystem::ToeDocument.watch(target, self, :target_object=)
-    end
+
   end
 
 end
