@@ -19,10 +19,14 @@
 require 'optparse'
 require 'colorize'
 
+# This class serves as the interface for the MExiCo executable. All subcommands
+# of the MExiCo executable are bound to class methods of the +Cmd+ class.
 class Mexico::Cmd
 
+  # Array of names of currently supported subcommands.
   SUBCOMMANDS = %w(help info init status)
 
+  # Hash of descriptions for the currently supported subcommands.
   SUBCOMMAND_DESCRIPTIONS = {}
 
   SUBCOMMAND_DESCRIPTIONS["help"]   = "Display helpful information and exit."
@@ -30,8 +34,10 @@ class Mexico::Cmd
   SUBCOMMAND_DESCRIPTIONS["init"]   = "Create corpus structure files in an existing or new folder."
   SUBCOMMAND_DESCRIPTIONS["status"] = "Show status info of file linkage and format conversion."
 
+  # the default banner to be displayed on the console when asked for how to use the executable.
   DEFAULT_BANNER = "Usage: mexico [subcommand] [options]"
 
+  # Hash of option parser objects for the currently supported subcommand.s
   OPTION_PARSERS = {}
 
   OPTION_PARSERS["help"] = OptionParser.new do |opts|
@@ -68,17 +74,29 @@ class Mexico::Cmd
 
   @@options = {}
 
+  # Helper method that writes an informative verbose message to the console
+  # if the +verbose+ parameter was given on the command line.
+  # @param (String) message A verbose message to be sent to stdout.
+  # @return (void)
   def self.verbose(message)
     puts "VERBOSE:  #{message}".cyan if @@options[:verbose]
   end
 
+  # Helper method that writes debugging information (typically in critical
+  # and error cases) to the console
+  # if the +debug+ parameter was given on the command line.
+  # @param (String) message A debugging message to be sent to stdout.
+  # @return (void)
   def self.debug(message)
     puts "DEBUG:    #{message}".magenta if @@options[:debug]
   end
 
-
+  # helper method that creates a human-readable file size representation
+  # (suffixed with "KB", "MB", "GB", etc.).
+  # @param (Number) number the number to be formatted
+  # @return (String) a human-readable file size representation of that number
   def self.humanize(number)
-    prefs = %w(Ti Gi Mi Ki)
+    prefs = %w(T G M K)
     display_number = number.to_f
     unit = ""
     while(display_number>1000 && !prefs.empty?)
@@ -88,6 +106,10 @@ class Mexico::Cmd
     return "%.1f %sB" % [display_number, unit]
   end
 
+  # The core method that is called when the executable runs.
+  # @param (Collection) arx a list of the command line parameters.
+  # @return (void) Should not return anything since {System::exit}
+  #   is usually called at some point in this method.
   def self.run!(arx)
     argsize = ARGV.size
     if argsize>0
@@ -121,6 +143,9 @@ class Mexico::Cmd
     exit(0)
   end
 
+  # This method handles the *help* subcommand.
+  # @param (Hash) options a hash of raw options from the command line.
+  # It does nothing but output usage information to the console and quit.
   def self.help(options)
     puts "Help".magenta
     puts OPTION_PARSERS['help']

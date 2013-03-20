@@ -51,7 +51,7 @@ class Mexico::FileSystem::DesignComponent
   #@todo belongs to Design
 
   # Returns a collection of resources that are associated with this design component.
-  # @return [Array<Resource>] an array of resources associated with this design component.
+  # @return Array<Resource> an array of resources associated with this design component.
   def resources
     @corpus.resources.select{ |i| i.design_component === self }
   end

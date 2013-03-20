@@ -41,10 +41,10 @@ class Mexico::FileSystem::Resource
   collection_ref :media_type, ::Mexico::Core::MediaType, ::Mexico::Constants::MediaTypes::ALL, ::Mexico::Constants::MediaTypes::OTHER
 
   # type Array<Mexico::FileSystem::LocalFile>
-  xml_accessor :local_files, :as => [::Mexico::FileSystem::LocalFile], :from => "LocalFile", :in => "."
+  xml_accessor :local_files, :as => [::Mexico::FileSystem::LocalFile], :from => "LocalFile" #, :in => "."
 
   # type Array<Mexico::FileSystem::URL>
-  # xml_accessor :urls,        :as => [::Mexico::FileSystem::URL],       :from => "URL" # ,  :in => "."
+  xml_accessor :urls,        :as => [::Mexico::FileSystem::URL],       :from => "URL" # ,  :in => "."
 
   # type String
   xml_accessor :trial_id, :from => "@trial_id"
@@ -146,6 +146,9 @@ class Mexico::FileSystem::Resource
    defined?(@document) ? @document : nil
   end
 
+  def after_parse
+    # puts "Parsed Resource #{self.identifier}"
+  end
 
   # @todo Resource must, upon creation, be bound to a physical resource somewhere in the file system.
 

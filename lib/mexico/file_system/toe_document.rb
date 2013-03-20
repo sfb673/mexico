@@ -83,6 +83,11 @@ class Mexico::FileSystem::ToeDocument
     puts "Watching out for ID %s, to call %s object's method %s" % [needed_id, object.to_s, method.to_s]
   end
 
+  # Checks whether the given id/object pair is watched, and takes appropriate action
+  # if this is the case.
+  # @param (String) needed_id The XML ID that might be watched.
+  # @param (Object) needed_object The ruby object that might be watched.
+  # @return (void)
   def self.check_watch(needed_id, needed_object)
     if defined?(@@WATCHLIST)
       if @@WATCHLIST.has_key?("#{Thread.current.__id__}.#{needed_id}")
@@ -90,8 +95,8 @@ class Mexico::FileSystem::ToeDocument
         puts "   Watchlist has key %s" % needed_id
         puts "   iterate %i elements." % @@WATCHLIST["#{Thread.current.__id__}.#{needed_id}"].size
         @@WATCHLIST["#{Thread.current.__id__}.#{needed_id}"].each do |entry|
-          puts "      entry: %s :: %s,   %s :: %s, %s" % [entry[0].class.name, entry[0].to_s, entry[1].class.name, entry[1].to_s, entry.__id__]
-          puts "      calling %s on %s object with value %s" % [ entry[1].to_s, entry[0].identifier, needed_object.identifier ]
+          # puts "      entry: %s :: %s,   %s :: %s, %s" % [entry[0].class.name, entry[0].to_s, entry[1].class.name, entry[1].to_s, entry.__id__]
+          # puts "      calling %s on %s object with value %s" % [ entry[1].to_s, entry[0].identifier, needed_object.identifier ]
           entry[0].send(entry[1], needed_object)
         end
         @@WATCHLIST.delete("#{Thread.current.__id__}.#{needed_id}")
@@ -99,10 +104,16 @@ class Mexico::FileSystem::ToeDocument
     end
   end
 
+  # Opens the document at the given location.
+  # @param (String) filename The path that points to the file to be opened.
+  # @return (Mexico::FileSystem::ToeDocument) a toe document with that file's contents.
   def self.open(filename)
     self.from_xml(File.open(filename))
   end
 
+  # This method attempts to link objects from other locations of the XML/object tree
+  # into position inside this object, by following the xml ids given in the
+  # appropriate fields of this class.
   def after_parse
 
     # process xml ids
