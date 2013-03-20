@@ -146,12 +146,17 @@ class Mexico::Cmd
   # This method handles the *help* subcommand.
   # @param (Hash) options a hash of raw options from the command line.
   # It does nothing but output usage information to the console and quit.
+  # @return nil
   def self.help(options)
     puts "Help".magenta
     puts OPTION_PARSERS['help']
     exit(0)
   end
 
+  # This method handles the *info* subcommand. It prints out basic information
+  # about an existing corpus.
+  # @param (Hash) options a hash of raw options from the command line.
+  # @return nil
   def self.info(options)
     # check if current folder is corpus folder
     current_folder = File.dirname(__FILE__)
@@ -186,12 +191,17 @@ class Mexico::Cmd
     end
   end
 
-
+  # This method handles the *init* subcommand. It can create the necessary structures and files
+  # for a new corpus folder.
+  # @param (Hash) options a hash of raw options from the command line.
+  # @return nil
   def self.init(options)
     puts "The 'init' subcommand is not yet implemented."
     exit(0)
   end
 
+  # This method handles the *status* subcommand. It outputs various pieces of information about
+  # the corpus, its linkage to a remote repository, untracked files, etc.
   def self.status(options)
     puts "The 'status' subcommand is not yet implemented."
     exit(0)

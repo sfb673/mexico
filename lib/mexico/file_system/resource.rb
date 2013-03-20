@@ -146,6 +146,7 @@ class Mexico::FileSystem::Resource
    defined?(@document) ? @document : nil
   end
 
+  # This method performs additional linking and cleanup after parsing a XML representation.
   def after_parse
     # puts "Parsed Resource #{self.identifier}"
   end

@@ -78,6 +78,8 @@ class Mexico::FileSystem::LocalFile
     return File.size(absolute_path)
   end
 
+
+  # This method performs additional linking and cleanup after parsing a XML representation.
   def after_parse
     # puts "Parsed LocalFile"
   end
