@@ -32,26 +32,33 @@ class Mexico::FileSystem::Participant
   
   xml_accessor :description, :from => "Description"     
   
-  def participant_role
-    ::Mexico::Constants::ParticipantRoles.get(participant_role_id)
-  end
+
+  # def participant_role
+  #   ::Mexico::Constants::ParticipantRoles.get(participant_role_id)
+  # end
   
-  def participant_role=(new_participant_role)
-    # check whether param is a string or a participant role object
-    if new_participant_role.kind_of?(String)
-      new_object = ::Mexico::Constants::ParticipantRoles.get(new_participant_role)
-      @participant_role_id=new_participant_role
-    end
-    if new_participant_role.kind_of?(::Mexico::FileSystem::ParticipantRole)
-      unless ::Mexico::Constants::ParticipantRoles.has?(new_participant_role.identifier)
-        # raise exception, this pr isn't available
-      else
-        participant_role_id = new_participant_role.identifier
-      end
-    end
-  end
+  # def participant_role=(new_participant_role)
+  #   # check whether param is a string or a participant role object
+  #   if new_participant_role.kind_of?(String)
+  #     new_object = ::Mexico::Constants::ParticipantRoles.get(new_participant_role)
+  #     @participant_role_id=new_participant_role
+  #   end
+  #   if new_participant_role.kind_of?(::Mexico::FileSystem::ParticipantRole)
+  #     unless ::Mexico::Constants::ParticipantRoles.has?(new_participant_role.identifier)
+  #       # raise exception, this pr isn't available
+  #     else
+  #       participant_role_id = new_participant_role.identifier
+  #     end
+  #   end
+  # end
   
-  
+  # Creates a new participant object.
+  # @option opts [String] :identifier The identifier of the new participant object.
+  # @option opts [String] :name The name of the new participant object.
+  # @option opts [String] :description The identifier of the new participant object.
+  # @option opts [String] :identifier The identifier of the new participant object.
+  # @option opts [String] :name The name of the new participant object.
+  # @option opts [String] :participant_role The participant role of the new participant object.
   def initialize(opts={})
     # @corpus = corpus
     [:identifier,:name,:description,:participant_role].each do |att|

@@ -24,21 +24,32 @@ class Mexico::FileSystem::LocalFile
   extend Mexico::FileSystem::StaticCollectionRef
   
   include ::ROXML
-  
-  xml_accessor :identifier,     :from => '@identifier' 
-  xml_accessor :name,           :from => '@name' 
-  xml_accessor :description,    :from => 'Description' 
 
+  # identifier
+  xml_accessor :identifier,     :from => '@identifier' 
+
+  # type String
+  xml_accessor :name,           :from => '@name'
+
+  # type String
+  xml_accessor :description,    :from => 'Description'
+
+  # type String
   xml_accessor :path, :from => "@path"
 
-
+  # Creates a new local file object.
+  # @option opts [String] :identifier The identifier of the new design (required).
+  # @option opts [String] :name The name of the new design. (required).
+  # @option opts [String] :description A description of the new design (optional).
   def initialize(opts={})
-    # @corpus = corpus
     [:identifier,:name,:description].each do |att|
       send("#{att}=", opts[att]) if opts.has_key?(att)
     end
   end
-  
+
+  # Resolves any relative path given in the path field, and returns an absolute
+  # path suited for the current operating system.
+  # @return (String) a string containing the absolute path to the file.
   def absolute_path
     if path.starts_with? "."
       return File.expand_path(File.join(@corpus.base_path, path))
@@ -46,19 +57,31 @@ class Mexico::FileSystem::LocalFile
     return path
   end
 
+  # Indicates whether the file described at the path actually exists.
+  # @return (Boolean) +true+ if the described file exists, +false+ otherwise.
   def file_exists?
     return false if path.blank?
     File.exists?(absolute_path)
   end
 
+  # Returns a file object for this {LocalFile} object.
+  # @return (File) a file object for the described file, or +nil+ if there is no readable file at that location.
   def file_handle
     return nil if path.blank?
     return File.open(absolute_path)
   end
 
+  # Returns the size of the file (in bytes).
+  # @return (Integer) the size of the file in bytes, or +nil+ if no file can be found.
   def file_size
     return nil if path.blank?
     return File.size(absolute_path)
+  end
+
+
+  # This method performs additional linking and cleanup after parsing a XML representation.
+  def after_parse
+    # puts "Parsed LocalFile"
   end
 
 end

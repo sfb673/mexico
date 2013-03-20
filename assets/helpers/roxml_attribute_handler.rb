@@ -24,7 +24,7 @@ FOO
       current_object_type = "String"
       object.dynamic = true
       object.docstring = "Gets the identifier of this object. #{ID_DESC}"
-      object.docstring.add_tag(YARD::Tags::Tag.new("return","", current_object_type))
+      object.docstring.add_tag(YARD::Tags::Tag.new("return","The current value of the #{name} field.", current_object_type))
       setter_string = "Sets the identifier for this object. #{ID_DESC}"
     end
 
@@ -32,7 +32,7 @@ FOO
       current_object_type = $1
       object.dynamic = true
       object.docstring = "XML-bound getter method for the #{name} field."
-      object.docstring.add_tag(YARD::Tags::Tag.new("return","", current_object_type))
+      object.docstring.add_tag(YARD::Tags::Tag.new("return","The current value of the #{name} field.", current_object_type))
       setter_string = "XML-bound setter method for the #{name} field."
     end
 
@@ -40,7 +40,7 @@ FOO
       object.dynamic = true
       object.docstring = "XML-bound getter method for the #{name} collection of #{$1} objects."
       current_object_type = "[#{$1}]"
-      object.docstring.add_tag(YARD::Tags::Tag.new("return","", current_object_type))
+      object.docstring.add_tag(YARD::Tags::Tag.new("return","The current value of the #{name} field.", current_object_type))
       setter_string = "XML-bound setter method for the #{name} collection of #{$1} objects."
     end
 
