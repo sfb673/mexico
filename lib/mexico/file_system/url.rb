@@ -16,7 +16,7 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
-# A template class doing nothing.
+# An URL object stands for a resource representation at the given location.
 class Mexico::FileSystem::URL
   
   include Mexico::FileSystem::BoundToCorpus
