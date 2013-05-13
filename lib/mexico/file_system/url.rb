@@ -38,5 +38,18 @@ class Mexico::FileSystem::URL
       send("#{att}=", opts[att]) if opts.has_key?(att)
     end
   end
+
+  # Retrieves a bunch of meta data with information about this resource representation.
+  # @return [Hash] A hash containing various information (size, mime_type, availability)
+  def info
+    # @todo Implement this method stub
+  end
+
+  # Attempts to fetch the contents at this resource.
+  # @option opts [String] :format The format to be retrieved. If omitted, the standard format will be retrieved.
+  # @return [String or ByteArray] The file contents, as a string or binary object.
+  def get(opts = {} )
+    # @todo Implement this method stub
+  end
   
 end
