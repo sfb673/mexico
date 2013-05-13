@@ -10,6 +10,14 @@ Its central organising unit is the **Corpus** class which allows researchers to 
 
 ## Last Changes
 
+
+### 0.0.7
+
+Completed on 13 May 2013.
+
++ **Method stubs**: Added method stubs for info and retrieval of URLs and LocalFiles
++ **Additional documentation**: Replaced template documentation with meaningful information
+
 ### 0.0.6
 
 Completed on 20 Mar 2013.
