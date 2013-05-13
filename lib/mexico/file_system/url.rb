@@ -16,7 +16,7 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
-# A template class doing nothing.
+# An URL object stands for a resource representation at the given location.
 class Mexico::FileSystem::URL
   
   include Mexico::FileSystem::BoundToCorpus
@@ -37,6 +37,19 @@ class Mexico::FileSystem::URL
     [:identifier,:name,:description].each do |att|
       send("#{att}=", opts[att]) if opts.has_key?(att)
     end
+  end
+
+  # Retrieves a bunch of meta data with information about this resource representation.
+  # @return [Hash] A hash containing various information (size, mime_type, availability)
+  def info
+    # @todo Implement this method stub
+  end
+
+  # Attempts to fetch the contents at this resource.
+  # @option opts [String] :format The format to be retrieved. If omitted, the standard format will be retrieved.
+  # @return [String or ByteArray] The file contents, as a string or binary object.
+  def get(opts = {} )
+    # @todo Implement this method stub
   end
   
 end

@@ -16,7 +16,8 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
-# A template class doing nothing.
+# A LocalFile object represents a file on a local file system, with additional
+# information
 class Mexico::FileSystem::LocalFile
   
   include Mexico::FileSystem::BoundToCorpus
