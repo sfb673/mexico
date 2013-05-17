@@ -18,7 +18,7 @@
 
 require 'spec_helper'
 
-describe Mexico::FileSystem::ToeDocument do
+describe Mexico::FileSystem::FiestaDocument do
 
   # set up an initial corpus representation from the example file
   before(:each) do

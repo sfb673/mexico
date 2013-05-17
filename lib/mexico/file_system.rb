@@ -45,7 +45,7 @@ require 'mexico/file_system/item_link.rb'
 require 'mexico/file_system/point_link.rb'
 require 'mexico/file_system/interval_link.rb'
 require 'mexico/file_system/item.rb'
-require 'mexico/file_system/toe_document.rb'
+require 'mexico/file_system/fiesta_document.rb'
 
 require 'mexico/file_system/trial.rb'
 require 'mexico/file_system/design_component.rb'

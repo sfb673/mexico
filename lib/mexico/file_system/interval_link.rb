@@ -36,7 +36,7 @@ class Mexico::FileSystem::IntervalLink
 
   attr_accessor :item
 
-  def initialize(args)
+  def initialize(args={})
     args.each do |k,v|
       if self.respond_to?("#{k}=")
         send("#{k}=", v)

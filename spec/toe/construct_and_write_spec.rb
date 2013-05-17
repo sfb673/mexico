@@ -18,7 +18,7 @@
 
 require 'spec_helper'
 
-describe Mexico::FileSystem::ToeDocument do
+describe Mexico::FileSystem::FiestaDocument do
 
   before(:each) do
     @testfile = File.join(File.dirname(__FILE__), '..','..','assets','out_only')
@@ -31,7 +31,7 @@ describe Mexico::FileSystem::ToeDocument do
   context 'writes a correct ToE structure' do
 
     it 'to a local file' do
-      @toe_doc = Mexico::FileSystem::ToeDocument.new
+      @toe_doc = Mexico::FileSystem::FiestaDocument.new
       @toe_doc.add_standard_timeline('s')
       @timeline = @toe_doc.scales.first
       (1..4).each do |x|

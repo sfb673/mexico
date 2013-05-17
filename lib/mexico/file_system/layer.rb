@@ -27,7 +27,7 @@ class ::Mexico::FileSystem::Layer
   # data type
   # content structure
 
-  def initialize(args)
+  def initialize(args={})
     args.each do |k,v|
       if self.respond_to?("#{k}=")
         send("#{k}=", v)
@@ -39,7 +39,7 @@ class ::Mexico::FileSystem::Layer
   # callback after xml parsing process, to store this element in the
   # document cache.
   def after_parse
-    ::Mexico::FileSystem::ToeDocument.store(self.identifier, self)
+    ::Mexico::FileSystem::FiestaDocument.store(self.identifier, self)
   end
 
 end

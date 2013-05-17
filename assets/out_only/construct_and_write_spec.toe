@@ -1,4 +1,4 @@
-<ToeDocument>
+<FiestaDocument>
   <ScaleSet>
     <Scale id="timeline01" name="Timeline" unit="s"/>
   </ScaleSet>
@@ -96,4 +96,4 @@
       </Data>
     </Item>
   </ItemSet>
-</ToeDocument>
+</FiestaDocument>
