@@ -41,6 +41,14 @@ class Mexico::FileSystem::Scale
   # OK role : String (free text)
   # continuous? : Boolean
 
+  def initialize(args={})
+    args.each do |k,v|
+      if self.respond_to?("#{k}=")
+        send("#{k}=", v)
+      end
+    end
+  end
+
   # overrides method in ROXML
   # callback after xml parsing process, to store this element in the
   # document cache.

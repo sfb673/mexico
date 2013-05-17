@@ -33,6 +33,15 @@ class Mexico::FileSystem::PointLink
 
   attr_accessor :item
 
+
+  def initialize(args)
+    args.each do |k,v|
+      if self.respond_to?("#{k}=")
+        send("#{k}=", v)
+      end
+    end
+  end
+
   # returns the target object, in this case, a Scale.
   # @return (Mexico::FileSystem::Scale) the scale this interval link points to.
   def target_object
@@ -44,7 +53,7 @@ class Mexico::FileSystem::PointLink
   # @return (void)
   def target_object=(new_target)
     @target_object=new_target
-    target=target_object.identifier
+    @target=target_object.identifier
   end
 
   # This method attempts to link objects from other locations of the XML/object tree

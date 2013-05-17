@@ -36,6 +36,14 @@ class Mexico::FileSystem::IntervalLink
 
   attr_accessor :item
 
+  def initialize(args)
+    args.each do |k,v|
+      if self.respond_to?("#{k}=")
+        send("#{k}=", v)
+      end
+    end
+  end
+
   # returns the target object, in this case, a Scale.
   # @return (Mexico::FileSystem::Scale) the scale this interval link points to.
   def target_object
