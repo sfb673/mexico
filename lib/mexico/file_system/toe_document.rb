@@ -111,6 +111,17 @@ class Mexico::FileSystem::ToeDocument
     self.from_xml(File.open(filename))
   end
 
+  def initialize
+    super
+    @scales = []
+    @layers = []
+    @items  = []
+  end
+
+  def add_standard_timeline(unit="ms")
+    @scales << Mexico::FileSystem::Scale.new(identifier: 'timeline01', name: 'Timeline', unit: unit)
+  end
+
   # This method attempts to link objects from other locations of the XML/object tree
   # into position inside this object, by following the xml ids given in the
   # appropriate fields of this class.
@@ -121,6 +132,12 @@ class Mexico::FileSystem::ToeDocument
     # then clear cache
     @@CACHE.clear
 
+  end
+
+  def add_item(item)
+    yield(item)
+    # check if item is not in the array already
+    @items << item
   end
 
 end

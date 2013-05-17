@@ -28,6 +28,14 @@ class Mexico::FileSystem::Data
   # keine Bool-Klasse in Ruby. xml_accessor :boolean_value, :as => Bool, :from => "B"
   # @todo map and list types
 
+  def initialize(args)
+    args.each do |k,v|
+      if self.respond_to?("#{k}=")
+        send("#{k}=", v)
+      end
+    end
+  end
+
   def after_parse
     # resolve links
   end

@@ -1,0 +1,99 @@
+<ToeDocument>
+  <ScaleSet>
+    <Scale id="timeline01" name="Timeline" unit="s"/>
+  </ScaleSet>
+  <LayerStructure>
+    <Layer id="layer01" name="Layer 1"/>
+    <Layer id="layer01" name="Layer 2"/>
+    <Layer id="layer01" name="Layer 3"/>
+    <Layer id="layer01" name="Layer 4"/>
+  </LayerStructure>
+  <ItemSet>
+    <Item id="i1">
+      <Links>
+        <ItemLink role="successor" target="i2"/>
+        <LayerLink target="layer01"/>
+        <PointLink point="100.0" target="timeline01"/>
+      </Links>
+      <Data>
+        <String>yes</String>
+      </Data>
+    </Item>
+    <Item id="i2">
+      <Links>
+        <ItemLink role="predecessor" target="i1"/>
+        <ItemLink role="successor" target="i3"/>
+        <LayerLink target="layer01"/>
+        <PointLink point="200.0" target="timeline01"/>
+      </Links>
+      <Data>
+        <String>all</String>
+      </Data>
+    </Item>
+    <Item id="i3">
+      <Links>
+        <ItemLink role="predecessor" target="i2"/>
+        <ItemLink role="successor" target="i4"/>
+        <LayerLink target="layer01"/>
+        <PointLink point="300.0" target="timeline01"/>
+      </Links>
+      <Data>
+        <String>work</String>
+      </Data>
+    </Item>
+    <Item id="i4">
+      <Links>
+        <ItemLink role="predecessor" target="i3"/>
+        <ItemLink role="successor" target="i5"/>
+        <LayerLink target="layer01"/>
+        <PointLink point="400.0" target="timeline01"/>
+      </Links>
+      <Data>
+        <String>and</String>
+      </Data>
+    </Item>
+    <Item id="i5">
+      <Links>
+        <ItemLink role="predecessor" target="i4"/>
+        <ItemLink role="successor" target="i6"/>
+        <LayerLink target="layer01"/>
+        <IntervalLink min="500.0" max="600.0" target="timeline01"/>
+      </Links>
+      <Data>
+        <String>no</String>
+      </Data>
+    </Item>
+    <Item id="i6">
+      <Links>
+        <ItemLink role="predecessor" target="i5"/>
+        <ItemLink role="successor" target="i7"/>
+        <LayerLink target="layer01"/>
+        <IntervalLink min="600.0" max="700.0" target="timeline01"/>
+      </Links>
+      <Data>
+        <String>play</String>
+      </Data>
+    </Item>
+    <Item id="i7">
+      <Links>
+        <ItemLink role="predecessor" target="i6"/>
+        <ItemLink role="successor" target="i8"/>
+        <LayerLink target="layer01"/>
+        <IntervalLink min="700.0" max="800.0" target="timeline01"/>
+      </Links>
+      <Data>
+        <String>makes</String>
+      </Data>
+    </Item>
+    <Item id="i8">
+      <Links>
+        <ItemLink role="predecessor" target="i7"/>
+        <LayerLink target="layer01"/>
+        <IntervalLink min="800.0" max="900.0" target="timeline01"/>
+      </Links>
+      <Data>
+        <String>jack</String>
+      </Data>
+    </Item>
+  </ItemSet>
+</ToeDocument>

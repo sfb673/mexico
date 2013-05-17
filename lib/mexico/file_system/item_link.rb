@@ -33,6 +33,14 @@ class Mexico::FileSystem::ItemLink
 
   attr_accessor :item
 
+  def initialize(args)
+    args.each do |k,v|
+      if self.respond_to?("#{k}=")
+        send("#{k}=", v)
+      end
+    end
+  end
+
   # returns the target object, in this case, an Item.
   # @return (Mexico::FileSystem::Item) the scale this interval link points to.
   def target_object
@@ -45,7 +53,7 @@ class Mexico::FileSystem::ItemLink
   def target_object=(new_target)
     puts "SETTING target object to %s, %s" % [new_target.identifier, new_target]
     @target_object=new_target
-    target=target_object.identifier
+    @target=target_object.identifier
   end
 
   # This method attempts to link objects from other locations of the XML/object tree

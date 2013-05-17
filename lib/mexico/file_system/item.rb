@@ -27,19 +27,31 @@ class Mexico::FileSystem::Item
   # @todo compound links (later)
 
   # collection of Mexico::FileSystem::ItemLink
-  xml_accessor :item_links,     :as => [Mexico::FileSystem::ItemLink],     :from => "Links/ItemLink"
+  xml_accessor :item_links,     :as => [Mexico::FileSystem::ItemLink],     :from => "ItemLink",     :in => "Links"
 
   # collection of Mexico::FileSystem::LayerLink
-  xml_accessor :layer_links,    :as => [Mexico::FileSystem::LayerLink],    :from => "Links/LayerLink"
+  xml_accessor :layer_links,    :as => [Mexico::FileSystem::LayerLink],    :from => "LayerLink",    :in => "Links"
 
   # collection of Mexico::FileSystem::PointLink
-  xml_accessor :point_links,    :as => [Mexico::FileSystem::PointLink],    :from => "Links/PointLink"
+  xml_accessor :point_links,    :as => [Mexico::FileSystem::PointLink],    :from => "PointLink",    :in => "Links"
 
   # collection of Mexico::FileSystem::IntervalLink
-  xml_accessor :interval_links, :as => [Mexico::FileSystem::IntervalLink], :from => "Links/IntervalLink"
+  xml_accessor :interval_links, :as => [Mexico::FileSystem::IntervalLink], :from => "IntervalLink", :in => "Links"
 
   # collection of Mexico::FileSystem::Data
   xml_accessor :data, :as => Mexico::FileSystem::Data, :from => "Data"
+
+  def initialize(args)
+    args.each do |k,v|
+      if self.respond_to?("#{k}=")
+        send("#{k}=", v)
+      end
+    end
+    @item_links = []
+    @layer_links = []
+    @point_links = []
+    @interval_links = []
+  end
 
   # This method attempts to link objects from other locations of the XML/object tree
   # into position inside this object, by following the xml ids given in the
