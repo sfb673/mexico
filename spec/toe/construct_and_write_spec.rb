@@ -35,7 +35,7 @@ describe Mexico::FileSystem::FiestaDocument do
       @toe_doc.add_standard_timeline('s')
       @timeline = @toe_doc.scales.first
       (1..4).each do |x|
-        @toe_doc.layers << Mexico::FileSystem::Layer.new(identifier: 'layer01', name: "Layer #{x}")
+        @toe_doc.layers << Mexico::FileSystem::Layer.new(identifier: "layer0#{x}", name: "Layer #{x}")
       end
       # @todo add layer hierarchies
       vals = %w(yes all work and no play makes jack andsoon)
@@ -67,7 +67,12 @@ describe Mexico::FileSystem::FiestaDocument do
       end
 
       File.open(File.join(@testfile,'construct_and_write_spec.toe'), "w:utf-8") do |file|
-        file << @toe_doc.to_xml
+        xml_node = @toe_doc.to_xml
+        xml_node['xmlns:xsi'] = "http://www.w3.org/2001/XMLSchema-instance"
+        xml_node['xsi:noNamespaceSchemaLocation'] = "../../xml/schema/fiesta.xsd"
+
+        puts "Atts: %s" % xml_node.attributes
+        file << xml_node
       end
       @toe_doc.should_not be_nil
     end
