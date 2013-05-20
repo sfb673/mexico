@@ -22,6 +22,9 @@ class Mexico::FileSystem::PointLink
 
   xml_name "PointLink"
 
+  # identifier
+  xml_accessor :identifier,        :from => '@id'
+
   # type Float
   xml_accessor :point, :as => Float, :from => "@point"
 

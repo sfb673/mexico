@@ -23,7 +23,7 @@ class Mexico::FileSystem::ItemLink
   xml_name 'ItemLink'
 
   # identifier
-  # xml_accessor :identifier, :from => '@id'
+  xml_accessor :identifier, :from => '@id'
 
   # type String
   xml_accessor :role, :from => '@role'

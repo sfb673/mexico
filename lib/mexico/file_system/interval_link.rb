@@ -22,6 +22,9 @@ class Mexico::FileSystem::IntervalLink
 
   xml_name "IntervalLink"
 
+  # identifier
+  xml_accessor :identifier,        :from => '@id'
+
   # type Float
   xml_accessor :min, :as => Float, :from => "@min"
 
