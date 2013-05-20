@@ -42,7 +42,7 @@ class Mexico::FileSystem::FiestaDocument
   xml_accessor :scales, :as => [::Mexico::FileSystem::Scale],     :from => "Scale",     :in => "ScaleSet"
 
   # collection of Mexico::FileSystem::Layer
-  xml_accessor :layers, :as => [::Mexico::FileSystem::Layer],     :from => "Layer",     :in => "LayerStructure"
+  xml_accessor :layers, :as => [::Mexico::FileSystem::Layer],     :from => "Layer",     :in => "LayerSet"
 
   # collection of Mexico::FileSystem::Item
   xml_accessor :items, :as => [::Mexico::FileSystem::Item],     :from => "Item",     :in => "ItemSet"
