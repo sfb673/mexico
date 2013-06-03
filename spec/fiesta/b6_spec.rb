@@ -29,7 +29,7 @@ describe Mexico::FileSystem::FiestaDocument do
     context 'Interfaces ' do
       context 'B6 Chat Game ' do
         it 'reads data from a test file' do
-          path = File.join @assetspath, 'mexico-testcorpus', 'fiesta', 'b6'
+          path = File.join @assetspath, 'fiesta', 'b6'
           filename = File.join path, 'match_jones_161_CM_neu_checked.parsed.xml'
           @fdoc = ::Mexico::Fiesta::Interfaces::B6ChatGameInterface.instance.import(File.read(filename))
           File.open(File.join(path,'test.out.fst'),'w') do |f|
