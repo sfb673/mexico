@@ -22,12 +22,12 @@
 # as files on a file system reachable from the top-level folder.
 
 # ToE Document
-class Mexico::FileSystem::ToeDocument
+class Mexico::FileSystem::FiestaDocument
 
   # This class stands for an XML document in the Toe format.
 
   include ::ROXML
-  xml_name 'ToeDocument'
+  xml_name 'FiestaDocument'
 
   # identifier
   xml_accessor :identifier, :from => '@id'
@@ -42,7 +42,7 @@ class Mexico::FileSystem::ToeDocument
   xml_accessor :scales, :as => [::Mexico::FileSystem::Scale],     :from => "Scale",     :in => "ScaleSet"
 
   # collection of Mexico::FileSystem::Layer
-  xml_accessor :layers, :as => [::Mexico::FileSystem::Layer],     :from => "Layer",     :in => "LayerStructure"
+  xml_accessor :layers, :as => [::Mexico::FileSystem::Layer],     :from => "Layer",     :in => "LayerSet"
 
   # collection of Mexico::FileSystem::Item
   xml_accessor :items, :as => [::Mexico::FileSystem::Item],     :from => "Item",     :in => "ItemSet"
@@ -69,7 +69,7 @@ class Mexico::FileSystem::ToeDocument
     @@CACHE = {} unless defined?(@@CACHE)
     @@CACHE["#{Thread.current.__id__}.#{xml_id}"] = ruby_object
     puts "Stored '%s' at '%s', cache size is now %i" % [ruby_object, "#{Thread.current.__id__}.#{xml_id}", @@CACHE.size]
-    ::Mexico::FileSystem::ToeDocument.check_watch(xml_id, ruby_object)
+    ::Mexico::FileSystem::FiestaDocument.check_watch(xml_id, ruby_object)
     @@CACHE.each_pair do |i,j|
       puts "  %32s %32s %32s" % [i, j.class.name, j.__id__]
     end
@@ -106,8 +106,9 @@ class Mexico::FileSystem::ToeDocument
 
   # Opens the document at the given location.
   # @param (String) filename The path that points to the file to be opened.
-  # @return (Mexico::FileSystem::ToeDocument) a toe document with that file's contents.
+  # @return (Mexico::FileSystem::FiestaDocument) a toe document with that file's contents.
   def self.open(filename)
+    puts "opening %s" % filename
     self.from_xml(File.open(filename))
   end
 
@@ -120,6 +121,7 @@ class Mexico::FileSystem::ToeDocument
 
   def add_standard_timeline(unit="ms")
     @scales << Mexico::FileSystem::Scale.new(identifier: 'timeline01', name: 'Timeline', unit: unit)
+    @scales.last
   end
 
   # This method attempts to link objects from other locations of the XML/object tree

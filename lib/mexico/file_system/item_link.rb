@@ -23,7 +23,7 @@ class Mexico::FileSystem::ItemLink
   xml_name 'ItemLink'
 
   # identifier
-  # xml_accessor :identifier, :from => '@id'
+  xml_accessor :identifier, :from => '@id'
 
   # type String
   xml_accessor :role, :from => '@role'
@@ -33,7 +33,7 @@ class Mexico::FileSystem::ItemLink
 
   attr_accessor :item
 
-  def initialize(args)
+  def initialize(args={})
     args.each do |k,v|
       if self.respond_to?("#{k}=")
         send("#{k}=", v)
@@ -62,13 +62,13 @@ class Mexico::FileSystem::ItemLink
   def after_parse
     # puts "item link after parse. What is the situation?"
     #
-    # if ::Mexico::FileSystem::ToeDocument.knows?(target)
+    # if ::Mexico::FileSystem::FiestaDocument.knows?(target)
     #   puts "  store knows the needed target. fetch it and set it."
-    #   @target_object=::Mexico::FileSystem::ToeDocument.resolve(target)
+    #   @target_object=::Mexico::FileSystem::FiestaDocument.resolve(target)
     #   puts "    %s" % @target_object
     # else
     #   # store i in watch list
-    #   ::Mexico::FileSystem::ToeDocument.watch(target, item, :target_object=)
+    #   ::Mexico::FileSystem::FiestaDocument.watch(target, item, :target_object=)
     # end
   end
 

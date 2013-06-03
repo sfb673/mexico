@@ -127,7 +127,7 @@ class Mexico::FileSystem::Resource
 
   # Attempts to load the contents of the resource from an appropriate source into an appropriate
   # data structure (for annotation files, into the ToE format, etc.)
-  # @return (Mexico::FileSystem::ToeDocument) the document, or +nil+ if no document could be loaded.
+  # @return (Mexico::FileSystem::FiestaDocument) the document, or +nil+ if no document could be loaded.
   def load
 
     # @todo create a loader interface in a separate package
@@ -150,7 +150,7 @@ class Mexico::FileSystem::Resource
       toe_file = local_files.find{ |f| f.path=~/toe$/ || f.path=~/fiesta$/ }
 
       unless toe_file.nil?
-        @document = ::Mexico::FileSystem::ToeDocument.open(toe_file.absolute_path)
+        @document = ::Mexico::FileSystem::FiestaDocument.open(toe_file.absolute_path)
         return @document
       end
     end
@@ -158,7 +158,7 @@ class Mexico::FileSystem::Resource
 
   # Returns the annotation document previously loaded in {#load} (this is only the case
   # if resource has media type video, and if an appropriate local file is present).
-  # @return (Mexico::FileSystem::ToeDocument) the document, or +nil+ if no document has been loaded.
+  # @return (Mexico::FileSystem::FiestaDocument) the document, or +nil+ if no document has been loaded.
   def document
    defined?(@document) ? @document : nil
   end
