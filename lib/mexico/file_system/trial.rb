@@ -16,6 +16,8 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
+require 'poseidon'
+
 # Trials model the events from reality that form the ultimate substrate
 # of a corpus. Trials are usually numbered sequentially. A trial
 # stands for a specific clip or segment of reality, e.g., a time span
@@ -47,6 +49,18 @@ class Mexico::FileSystem::Trial
 
   # type Mexico::FileSystem::Design
   id_ref :design
+
+  # POSEIdON-based RDF augmentation
+  include Poseidon
+
+  self_uri %q(http://cats.sfb673.org/Trial)
+  instance_uri_scheme %q(http://phoibos.sfb673.org/corpora/#{corpus.identifier}/trials/#{identifier})
+
+  rdf_property :identifier, %q(http://cats.sfb673.org/identifier)
+  rdf_property :name, %q(http://cats.sfb673.org/name)
+  rdf_property :description, %q(http://cats.sfb673.org/description)
+  rdf_property :cue, %q(http://cats.sfb673.org/cue)
+  rdf_property :running_number, %q(http://cats.sfb673.org/running_number)
 
   # creates a new Trial object.
   # @option opts [String] :identifier The identifier of the new trial object.

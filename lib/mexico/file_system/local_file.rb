@@ -16,6 +16,8 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
+require 'poseidon'
+
 # A LocalFile object represents a file on a local file system, with additional
 # information
 class Mexico::FileSystem::LocalFile
@@ -37,6 +39,17 @@ class Mexico::FileSystem::LocalFile
 
   # type String
   xml_accessor :path, :from => "@path"
+
+
+  # POSEIdON-based RDF augmentation
+  include Poseidon
+  self_uri %q(http://cats.sfb673.org/LocalFile)
+  instance_uri_scheme %q(http://phoibos.sfb673.org/corpora/#{corpus.identifier}/local_files/#{identifier})
+  rdf_property :identifier, %q(http://cats.sfb673.org/identifier)
+  rdf_property :name, %q(http://cats.sfb673.org/name)
+  rdf_property :description, %q(http://cats.sfb673.org/description)
+  rdf_property :path, %q(http://cats.sfb673.org/path)
+
 
   # Creates a new local file object.
   # @option opts [String] :identifier The identifier of the new design (required).

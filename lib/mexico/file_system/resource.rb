@@ -16,6 +16,8 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
+require 'poseidon'
+
 # A template class doing nothing.
 class Mexico::FileSystem::Resource
   
@@ -57,6 +59,21 @@ class Mexico::FileSystem::Resource
 
   # type Mexico::FileSystem::DesignComponent
   id_ref :design_component
+
+  # POSEIdON-based RDF augmentation
+  include Poseidon
+
+  self_uri %q(http://cats.sfb673.org/Resource)
+  instance_uri_scheme %q(http://phoibos.sfb673.org/corpora/#{corpus.identifier}/resources/#{identifier})
+
+  rdf_property :identifier, %q(http://cats.sfb673.org/identifier)
+  rdf_property :name, %q(http://cats.sfb673.org/name)
+  rdf_property :description, %q(http://cats.sfb673.org/description)
+  rdf_property :document, %q(http://cats.sfb673.org/document)
+
+  rdf_include :local_files, %q(http://cats.sfb673.org/hasLocalFile)
+  rdf_include :urls, %q(http://cats.sfb673.org/hasURLs)
+
 
   # docme
 
@@ -130,7 +147,7 @@ class Mexico::FileSystem::Resource
     if is_annotation?
 
       # puts "Toe File? %s" % local_files.find{ |f| f.path=~/toe$/ }
-      toe_file = local_files.find{ |f| f.path=~/toe$/ }
+      toe_file = local_files.find{ |f| f.path=~/toe$/ || f.path=~/fiesta$/ }
 
       unless toe_file.nil?
         @document = ::Mexico::FileSystem::ToeDocument.open(toe_file.absolute_path)

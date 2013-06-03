@@ -8,6 +8,10 @@ gem "nokogiri"
 gem 'roxml'
 gem 'colorize'
 
+gem 'rdf'
+# gem 'rdf-ntriples'
+gem 'rdf-rdfxml'
+gem 'poseidon', :path => '~pmenke/code/poseidon', :require => true
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
