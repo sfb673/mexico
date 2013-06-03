@@ -16,19 +16,12 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
+# The FileSystem module contains an implementation of the MExiCo
+# library that works locally with a set of folders and files as
+# its backend.
 
+module Mexico::Fiesta
 
-require 'nokogiri'
-require 'roxml'
-require 'fileutils'
-
-# This is the main module for the MExiCO gem.
-module Mexico
-  
 end
 
-require "mexico/core.rb"
-require "mexico/file_system.rb"
-require "mexico/constants.rb"
-require "mexico/fiesta.rb"
-require 'mexico/cmd.rb'
+require 'mexico/fiesta/interfaces'

@@ -121,6 +121,7 @@ class Mexico::FileSystem::FiestaDocument
 
   def add_standard_timeline(unit="ms")
     @scales << Mexico::FileSystem::Scale.new(identifier: 'timeline01', name: 'Timeline', unit: unit)
+    @scales.last
   end
 
   # This method attempts to link objects from other locations of the XML/object tree

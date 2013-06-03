@@ -16,19 +16,28 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
+require 'spec_helper'
 
+describe Mexico::FileSystem::FiestaDocument do
 
-require 'nokogiri'
-require 'roxml'
-require 'fileutils'
+  before(:each) do
+    @basepath = File.join File.dirname(__FILE__), '..', '..'
+    @assetspath = File.join @basepath, 'assets'
+  end
 
-# This is the main module for the MExiCO gem.
-module Mexico
-  
+  context 'Fiesta ' do
+    context 'Interfaces ' do
+      context 'B6 Chat Game ' do
+        it 'reads data from a test file' do
+          path = File.join @assetspath, 'mexico-testcorpus', 'fiesta', 'b6'
+          filename = File.join path, 'match_jones_161_CM_neu_checked.parsed.xml'
+          @fdoc = ::Mexico::Fiesta::Interfaces::B6ChatGameInterface.instance.import(File.read(filename))
+          File.open(File.join(path,'test.out.fst'),'w') do |f|
+            f << @fdoc.to_xml
+          end
+        end
+      end
+    end
+  end
+
 end
-
-require "mexico/core.rb"
-require "mexico/file_system.rb"
-require "mexico/constants.rb"
-require "mexico/fiesta.rb"
-require 'mexico/cmd.rb'
