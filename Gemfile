@@ -6,12 +6,13 @@ source "http://rubygems.org"
 gem "nokogiri"
 # gem 'nokogiri-happymapper', :require => 'happymapper'
 gem 'roxml'
+gem 'builder'
 gem 'colorize'
 
 gem 'rdf'
 # gem 'rdf-ntriples'
 gem 'rdf-rdfxml'
-gem 'poseidon', :path => '~pmenke/code/poseidon', :require => true
+gem 'poseidon', :git => 'git://github.com/sfb673/poseidon.git', :require => true
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
