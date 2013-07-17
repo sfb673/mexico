@@ -21,6 +21,8 @@
 # XML representation of the corpus structure, and all actual resources are found
 # as files on a file system reachable from the top-level folder.
 
+require 'poseidon'
+
 # ToE Document
 class Mexico::FileSystem::FiestaDocument
 
@@ -47,6 +49,20 @@ class Mexico::FileSystem::FiestaDocument
   # collection of Mexico::FileSystem::Item
   xml_accessor :items, :as => [::Mexico::FileSystem::Item],     :from => "Item",     :in => "ItemSet"
 
+  attr_accessor :resource
+
+  # POSEIdON-based RDF augmentation
+  include Poseidon
+  self_uri %q(http://cats.sfb673.org/FiestaDocument)
+  # instance_uri_scheme %q(http://phoibos.sfb673.org/corpora/#{resource.corpus.identifier}/resources/#{resource.identifier}.fst)
+  instance_uri_scheme %q(http://phoibos.sfb673.org/resources/#{identifier})
+  rdf_property :identifier, %q(http://cats.sfb673.org/identifier)
+  rdf_property :name, %q(http://cats.sfb673.org/name)
+
+  rdf_include :scales, %q(http://cats.sfb673.org/hasScale)
+  rdf_include :layers, %q(http://cats.sfb673.org/hasLayer)
+  rdf_include :items, %q(http://cats.sfb673.org/hasItem)
+
   # Retrieves a stored object from the temporary import cache.
   # @param (String) xml_id The xml id of the needed object.
   # @return (Object) The needed object, or +nil+ if nothing could be found.
@@ -68,11 +84,11 @@ class Mexico::FileSystem::FiestaDocument
   def self.store(xml_id, ruby_object)
     @@CACHE = {} unless defined?(@@CACHE)
     @@CACHE["#{Thread.current.__id__}.#{xml_id}"] = ruby_object
-    puts "Stored '%s' at '%s', cache size is now %i" % [ruby_object, "#{Thread.current.__id__}.#{xml_id}", @@CACHE.size]
+    #puts "Stored '%s' at '%s', cache size is now %i" % [ruby_object, "#{Thread.current.__id__}.#{xml_id}", @@CACHE.size]
     ::Mexico::FileSystem::FiestaDocument.check_watch(xml_id, ruby_object)
-    @@CACHE.each_pair do |i,j|
-      puts "  %32s %32s %32s" % [i, j.class.name, j.__id__]
-    end
+    #@@CACHE.each_pair do |i,j|
+    #  puts "  %32s %32s %32s" % [i, j.class.name, j.__id__]
+    #end
   end
 
   # Put an xml id into the watch list, along with an object and a method
@@ -80,7 +96,7 @@ class Mexico::FileSystem::FiestaDocument
     @@WATCHLIST = {} unless defined?(@@WATCHLIST)
     @@WATCHLIST["#{Thread.current.__id__}.#{needed_id}"] = [] unless @@WATCHLIST.has_key?("#{Thread.current.__id__}.#{needed_id}")
     @@WATCHLIST["#{Thread.current.__id__}.#{needed_id}"] << [object, method]
-    puts "Watching out for ID %s, to call %s object's method %s" % [needed_id, object.to_s, method.to_s]
+    # puts "Watching out for ID %s, to call %s object's method %s" % [needed_id, object.to_s, method.to_s]
   end
 
   # Checks whether the given id/object pair is watched, and takes appropriate action
@@ -91,9 +107,9 @@ class Mexico::FileSystem::FiestaDocument
   def self.check_watch(needed_id, needed_object)
     if defined?(@@WATCHLIST)
       if @@WATCHLIST.has_key?("#{Thread.current.__id__}.#{needed_id}")
-        puts ""
-        puts "   Watchlist has key %s" % needed_id
-        puts "   iterate %i elements." % @@WATCHLIST["#{Thread.current.__id__}.#{needed_id}"].size
+        # puts ""
+        # puts "   Watchlist has key %s" % needed_id
+        # puts "   iterate %i elements." % @@WATCHLIST["#{Thread.current.__id__}.#{needed_id}"].size
         @@WATCHLIST["#{Thread.current.__id__}.#{needed_id}"].each do |entry|
           # puts "      entry: %s :: %s,   %s :: %s, %s" % [entry[0].class.name, entry[0].to_s, entry[1].class.name, entry[1].to_s, entry.__id__]
           # puts "      calling %s on %s object with value %s" % [ entry[1].to_s, entry[0].identifier, needed_object.identifier ]
@@ -108,7 +124,7 @@ class Mexico::FileSystem::FiestaDocument
   # @param (String) filename The path that points to the file to be opened.
   # @return (Mexico::FileSystem::FiestaDocument) a toe document with that file's contents.
   def self.open(filename)
-    puts "opening %s" % filename
+    #puts "opening %s" % filename
     self.from_xml(File.open(filename))
   end
 
@@ -117,10 +133,12 @@ class Mexico::FileSystem::FiestaDocument
     @scales = []
     @layers = []
     @items  = []
+    link_document
   end
 
   def add_standard_timeline(unit="ms")
     @scales << Mexico::FileSystem::Scale.new(identifier: 'timeline01', name: 'Timeline', unit: unit)
+    @scales.last.document = self
     @scales.last
   end
 
@@ -128,14 +146,35 @@ class Mexico::FileSystem::FiestaDocument
   # into position inside this object, by following the xml ids given in the
   # appropriate fields of this class.
   def after_parse
-
-    # process xml ids
-
+    link_document
     # then clear cache
     @@CACHE.clear
-
   end
 
+  def link_document
+    # process xml ids
+    scales.each do |x|
+      x.document = self
+    end
+    layers.each do |x|
+      x.document = self
+    end
+    items.each do |x|
+      x.document = self
+      x.item_links.each do |y|
+        y.document = self
+      end
+      x.layer_links.each do |y|
+        y.document = self
+      end
+      x.point_links.each do |y|
+        y.document = self
+      end
+      x.interval_links.each do |y|
+        y.document = self
+      end
+    end
+  end
   def add_item(item)
     yield(item)
     # check if item is not in the array already

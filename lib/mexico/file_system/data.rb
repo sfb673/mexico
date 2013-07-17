@@ -22,9 +22,20 @@ class Mexico::FileSystem::Data
   include ::ROXML
   xml_name 'D'
 
-  xml_accessor :string_value, :from => "String"
-  xml_accessor :int_value, :as => Integer, :from => "Int"
+  xml_accessor :string_value, :from => "String" # , :to_xml => proc{|val| (@type=='string' ? val : '')}
+      xml_accessor :int_value, :as => Integer, :from => "Int"
   xml_accessor :float_value, :as => Float, :from => "Float"
+  xml_accessor :map, :as => Mexico::FileSystem::FiestaMap, :from => "Map"
+  #xml_accessor :list, :as => Mexico::FileSystem::FiestaList, :from => "List"
+
+  attr_accessor :item, :document
+
+  include Poseidon
+  self_uri %q(http://cats.sfb673.org/Data)
+  instance_uri_scheme %q(#{document.self_uri}##{item.identifier}-data)
+  rdf_property :string_value, %q(http://cats.sfb673.org/string_value)
+  # rdf_property :name, %q(http://cats.sfb673.org/name)
+
   # keine Bool-Klasse in Ruby. xml_accessor :boolean_value, :as => Bool, :from => "B"
   # @todo map and list types
 
@@ -38,6 +49,32 @@ class Mexico::FileSystem::Data
 
   def after_parse
     # resolve links
+  end
+
+
+  def map_value
+    return nil unless @type=="map"
+    @map_value ||= JSON::load(@string_value)
+  end
+
+  def list_value
+    return nil unless @type=="list"
+    @list_value ||= JSON::load(@string_value)
+  end
+
+  def map_value=(val)
+    # todo eliminate all other value types
+    @map = Mexico::FileSystem::FiestaMap.new(val)
+  end
+
+  def list_value=(val=Array.new)
+    # todo eliminate all other value types
+    @list = val
+  end
+
+  def to_s
+    return string_value unless string_value.nil?
+    return @map.to_s unless @map.nil?
   end
 
 end

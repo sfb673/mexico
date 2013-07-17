@@ -30,6 +30,16 @@ class Mexico::FileSystem::LayerLink
   xml_accessor :target, :from => "@target"
 
   attr_accessor :item
+  attr_accessor :document
+
+  # POSEIdON-based RDF augmentation
+  include Poseidon
+  self_uri %q(http://cats.sfb673.org/LayerLink)
+  instance_uri_scheme %q(#{document.self_uri}##{identifier})
+  rdf_property :identifier, %q(http://cats.sfb673.org/identifier)
+  rdf_property :role, %q(http://cats.sfb673.org/role)
+  rdf_property :target, %q(http://cats.sfb673.org/target), :value_expression => 'RDF::URI(target_object.self_uri)'
+
 
   def initialize(args={})
     args.each do |k,v|

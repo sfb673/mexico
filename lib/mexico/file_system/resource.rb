@@ -69,7 +69,7 @@ class Mexico::FileSystem::Resource
   rdf_property :identifier, %q(http://cats.sfb673.org/identifier)
   rdf_property :name, %q(http://cats.sfb673.org/name)
   rdf_property :description, %q(http://cats.sfb673.org/description)
-  rdf_property :document, %q(http://cats.sfb673.org/document)
+  rdf_property :document, %q(http://cats.sfb673.org/document), {:value_expression => 'RDF::URI("#{self_uri}.fst")'}
 
   rdf_include :local_files, %q(http://cats.sfb673.org/hasLocalFile)
   rdf_include :urls, %q(http://cats.sfb673.org/hasURLs)
@@ -151,6 +151,7 @@ class Mexico::FileSystem::Resource
 
       unless toe_file.nil?
         @document = ::Mexico::FileSystem::FiestaDocument.open(toe_file.absolute_path)
+        @document.resource = self
         return @document
       end
     end
