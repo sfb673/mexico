@@ -9,10 +9,12 @@ gem 'roxml'
 gem 'builder'
 gem 'colorize'
 
-gem 'rdf'
+gem 'rdf', '~> 1.0.7'
+gem 'rdf-turtle', '~> 1.0.8'
 # gem 'rdf-ntriples'
 gem 'rdf-rdfxml'
-gem 'poseidon', :git => 'git://github.com/sfb673/poseidon.git', :require => true
+#gem 'poseidon', :require => true, :path => '~/code/poseidon'
+gem 'poseidon', '~> 1.1.1', :require => true, :git => 'git://github.com/sfb673/poseidon.git'
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
