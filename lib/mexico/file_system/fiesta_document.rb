@@ -44,6 +44,9 @@ class Mexico::FileSystem::FiestaDocument
   # collection of Mexico::FileSystem::Layer
   xml_accessor :layers, :as => [::Mexico::FileSystem::Layer],     :from => "Layer",     :in => "LayerSet"
 
+  # collection of Mexico::FileSystem::Layer
+  xml_accessor :layer_connectors, :as => [::Mexico::FileSystem::LayerConnector], :from => "LayerConnector", :in => "LayerSet"
+
   # collection of Mexico::FileSystem::Item
   xml_accessor :items, :as => [::Mexico::FileSystem::Item],     :from => "Item",     :in => "ItemSet"
 
@@ -130,6 +133,18 @@ class Mexico::FileSystem::FiestaDocument
   def after_parse
 
     # process xml ids
+    layer_connectors.each do |c|
+      c.source = ::Mexico::FileSystem::FiestaDocument.resolve c.source_id
+      c.target = ::Mexico::FileSystem::FiestaDocument.resolve c.target_id
+    end
+
+    layers.each do |l|
+      l.document = self
+    end
+
+    layer_connectors.each do |l|
+      l.document = self
+    end
 
     # then clear cache
     @@CACHE.clear
