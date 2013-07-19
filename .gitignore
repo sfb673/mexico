@@ -55,3 +55,6 @@ _yardoc
 doc/
 
 /assets/TESTCORPUS/Corpus.OUT.xml
+/assets/fiesta/b6/map.OUT.fst
+/assets/fiesta/b6/test.dot
+/assets/fiesta/b6/test.dot.png
