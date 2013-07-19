@@ -16,30 +16,28 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
-# A layer (or tier) in an transcription or annotation document.
-class ::Mexico::FileSystem::Layer
+require 'spec_helper'
 
-  include ROXML
+describe Mexico::FileSystem::FiestaDocument do
 
-  xml_accessor :identifier, :from => '@id'
-  xml_accessor :name,       :from => '@name'
-
-  # data type
-  # content structure
-
-  def initialize(args={})
-    args.each do |k,v|
-      if self.respond_to?("#{k}=")
-        send("#{k}=", v)
-      end
-    end
+  before(:each) do
+    @basepath = File.join File.dirname(__FILE__), '..', '..'
+    @assetspath = File.join @basepath, 'assets'
   end
 
-  # overrides method in ROXML
-  # callback after xml parsing process, to store this element in the
-  # document cache.
-  def after_parse
-    ::Mexico::FileSystem::FiestaDocument.store(self.identifier, self)
+  context 'Fiesta ' do
+    context 'Interfaces ' do
+      context 'B6 Chat Game ' do
+        it 'reads data from a test file' do
+          path = File.join @assetspath, 'fiesta', 'b6'
+          filename = File.join path, 'match_jones_161_CM_neu_checked.parsed.xml'
+          @fdoc = ::Mexico::Fiesta::Interfaces::B6ChatGameInterface.instance.import(File.read(filename))
+          File.open(File.join(path,'test.out.fst'),'w') do |f|
+            f << @fdoc.to_xml
+          end
+        end
+      end
+    end
   end
 
 end

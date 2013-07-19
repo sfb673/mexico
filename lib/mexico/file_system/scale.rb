@@ -53,7 +53,7 @@ class Mexico::FileSystem::Scale
   # callback after xml parsing process, to store this element in the
   # document cache.
   def after_parse
-    ::Mexico::FileSystem::ToeDocument.store(self.identifier, self)
+    ::Mexico::FileSystem::FiestaDocument.store(self.identifier, self)
   end
 
 end

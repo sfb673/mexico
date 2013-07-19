@@ -22,14 +22,16 @@ class Mexico::FileSystem::LayerLink
   include ::ROXML
   xml_name 'LayerLink'
 
-  xml_accessor :identifier, :from => '@id'
+  # identifier
+  xml_accessor :identifier,        :from => '@id'
+
   xml_accessor :role, :from => '@role'
 
   xml_accessor :target, :from => "@target"
 
   attr_accessor :item
 
-  def initialize(args)
+  def initialize(args={})
     args.each do |k,v|
       if self.respond_to?("#{k}=")
         send("#{k}=", v)
