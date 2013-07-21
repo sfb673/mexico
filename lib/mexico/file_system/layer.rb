@@ -24,6 +24,8 @@ class ::Mexico::FileSystem::Layer
   xml_accessor :identifier, :from => '@id'
   xml_accessor :name,       :from => '@name'
 
+  attr_accessor :document
+
   # data type
   # content structure
 
@@ -41,5 +43,18 @@ class ::Mexico::FileSystem::Layer
   def after_parse
     ::Mexico::FileSystem::FiestaDocument.store(self.identifier, self)
   end
+
+  # returns all layers that are linked to this layer such that this layer
+  # is the target, and the result layer is the source.
+  def predecessor_layers
+    document.layer_connectors.select{|c| c.target==self}.collect{|c| [c.source, c.role]}
+  end
+
+  # returns all layers that are linked to this layer such that this layer
+  # is the source, and the result layer is the target.
+  def successor_layers
+    document.layer_connectors.select{|c| c.source==self}.collect{|c| [c.target, c.role]}
+  end
+
 
 end
