@@ -119,6 +119,7 @@ class Mexico::FileSystem::FiestaDocument
     super
     @scales = []
     @layers = []
+    @layer_connectors = []
     @items  = []
   end
 
