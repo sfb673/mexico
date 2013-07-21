@@ -1,13 +1,13 @@
-<ToeDocument>
+<FiestaDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xml/schema/fiesta.xsd">
   <ScaleSet>
     <Scale id="timeline01" name="Timeline" unit="s"/>
   </ScaleSet>
-  <LayerStructure>
+  <LayerSet>
     <Layer id="layer01" name="Layer 1"/>
-    <Layer id="layer01" name="Layer 2"/>
-    <Layer id="layer01" name="Layer 3"/>
-    <Layer id="layer01" name="Layer 4"/>
-  </LayerStructure>
+    <Layer id="layer02" name="Layer 2"/>
+    <Layer id="layer03" name="Layer 3"/>
+    <Layer id="layer04" name="Layer 4"/>
+  </LayerSet>
   <ItemSet>
     <Item id="i1">
       <Links>
@@ -56,7 +56,7 @@
       <Links>
         <ItemLink role="predecessor" target="i4"/>
         <ItemLink role="successor" target="i6"/>
-        <LayerLink target="layer01"/>
+        <LayerLink target="layer02"/>
         <IntervalLink min="500.0" max="600.0" target="timeline01"/>
       </Links>
       <Data>
@@ -67,7 +67,7 @@
       <Links>
         <ItemLink role="predecessor" target="i5"/>
         <ItemLink role="successor" target="i7"/>
-        <LayerLink target="layer01"/>
+        <LayerLink target="layer02"/>
         <IntervalLink min="600.0" max="700.0" target="timeline01"/>
       </Links>
       <Data>
@@ -78,7 +78,7 @@
       <Links>
         <ItemLink role="predecessor" target="i6"/>
         <ItemLink role="successor" target="i8"/>
-        <LayerLink target="layer01"/>
+        <LayerLink target="layer02"/>
         <IntervalLink min="700.0" max="800.0" target="timeline01"/>
       </Links>
       <Data>
@@ -88,7 +88,7 @@
     <Item id="i8">
       <Links>
         <ItemLink role="predecessor" target="i7"/>
-        <LayerLink target="layer01"/>
+        <LayerLink target="layer02"/>
         <IntervalLink min="800.0" max="900.0" target="timeline01"/>
       </Links>
       <Data>
@@ -96,4 +96,4 @@
       </Data>
     </Item>
   </ItemSet>
-</ToeDocument>
+</FiestaDocument>

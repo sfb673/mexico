@@ -41,7 +41,7 @@ class Mexico::FileSystem::Item
   # collection of Mexico::FileSystem::Data
   xml_accessor :data, :as => Mexico::FileSystem::Data, :from => "Data"
 
-  def initialize(args)
+  def initialize(args={})
     args.each do |k,v|
       if self.respond_to?("#{k}=")
         send("#{k}=", v)
@@ -58,16 +58,16 @@ class Mexico::FileSystem::Item
   # appropriate fields of this class.
   def after_parse
     # store self
-    ::Mexico::FileSystem::ToeDocument.store(self.identifier, self)
+    ::Mexico::FileSystem::FiestaDocument.store(self.identifier, self)
 
     [item_links,layer_links,point_links,interval_links].flatten.each do |link|
       link.item = self
 
-      if ::Mexico::FileSystem::ToeDocument.knows?(link.target)
-        link.target_object=::Mexico::FileSystem::ToeDocument.resolve(link.target)
+      if ::Mexico::FileSystem::FiestaDocument.knows?(link.target)
+        link.target_object=::Mexico::FileSystem::FiestaDocument.resolve(link.target)
       else
         # store i in watch list
-        ::Mexico::FileSystem::ToeDocument.watch(link.target, link, :target_object=)
+        ::Mexico::FileSystem::FiestaDocument.watch(link.target, link, :target_object=)
       end
 
     end

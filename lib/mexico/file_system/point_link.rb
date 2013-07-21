@@ -22,6 +22,9 @@ class Mexico::FileSystem::PointLink
 
   xml_name "PointLink"
 
+  # identifier
+  xml_accessor :identifier,        :from => '@id'
+
   # type Float
   xml_accessor :point, :as => Float, :from => "@point"
 
@@ -34,7 +37,7 @@ class Mexico::FileSystem::PointLink
   attr_accessor :item
 
 
-  def initialize(args)
+  def initialize(args={})
     args.each do |k,v|
       if self.respond_to?("#{k}=")
         send("#{k}=", v)

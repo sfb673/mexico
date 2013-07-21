@@ -16,30 +16,12 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
-# A layer (or tier) in an transcription or annotation document.
-class ::Mexico::FileSystem::Layer
+# The FileSystem module contains an implementation of the MExiCo
+# library that works locally with a set of folders and files as
+# its backend.
 
-  include ROXML
-
-  xml_accessor :identifier, :from => '@id'
-  xml_accessor :name,       :from => '@name'
-
-  # data type
-  # content structure
-
-  def initialize(args={})
-    args.each do |k,v|
-      if self.respond_to?("#{k}=")
-        send("#{k}=", v)
-      end
-    end
-  end
-
-  # overrides method in ROXML
-  # callback after xml parsing process, to store this element in the
-  # document cache.
-  def after_parse
-    ::Mexico::FileSystem::FiestaDocument.store(self.identifier, self)
-  end
+module Mexico::Fiesta::Interfaces
 
 end
+
+require 'mexico/fiesta/interfaces/b6_chat_game_interface.rb'
