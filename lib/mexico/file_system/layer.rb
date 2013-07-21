@@ -24,14 +24,45 @@ class ::Mexico::FileSystem::Layer
   xml_accessor :identifier, :from => '@id'
   xml_accessor :name,       :from => '@name'
 
+  attr_accessor :document
+
+  # POSEIdON-based RDF augmentation
+  include Poseidon
+  self_uri %q(http://cats.sfb673.org/Layer)
+  instance_uri_scheme %q(#{document.self_uri}##{identifier})
+  rdf_property :identifier, %q(http://cats.sfb673.org/identifier)
+  rdf_property :name, %q(http://cats.sfb673.org/name)
+
+
   # data type
   # content structure
+
+  def initialize(args={})
+    args.each do |k,v|
+      if self.respond_to?("#{k}=")
+        send("#{k}=", v)
+      end
+    end
+  end
 
   # overrides method in ROXML
   # callback after xml parsing process, to store this element in the
   # document cache.
   def after_parse
-    ::Mexico::FileSystem::ToeDocument.store(self.identifier, self)
+    ::Mexico::FileSystem::FiestaDocument.store(self.identifier, self)
   end
+
+  # returns all layers that are linked to this layer such that this layer
+  # is the target, and the result layer is the source.
+  def predecessor_layers
+    document.layer_connectors.select{|c| c.target==self}.collect{|c| [c.source, c.role]}
+  end
+
+  # returns all layers that are linked to this layer such that this layer
+  # is the source, and the result layer is the target.
+  def successor_layers
+    document.layer_connectors.select{|c| c.source==self}.collect{|c| [c.target, c.role]}
+  end
+
 
 end

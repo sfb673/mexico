@@ -16,6 +16,8 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
+require 'poseidon'
+
 # A template class doing nothing.
 class Mexico::FileSystem::DesignComponent
 
@@ -49,6 +51,23 @@ class Mexico::FileSystem::DesignComponent
   #@todo data_type
   #@todo content_structure
   #@todo belongs to Design
+
+
+  attr_accessor :design
+
+
+  # POSEIdON-based RDF augmentation
+  include Poseidon
+
+  self_uri %q(http://cats.sfb673.org/DesignComponent)
+  instance_uri_scheme %q(http://phoibos.sfb673.org/corpora/#{design.corpus.identifier}/designs/#{design.identifier}/design_components/#{identifier})
+
+  rdf_property :identifier, %q(http://cats.sfb673.org/identifier)
+  rdf_property :name, %q(http://cats.sfb673.org/name)
+  rdf_property :description, %q(http://cats.sfb673.org/description)
+  rdf_property :cue, %q(http://cats.sfb673.org/cue)
+  rdf_property :running_number, %q(http://cats.sfb673.org/running_number)
+  rdf_property :required?, %q(http://cats.sfb673.org/is_required)
 
   # Returns a collection of resources that are associated with this design component.
   # @return [Array<Resource>] an array of resources associated with this design component.

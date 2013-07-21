@@ -22,12 +22,32 @@ class Mexico::FileSystem::LayerLink
   include ::ROXML
   xml_name 'LayerLink'
 
-  xml_accessor :identifier, :from => '@id'
+  # identifier
+  xml_accessor :identifier,        :from => '@id'
+
   xml_accessor :role, :from => '@role'
 
   xml_accessor :target, :from => "@target"
 
   attr_accessor :item
+  attr_accessor :document
+
+  # POSEIdON-based RDF augmentation
+  include Poseidon
+  self_uri %q(http://cats.sfb673.org/LayerLink)
+  instance_uri_scheme %q(#{document.self_uri}##{identifier})
+  rdf_property :identifier, %q(http://cats.sfb673.org/identifier)
+  rdf_property :role, %q(http://cats.sfb673.org/role)
+  rdf_property :target, %q(http://cats.sfb673.org/target), :value_expression => 'RDF::URI(target_object.self_uri)'
+
+
+  def initialize(args={})
+    args.each do |k,v|
+      if self.respond_to?("#{k}=")
+        send("#{k}=", v)
+      end
+    end
+  end
 
   # returns the target object, in this case, a Layer.
   # @return (Mexico::FileSystem::Layer) the scale this interval link points to.
@@ -40,7 +60,7 @@ class Mexico::FileSystem::LayerLink
   # @return (void)
   def target_object=(new_target)
     @target_object=new_target
-    target=target_object.identifier
+    @target=target_object.identifier
   end
 
   # This method attempts to link objects from other locations of the XML/object tree

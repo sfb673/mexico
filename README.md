@@ -11,6 +11,18 @@ Its central organising unit is the **Corpus** class which allows researchers to 
 ## Last Changes
 
 
+### 0.0.8
+
+Completed on July 21 2013.
+
++ **Layer Connectors**: Added LayerConnector model class
++ **Example files compliant with schema**: Changed example files so they are working with the new schema files
++ **Add necessity of attributes in corpus schema file**: Improved Mexico schema file by adding information on which attributes are required and which optional
++ **Refactor file format (FiESTA instead of ToE)**: Changed occurrences of the old name 'toe' into 'fiesta'.
++ **Missing constructors**: Added constructor methods that were missing
++ **Create repo for schema**: Added a separate repo for the schema files.
++ **Basic RDF representations**: Several model files can now be exported to RDF using the POSEIdON gem.
+
 ### 0.0.7
 
 Completed on 13 May 2013.

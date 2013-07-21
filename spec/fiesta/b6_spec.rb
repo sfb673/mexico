@@ -20,20 +20,24 @@ require 'spec_helper'
 
 describe Mexico::FileSystem::FiestaDocument do
 
-  # set up an initial corpus representation from the example file
   before(:each) do
-    @basepath = File.join(File.dirname(__FILE__), '..','..','assets','mexico-testcorpus','mexico')
-    @corpus = Mexico::FileSystem::Corpus.open(@basepath)
-    @audio_resource = @corpus.resources[0]
-    @trans_resource = @corpus.resources[1]
+    @basepath = File.join File.dirname(__FILE__), '..', '..'
+    @assetspath = File.join @basepath, 'assets'
   end
 
-  context 'mexico utterance corpus' do
-
-    it "should have the correct resources to begin with" do
-      @corpus.resources.size.should eq 2
+  context 'Fiesta ' do
+    context 'Interfaces ' do
+      context 'B6 Chat Game ' do
+        it 'reads data from a test file' do
+          path = File.join @assetspath, 'fiesta', 'b6'
+          filename = File.join path, 'match_jones_161_CM_neu_checked.parsed.xml'
+          @fdoc = ::Mexico::Fiesta::Interfaces::B6ChatGameInterface.instance.import(File.read(filename))
+          File.open(File.join(path,'test.out.fst'),'w') do |f|
+            f << @fdoc.to_xml
+          end
+        end
+      end
     end
-
   end
 
 end

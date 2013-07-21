@@ -23,7 +23,7 @@ class Mexico::FileSystem::ItemLink
   xml_name 'ItemLink'
 
   # identifier
-  # xml_accessor :identifier, :from => '@id'
+  xml_accessor :identifier, :from => '@id'
 
   # type String
   xml_accessor :role, :from => '@role'
@@ -32,6 +32,23 @@ class Mexico::FileSystem::ItemLink
   xml_accessor :target, :from => "@target"
 
   attr_accessor :item
+  attr_accessor :document
+
+  # POSEIdON-based RDF augmentation
+  include Poseidon
+  self_uri %q(http://cats.sfb673.org/ItemLink)
+  instance_uri_scheme %q(#{document.self_uri}##{identifier})
+  rdf_property :identifier, %q(http://cats.sfb673.org/identifier)
+  rdf_property :role, %q(http://cats.sfb673.org/role)
+  rdf_property :target, %q(http://cats.sfb673.org/target), :value_expression => 'RDF::URI(target_object.self_uri)'
+
+  def initialize(args={})
+    args.each do |k,v|
+      if self.respond_to?("#{k}=")
+        send("#{k}=", v)
+      end
+    end
+  end
 
   # returns the target object, in this case, an Item.
   # @return (Mexico::FileSystem::Item) the scale this interval link points to.
@@ -43,9 +60,9 @@ class Mexico::FileSystem::ItemLink
   # @param (Mexico::FileSystem::Item) new_target The new target object to set
   # @return (void)
   def target_object=(new_target)
-    puts "SETTING target object to %s, %s" % [new_target.identifier, new_target]
+    # puts "SETTING target object to %s, %s" % [new_target.identifier, new_target]
     @target_object=new_target
-    target=target_object.identifier
+    @target=target_object.identifier
   end
 
   # This method attempts to link objects from other locations of the XML/object tree
@@ -54,13 +71,13 @@ class Mexico::FileSystem::ItemLink
   def after_parse
     # puts "item link after parse. What is the situation?"
     #
-    # if ::Mexico::FileSystem::ToeDocument.knows?(target)
+    # if ::Mexico::FileSystem::FiestaDocument.knows?(target)
     #   puts "  store knows the needed target. fetch it and set it."
-    #   @target_object=::Mexico::FileSystem::ToeDocument.resolve(target)
+    #   @target_object=::Mexico::FileSystem::FiestaDocument.resolve(target)
     #   puts "    %s" % @target_object
     # else
     #   # store i in watch list
-    #   ::Mexico::FileSystem::ToeDocument.watch(target, item, :target_object=)
+    #   ::Mexico::FileSystem::FiestaDocument.watch(target, item, :target_object=)
     # end
   end
 

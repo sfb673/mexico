@@ -18,7 +18,7 @@
 
 require 'spec_helper'
 
-describe Mexico::FileSystem::ToeDocument do
+describe Mexico::FileSystem::FiestaDocument do
 
   before(:each) do
     @basepath = File.join(File.dirname(__FILE__), '..','..','assets','mexico-testcorpus','structured')

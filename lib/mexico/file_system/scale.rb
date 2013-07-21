@@ -32,6 +32,22 @@ class Mexico::FileSystem::Scale
 
   xml_accessor :mode, :from => '@mode'
 
+  attr_accessor :document
+
+  # POSEIdON-based RDF augmentation
+  include Poseidon
+  self_uri %q(http://cats.sfb673.org/Scale)
+  instance_uri_scheme 'http://phoibos.sfb673.org/resources/1##{identifier}' # %q(#{document.self_uri}##{identifier})
+  rdf_property :identifier, %q(http://cats.sfb673.org/identifier)
+  rdf_property :name, %q(http://cats.sfb673.org/name)
+
+  rdf_property :unit, %q(http://cats.sfb673.org/unit)
+  rdf_property :dimension, %q(http://cats.sfb673.org/dimension)
+  rdf_property :role, %q(http://cats.sfb673.org/role)
+  rdf_property :continuous?, %q(http://cats.sfb673.org/is_continuous)
+  rdf_property :mode, %q(http://cats.sfb673.org/mode)
+
+
   # static collection of MODES
   # mode : MODES collection
   # @todo collection of scale elements (if not continuous)
@@ -41,11 +57,53 @@ class Mexico::FileSystem::Scale
   # OK role : String (free text)
   # continuous? : Boolean
 
+  def initialize(args={})
+    args.each do |k,v|
+      if self.respond_to?("#{k}=")
+        send("#{k}=", v)
+      end
+    end
+  end
+
   # overrides method in ROXML
   # callback after xml parsing process, to store this element in the
   # document cache.
   def after_parse
-    ::Mexico::FileSystem::ToeDocument.store(self.identifier, self)
+    ::Mexico::FileSystem::FiestaDocument.store(self.identifier, self)
+  end
+
+  def self.to_turtle
+    rdf_writer = RDF::Turtle::Writer
+    return rdf_writer.buffer(:base_uri => 'http://phoibos.sfb673.org/',
+                             :prefixes => {
+                                 :cats => 'http://cats.sfb673.org/',
+                                 :rdfs => RDF::RDFS.to_uri,
+                                 :foaf => RDF::FOAF.to_uri,
+                                 :dc => RDF::DC.to_uri,
+                                 :owl => RDF::OWL.to_uri,
+                                 :xsd  => RDF::XSD.to_uri} #
+    ) do |writer|
+      as_rdf.each_statement do |statement|
+        writer << statement
+      end
+    end
+  end
+
+  def to_turtle
+    rdf_writer = RDF::Turtle::Writer
+    return rdf_writer.buffer(:base_uri => 'http://phoibos.sfb673.org/',
+                             :prefixes => {
+                                 :cats => 'http://cats.sfb673.org/',
+                                 :rdfs => RDF::RDFS.to_uri,
+                                 :foaf => RDF::FOAF.to_uri,
+                                 :dc => RDF::DC.to_uri,
+                                 :owl => RDF::OWL.to_uri,
+                                 :xsd  => RDF::XSD.to_uri} #
+    ) do |writer|
+      as_rdf.each_statement do |statement|
+        writer << statement
+      end
+    end
   end
 
 end

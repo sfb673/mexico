@@ -22,6 +22,9 @@ class Mexico::FileSystem::PointLink
 
   xml_name "PointLink"
 
+  # identifier
+  xml_accessor :identifier,        :from => '@id'
+
   # type Float
   xml_accessor :point, :as => Float, :from => "@point"
 
@@ -32,6 +35,24 @@ class Mexico::FileSystem::PointLink
   xml_accessor :target, :from => "@target"
 
   attr_accessor :item
+  attr_accessor :document
+
+  # POSEIdON-based RDF augmentation
+  include Poseidon
+  self_uri %q(http://cats.sfb673.org/PointLink)
+  instance_uri_scheme %q(#{document.self_uri}##{identifier})
+  rdf_property :identifier, %q(http://cats.sfb673.org/identifier)
+  rdf_property :role, %q(http://cats.sfb673.org/role)
+  rdf_property :point, %q(http://cats.sfb673.org/point)
+  rdf_property :target, %q(http://cats.sfb673.org/target), :value_expression => 'RDF::URI(target_object.self_uri)'
+
+  def initialize(args={})
+    args.each do |k,v|
+      if self.respond_to?("#{k}=")
+        send("#{k}=", v)
+      end
+    end
+  end
 
   # returns the target object, in this case, a Scale.
   # @return (Mexico::FileSystem::Scale) the scale this interval link points to.
@@ -44,7 +65,7 @@ class Mexico::FileSystem::PointLink
   # @return (void)
   def target_object=(new_target)
     @target_object=new_target
-    target=target_object.identifier
+    @target=target_object.identifier
   end
 
   # This method attempts to link objects from other locations of the XML/object tree

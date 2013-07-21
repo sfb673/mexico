@@ -16,24 +16,13 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
-require 'spec_helper'
+# The FileSystem module contains an implementation of the MExiCo
+# library that works locally with a set of folders and files as
+# its backend.
 
-describe Mexico::FileSystem::FiestaDocument do
-
-  # set up an initial corpus representation from the example file
-  before(:each) do
-    @basepath = File.join(File.dirname(__FILE__), '..','..','assets','mexico-testcorpus','mexico')
-    @corpus = Mexico::FileSystem::Corpus.open(@basepath)
-    @audio_resource = @corpus.resources[0]
-    @trans_resource = @corpus.resources[1]
-  end
-
-  context 'mexico utterance corpus' do
-
-    it "should have the correct resources to begin with" do
-      @corpus.resources.size.should eq 2
-    end
-
-  end
+module Mexico::Fiesta::Interfaces
 
 end
+
+require 'mexico/fiesta/interfaces/b6_chat_game_interface.rb'
+require 'mexico/fiesta/interfaces/dot_interface.rb'

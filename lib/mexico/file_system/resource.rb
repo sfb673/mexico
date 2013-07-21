@@ -16,6 +16,8 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
+require 'poseidon'
+
 # A template class doing nothing.
 class Mexico::FileSystem::Resource
   
@@ -57,6 +59,21 @@ class Mexico::FileSystem::Resource
 
   # type Mexico::FileSystem::DesignComponent
   id_ref :design_component
+
+  # POSEIdON-based RDF augmentation
+  include Poseidon
+
+  self_uri %q(http://cats.sfb673.org/Resource)
+  instance_uri_scheme %q(http://phoibos.sfb673.org/corpora/#{corpus.identifier}/resources/#{identifier})
+
+  rdf_property :identifier, %q(http://cats.sfb673.org/identifier)
+  rdf_property :name, %q(http://cats.sfb673.org/name)
+  rdf_property :description, %q(http://cats.sfb673.org/description)
+  rdf_property :document, %q(http://cats.sfb673.org/document), {:value_expression => 'RDF::URI("#{self_uri}.fst")'}
+
+  rdf_include :local_files, %q(http://cats.sfb673.org/hasLocalFile)
+  rdf_include :urls, %q(http://cats.sfb673.org/hasURLs)
+
 
   # docme
 
@@ -110,7 +127,7 @@ class Mexico::FileSystem::Resource
 
   # Attempts to load the contents of the resource from an appropriate source into an appropriate
   # data structure (for annotation files, into the ToE format, etc.)
-  # @return (Mexico::FileSystem::ToeDocument) the document, or +nil+ if no document could be loaded.
+  # @return (Mexico::FileSystem::FiestaDocument) the document, or +nil+ if no document could be loaded.
   def load
 
     # @todo create a loader interface in a separate package
@@ -130,10 +147,11 @@ class Mexico::FileSystem::Resource
     if is_annotation?
 
       # puts "Toe File? %s" % local_files.find{ |f| f.path=~/toe$/ }
-      toe_file = local_files.find{ |f| f.path=~/toe$/ }
+      toe_file = local_files.find{ |f| f.path=~/toe$/ || f.path=~/fiesta$/ }
 
       unless toe_file.nil?
-        @document = ::Mexico::FileSystem::ToeDocument.open(toe_file.absolute_path)
+        @document = ::Mexico::FileSystem::FiestaDocument.open(toe_file.absolute_path)
+        @document.resource = self
         return @document
       end
     end
@@ -141,7 +159,7 @@ class Mexico::FileSystem::Resource
 
   # Returns the annotation document previously loaded in {#load} (this is only the case
   # if resource has media type video, and if an appropriate local file is present).
-  # @return (Mexico::FileSystem::ToeDocument) the document, or +nil+ if no document has been loaded.
+  # @return (Mexico::FileSystem::FiestaDocument) the document, or +nil+ if no document has been loaded.
   def document
    defined?(@document) ? @document : nil
   end

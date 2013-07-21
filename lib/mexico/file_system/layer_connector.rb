@@ -1,3 +1,4 @@
+# encoding: utf-8
 # This file is part of the MExiCo gem.
 # Copyright (c) 2012, 2013 Peter Menke, SFB 673, Universität Bielefeld
 # http://www.sfb673.org
@@ -16,24 +17,37 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
-require 'spec_helper'
+# A typed connector between two layers (or tiers) in an transcription or annotation document.
+class Mexico::FileSystem::LayerConnector
 
-describe Mexico::FileSystem::FiestaDocument do
+  include ROXML
 
-  # set up an initial corpus representation from the example file
-  before(:each) do
-    @basepath = File.join(File.dirname(__FILE__), '..','..','assets','mexico-testcorpus','mexico')
-    @corpus = Mexico::FileSystem::Corpus.open(@basepath)
-    @audio_resource = @corpus.resources[0]
-    @trans_resource = @corpus.resources[1]
+  xml_accessor :identifier, :from => '@id'
+  xml_accessor :name,       :from => '@name'
+
+  xml_accessor :source_id, :from => '@source'
+  xml_accessor :target_id, :from => '@target'
+
+  xml_accessor :role, :from => '@role'
+
+  attr_accessor :document
+
+  def source
+    @source
   end
 
-  context 'mexico utterance corpus' do
+  def source=(param)
+    @source = param
+    @source_id = @source.identifier
+  end
 
-    it "should have the correct resources to begin with" do
-      @corpus.resources.size.should eq 2
-    end
+  def target
+    @target
+  end
 
+  def target=(param)
+    @target = param
+    @target_id = @target.identifier
   end
 
 end

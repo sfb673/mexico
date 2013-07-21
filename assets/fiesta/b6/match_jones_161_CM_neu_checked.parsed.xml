@@ -1,0 +1,1225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<match startTime="16.11.11 11:22">
+  <player name="shariar" age="30" gender="MALE"/>
+  <player name="Flo" age="40" gender="FEMALE"/>
+  <round timeStarted="16.11.11 11:22" roundId="1">
+    <player name="Flo" role="CHATTER"/>
+    <player name="shariar" role="SLIDER"/>
+    <state>
+      <shape id="pink_rectangle" pos="-1,0" target="215,533"/>
+      <shape id="cyan_circle" pos="-1,0" target="115,415"/>
+      <shape id="magenta_square" pos="-1,0" target="15,315"/>
+      <shape id="red_triangle" pos="-1,0" target="515,315"/>
+    </state>
+    <active player="CHATTER"/>
+    <chat message="grauer kreis linke haelfte obere haelfte" time="+105"/>
+    <annotation id="annotation1">
+      <spelling id="spelling1">
+        <word id="word1">grauer</word><correction id="correction1">Grauer</correction>
+        <word id="word2">kreis</word><correction id="correction2">Kreis</correction>, linke
+        <word id="word3">haelfte</word><correction id="correction3">Hälfte</correction>, obere
+        <word id="word4">haelfte</word><correction id="correction4">Hälfte</correction>
+        <forms><form shape="circle">kreis</form></forms>
+        <colors><color shape="grey">grauer</color></colors>
+      </spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="spatial" id="sentence1">
+        grauer kreis linke haelfte obere haelfte
+        <parsetree id="parsetree1" tiefe="2" verzweigung="3.0" hoeflichkeit="2">
+          <CNP>
+            <NP>
+              <ADJA lemma="grau">Grauer</ADJA>
+              <NN lemma="Kreis">Kreis</NN>
+            </NP>
+            <PUNCTUATION_COMMA>,</PUNCTUATION_COMMA>
+            <NP><ADJA lemma="links">linke</ADJA>
+              <NN lemma="Hälfte">Hälfte</NN>
+            </NP>
+            <PUNCTUATION_COMMA>,</PUNCTUATION_COMMA>
+            <NP>
+              <ADJA lemma="oben">obere</ADJA>
+              <NN lemma="Hälfte">Hälfte</NN>
+            </NP>
+            <PUNCTUATION_STOP>.</PUNCTUATION_STOP>
+          </CNP>
+        </parsetree>
+      </sentence>
+    </annotation>
+    <move shape="gray_circle" from="-1,0" to="215,215" distance="999" time="+133"/>
+    <move shape="gray_circle" from="215,215" to="215,15" distance="999" time="+136"/>
+    <chat message="gr kreis etws weiter runter und nach links" time="+156"/>
+    <annotation id="annotation2">
+      <spelling id="spelling2">
+        <word id="word5">gr</word><correction id="correction5">Grauer</correction>
+        <word id="word6">kreis</word><correction id="correction6">Kreis</correction>,
+        <word id="word7">etws</word><correction id="correction7">Etwas</correction> weiter runter und
+        nach links<forms><form shape="circle">kreis</form></forms><colors><color shape="grey"
+            >gr</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="direction"
+        id="sentence2"> gr kreis etws weiter runter und nach links<parsetree id="parsetree2"
+          tiefe="4" verzweigung="2.8" hoeflichkeit="2"><NP><ADJA lemma="grau">Grauer</ADJA><NN
+              lemma="Kreis"
+                  >Kreis</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><CS><S><PIS>Etwas</PIS><ADV>weiter</ADV><ADV>runter</ADV></S><KON>und</KON><S><ISU><APPR>nach</APPR><ADV>links</ADV></ISU></S></CS><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NP></parsetree></sentence>
+    </annotation>
+    <move shape="gray_circle" from="215,15" to="115,115" distance="989" time="+162"/>
+    <chat message="blauer kreis gleiche spalte weiter runter" time="+177"/>
+    <annotation id="annotation3">
+      <spelling id="spelling3"><word id="word8">blauer</word><correction id="correction8"
+          >Blauer</correction>
+        <word id="word9">kreis</word><correction id="correction9">Kreis</correction>, gleiche <word
+          id="word10">spalte</word><correction id="correction10">Spalte</correction>, weiter
+            runter<forms><form shape="circle">kreis</form></forms><colors><color shape="cyan"
+            >blauer</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="spatial+direction"
+        id="sentence3"> blauer kreis gleiche spalte weiter runter<parsetree id="parsetree3"
+          tiefe="2" verzweigung="3.6666666666666665" hoeflichkeit="2"><S><NPSB><ADJA lemma="blau"
+                >Blauer</ADJA><NN lemma="Kreis"
+              >Kreis</NN></NPSB><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><ADJA lemma="gleich"
+              >gleiche</ADJA><NN lemma="Spalte"
+                >Spalte</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><VP><ADV lemma="weiter"
+                >weiter</ADV><ADV lemma="runter"
+              >runter</ADV></VP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="cyan_circle" from="-1,0" to="215,215" distance="918" time="+188"/>
+    <move shape="cyan_circle" from="215,215" to="115,215" distance="913" time="+191"/>
+    <chat message="bl kreis weiter runter" time="+205"/>
+    <annotation id="annotation4">
+      <spelling id="spelling4"><word id="word11">bl</word><correction id="correction11"
+          >Blauer</correction>
+        <word id="word12">kreis</word><correction id="correction12">Kreis</correction>, weiter
+            runter<forms><form shape="circle">kreis</form></forms><colors><color shape="cyan"
+            >bl</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="direction"
+        id="sentence4">bl kreis weiter runter <parsetree id="parsetree4" tiefe="2" verzweigung="3.5"
+          hoeflichkeit="2"><NP><ADJA lemma="blau">Blauer</ADJA><NN lemma="Kreis"
+              >Kreis</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><VP><ADV lemma="weiter"
+                >weiter</ADV><ADV lemma="runter"
+              >runter</ADV></VP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NP></parsetree></sentence>
+    </annotation>
+    <move shape="cyan_circle" from="115,215" to="115,315" distance="897" time="+210"/>
+    <chat message="noch weiter" time="+215"/>
+    <annotation id="annotation5">
+      <spelling id="spelling5"><word id="word13">noch</word><correction id="correction13"
+          >Noch</correction> weiter</spelling>
+      <sentence no="1" value="fragment without verb" type="correction" lok="none" id="sentence5">
+        noch weiter<parsetree id="parsetree5" tiefe="1" verzweigung="3.0" hoeflichkeit="2"><NUR><ADV
+              lemma="noch">Noch</ADV><ADV lemma="weiter"
+              >weiter</ADV><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NUR></parsetree></sentence>
+    </annotation>
+    <move shape="cyan_circle" from="115,315" to="115,415" distance="891" time="+220"/>
+    <chat message="pinkfarbenes quadrat linke obere diagonale von blauem kreis" time="+268"/>
+    <annotation id="annotation6">
+      <spelling id="spelling6"><word id="word14">pinkfarbenes</word><correction id="correction14"
+          >Pinkfarbenes</correction>
+        <word id="word15">quadrat</word><correction id="correction15">Quadrat</correction>, linke
+        obere <word id="word16">diagonale</word><correction id="correction16"
+        >Diagonale</correction>, von blauem <word id="word17">kreis</word><correction
+          id="correction17">Kreis</correction><forms><form shape="square">quadrat</form><form
+            shape="circle">kreis</form></forms><colors><color shape="magenta"
+            >pinkfarbenes</color><color shape="cyan">blauem</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="relation"
+        id="sentence6"> pinkfarbenes quadrat linke obere diagonale von blauem kreis<parsetree
+          id="parsetree6" tiefe="3" verzweigung="3.0" hoeflichkeit="2"><S><NP><MPN><ADJA
+                  lemma="pinkfarben">Pinkfarbenes</ADJA><NN lemma="Quadrat"
+                >Quadrat</NN></MPN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><NP><ADJA lemma="links"
+                  >linke</ADJA><ADJA lemma="oben">obere</ADJA><NN lemma="Diagonale"
+                >Diagonale</NN></NP></NP><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><PP><APPR>von</APPR><ADJA
+                lemma="blau">blauem</ADJA><NN lemma="Kreis"
+              >Kreis</NN></PP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="magenta_square" from="-1,0" to="215,215" distance="863" time="+285"/>
+    <move shape="magenta_square" from="215,215" to="15,315" distance="833" time="+287"/>
+    <chat
+      message="hautfarbenes rechteck auf freies feld in gleicher diagonale pinkes quadrat und blauer kreis"
+      time="+348"/>
+    <annotation id="annotation7">
+      <spelling id="spelling7"><word id="word18">hautfarbenes</word><correction id="correction18"
+          >Hautfarbenes</correction>
+        <word id="word19">rechteck</word><correction id="correction19">Rechteck</correction>, auf
+        freies <word id="word20">feld</word><correction id="correction20">Feld</correction>, in
+        gleicher <word id="word21">diagonale</word><correction id="correction21"
+          >Diagonale</correction>, pinkes <word id="word22">quadrat</word><correction
+          id="correction22">Quadrat</correction> und blauer <word id="word23"
+          >kreis</word><correction id="correction23">Kreis</correction><forms><form
+            shape="rectangle">rechteck</form><form shape="square">quadrat</form><form shape="circle"
+            >kreis</form></forms><colors><color shape="pink">hautfarbenes</color><color
+            shape="magenta">pinkes</color><color shape="cyan">blauer</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="relation"
+        id="sentence7"> hautfarbenes rechteck auf freies feld in gleicher diagonale pinkes quadrat
+        und blauer kreis<parsetree id="parsetree7" tiefe="5" verzweigung="2.7777777777777777"
+          hoeflichkeit="2"><S><NP><ADJA lemma="hautfarben">Hautfarbenes</ADJA><NN lemma="Rechteck"
+                >Rechteck</NN></NP><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><CPP><PP><APPR
+                  lemma="auf">auf</APPR><ADJA lemma="frei">freies</ADJA><NN lemma="Feld"
+                >Feld</NN></PP><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><PP><APPR lemma="in"
+                  >in</APPR><CNP><NP><ADJA lemma="gleich">gleicher</ADJA><NN lemma="Diagonale"
+                      >Diagonale</NN></NP><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><NP><ADJA
+                      lemma="pink">pinkes</ADJA><NN lemma="Quadrat">Quadrat</NN></NP><KON
+                    lemma="und">und</KON><NP><ADJA lemma="blau">blauer</ADJA><NN lemma="Kreis"
+                      >Kreis</NN></NP></CNP></PP></CPP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="pink_rectangle" from="-1,0" to="215,233" distance="674" time="+359"/>
+    <move shape="pink_rectangle" from="215,233" to="215,533" distance="604" time="+361"/>
+    <chat message="rotes dreieck gleiche zeile pinkes quadrat ganz rechts aussen" time="+385"/>
+    <annotation id="annotation8">
+      <spelling id="spelling8"><word id="word24">rotes</word><correction id="correction24"
+          >Rotes</correction>
+        <word id="word25">dreieck</word><correction id="correction25">Dreieck</correction>, gleiche
+          <word id="word26">zeile</word><correction id="correction26">Zeile</correction>, pinkes
+          <word id="word27">quadrat</word><correction id="correction27">Quadrat</correction>, ganz
+        rechts <word id="word28">aussen</word><correction id="correction28"
+            >außen</correction><forms><form shape="triangle">dreieck</form><form shape="square"
+            >quadrat</form></forms><colors><color shape="red">rotes</color><color shape="magenta"
+            >pinkes</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="relation"
+        id="sentence8"> rotes dreieck gleiche zeile pinkes quadrat ganz rechts aussen<parsetree
+          id="parsetree8" tiefe="3" verzweigung="3.4" hoeflichkeit="2"><S><NPSB><MPN><ADJA
+                  lemma="rot">Rotes</ADJA><NN lemma="Dreieck"
+                >Dreieck</NN></MPN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><NP><ADJA lemma="gleich"
+                  >gleiche</ADJA><NN lemma="Zeile"
+              >Zeile</NN></NP></NPSB><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><ADJA lemma="pink"
+              >pinkes</ADJA><NN lemma="Quadrat"
+              >Quadrat</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><ADV lemma="ganz"
+                >ganz</ADV><AVP><ADV lemma="rechts">rechts</ADV><ADV lemma="außen"
+              >außen</ADV></AVP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="red_triangle" from="-1,0" to="215,215" distance="316" time="+393"/>
+    <move shape="red_triangle" from="215,215" to="515,315" distance="0" time="+395"/>
+    <endRound timeEnd="16.11.11 11:29"/>
+    <state>
+      <shape id="pink_rectangle" pos="215,533" target="215,533"/>
+      <shape id="gray_circle" pos="115,115" target="115,115"/>
+      <shape id="cyan_circle" pos="115,415" target="115,415"/>
+      <shape id="magenta_square" pos="15,315" target="15,315"/>
+      <shape id="red_triangle" pos="515,315" target="515,315"/>
+    </state>
+  </round>
+  <round timeStarted="16.11.11 11:29" roundId="2">
+    <player name="shariar" role="CHATTER"/>
+    <player name="Flo" role="SLIDER"/>
+    <state>
+      <shape id="pink_rectangle" pos="-1,0" target="515,533"/>
+      <shape id="yellow_triangle" pos="-1,0" target="15,115"/>
+      <shape id="green_circle" pos="-1,0" target="515,215"/>
+      <shape id="pink_triangle" pos="-1,0" target="415,315"/>
+      <shape id="gray_circle" pos="-1,0" target="515,315"/>
+    </state>
+    <active player="CHATTER"/>
+    <chat message="guten morgen! gelbes dreieck fast ganz oben links" time="+46"/>
+    <annotation id="annotation9">
+      <spelling id="spelling9"><word id="word29">guten</word><correction id="correction29"
+          >Guten</correction>
+        <word id="word30">morgen</word><correction id="correction30">Morgen</correction>! gelbes
+        dreieck, fast ganz oben links<forms><form shape="triangle"
+            >dreieck</form></forms><colors><color shape="yellow">gelbes</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="greeting" lok="none" id="sentence9">
+        guten morgen! <parsetree id="parsetree9" tiefe="1" verzweigung="3.0" hoeflichkeit="2"
+              ><NP><ADJA lemma="gut">Guten</ADJA><NN lemma="Morgen"
+              >Morgen</NN><PUNCTUATION_STOP>!</PUNCTUATION_STOP></NP></parsetree></sentence>
+      <sentence no="2" value="fragment without verb" type="instruction" lok="destination"
+        id="sentence10">gelbes dreieck fast ganz oben links<parsetree id="parsetree10" tiefe="2"
+          verzweigung="4.5" hoeflichkeit="2"><S><ADJA lemma="gelb">gelbes</ADJA><NN lemma="Dreieck"
+              >dreieck</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><ADV lemma="fast">fast</ADV><ADV
+              lemma="ganz">ganz</ADV><AVP><ADV lemma="oben">oben</ADV><ADV lemma="links"
+              >links</ADV></AVP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="yellow_triangle" from="-1,0" to="215,215" distance="1244" time="+57"/>
+    <move shape="yellow_triangle" from="215,215" to="15,115" distance="1223" time="+64"/>
+    <chat message="'hautfarbenes' viereck unten rechts außen" time="+95"/>
+    <annotation id="annotation10">
+      <spelling id="spelling10"><word id="word31">hautfarbenes</word><correction id="correction31"
+          >Hautfarbenes</correction>
+        <word id="word32">viereck</word><correction id="correction32">Viereck</correction>, unten,
+        rechts außen<forms><form shape="rectangle">viereck</form></forms><colors><color shape="pink"
+            >hautfarbenes</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="destination"
+        id="sentence11"> hautfarbenes' viereck unten rechts außen<parsetree id="parsetree11"
+          tiefe="2" verzweigung="2.75" hoeflichkeit="2"><S><NP><ADJ lemma="hautfarben"
+                >Hautfarbenes</ADJ><NN lemma="Viereck"
+              >Viereck</NN></NP><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><AVP><ADV lemma="unten"
+                >unten</ADV></AVP><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><S><ADV lemma="rechts"
+                >rechts</ADV><ADV lemma="außen"
+              >außen</ADV></S><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="pink_rectangle" from="-1,0" to="215,233" distance="1062" time="+107"/>
+    <move shape="pink_rectangle" from="215,233" to="515,533" distance="974" time="+110"/>
+    <chat message="hautfarbenes dreieck mehr als fast über hautf 4eck und bissel links" time="+166"/>
+    <annotation id="annotation11">
+      <spelling id="spelling11"><word id="word33">hautfarbenes</word><correction id="correction33"
+          >Hautfarbenes</correction>
+        <word id="word34">dreieck</word><correction id="correction34">Dreieck</correction>, mehr als
+        fast über <word id="word35">hautf</word><correction id="correction35"
+          >hautfarbenes</correction>
+        <word id="word36">4eck</word><correction id="correction36">Viereck</correction> und <word
+          id="word37">bissel</word><correction id="correction37">ein bisschen</correction>
+            links<forms><form shape="triangle">dreieck</form><form shape="rectangle"
+          >4eck</form></forms><colors><color shape="pink">hautfarbenes</color><color shape="pink"
+            >hautf</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="relation+destination"
+        id="sentence12">hautfarbenes dreieck mehr als fast über hautf 4eck und bissel links
+          <parsetree id="parsetree12" tiefe="5" verzweigung="2.857142857142857" hoeflichkeit="2"
+                ><S><S><ADJA lemma="hautfarben">Hautfarbenes</ADJA><NN lemma="Dreieck"
+              >Dreieck</NN></S><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><ADV lemma="mehr"
+                >mehr</ADV><AVP><KOKOM lemma="als">als</KOKOM><ADV lemma="fast">fast</ADV><PP><APPR
+                  lemma="über">über</APPR><CNP><NP><ADJA lemma="hautfarben">hautfarbenes</ADJA><NN
+                      lemma="Viereck">Viereck</NN></NP><KON lemma="und">und</KON><NP><ART
+                      lemma="ein">ein</ART><PIS lemma="bisschen">bisschen</PIS></NP></CNP><ADV
+                  lemma="links"
+          >links</ADV></PP></AVP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="pink_triangle" from="-1,0" to="215,215" distance="852" time="+173"/>
+    <move shape="pink_triangle" from="215,215" to="415,315" distance="822" time="+196"/>
+    <chat message="klasse. rechts daneben grauer kreis und über grauen kreis der gruene :-)"
+      time="+223"/>
+    <annotation id="annotation12">
+      <spelling id="spelling12"><word id="word38">klasse</word><correction id="correction38"
+          >Klasse</correction>. <word id="word39">rechts</word><correction id="correction39"
+          >Rechts</correction> daneben, grauer <word id="word40">kreis</word><correction
+          id="correction40">Kreis</correction> und über grauen <word id="word41"
+          >kreis</word><correction id="correction41">Kreis</correction>, der gruene<forms><form
+            shape="circle">kreis</form><form shape="circle">kreis</form><form shape="circle">der
+            gruene</form></forms><colors><color shape="gray">grauer</color><color shape="gray"
+            >grauen</color><color shape="green">gruene</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="feedback" lok="none" id="sentence13">
+          klasse.<parsetree id="parsetree13" tiefe="1" verzweigung="2.0" hoeflichkeit="2"><NUR><ADV
+              lemma="klasse"
+        >Klasse</ADV><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NUR></parsetree></sentence>
+      <sentence no="2" value="fragment without verb" type="instruction" lok="relation"
+        id="sentence14">rechts daneben grauer kreis und über grauen kreis der gruene :-)<parsetree
+          id="parsetree14" tiefe="4" verzweigung="2.7142857142857144" hoeflichkeit="2"><CO><AVP><ADV
+                lemma="rechts">Rechts</ADV><PROAV lemma="daneben"
+                >daneben</PROAV><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><NP><ADJA lemma="grau"
+                  >grauer</ADJA><NN lemma="Kreis">Kreis</NN></NP></AVP><KON lemma="und"
+                >und</KON><PP><APPR lemma="über">über</APPR><CNP><NP><ADJA lemma="grau"
+                    >grauen</ADJA><NN lemma="Kreis"
+                  >Kreis</NN></NP><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><NP><ART lemma="der"
+                    >der</ART><ADJA lemma="grün"
+                  >gruene</ADJA></NP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></CNP></PP></CO></parsetree></sentence>
+    </annotation>
+    <move shape="gray_circle" from="-1,0" to="215,215" distance="642" time="+231"/>
+    <move shape="gray_circle" from="215,215" to="515,315" distance="559" time="+235"/>
+    <chat message="gruen über grau" time="+250"/>
+    <annotation id="annotation13">
+      <spelling id="spelling13"><word id="word42">gruen</word><correction id="correction42"
+          >Grün</correction> über <word id="word43">grau</word><correction id="correction43"
+          >Grau</correction><colors><color shape="green">gruen</color><color shape="gray"
+            >grau</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="relation"
+        id="sentence15">gruen über grau<parsetree id="parsetree15" tiefe="2" verzweigung="2.5"
+          hoeflichkeit="2"><S><NN lemma="Grün">Grün</NN><PP><APPR lemma="über">über</APPR><NN
+                lemma="Grau"
+        >Grau</NN></PP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="green_circle" from="-1,0" to="215,215" distance="300" time="+254"/>
+    <move shape="green_circle" from="215,215" to="515,215" distance="0" time="+256"/>
+    <chat message="geschafft" time="+264"/>
+    <annotation id="annotation14">
+      <spelling id="spelling14">
+        <word id="word44">geschafft</word>
+        <correction id="correction44">Geschafft</correction>
+      </spelling>
+      <sentence no="1" value="fragment without verb" type="feedback" lok="none" id="sentence16">
+          geschafft<parsetree id="parsetree16" tiefe="1" verzweigung="2.0" hoeflichkeit="2"
+              ><NUR><VVPP lemma="schaffen"
+            >Geschafft</VVPP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NUR></parsetree></sentence>
+    </annotation>
+    <endRound timeEnd="16.11.11 11:34"/>
+    <state>
+      <shape id="pink_rectangle" pos="515,533" target="515,533"/>
+      <shape id="yellow_triangle" pos="15,115" target="15,115"/>
+      <shape id="green_circle" pos="515,215" target="515,215"/>
+      <shape id="pink_triangle" pos="415,315" target="415,315"/>
+      <shape id="gray_circle" pos="515,315" target="515,315"/>
+    </state>
+  </round>
+  <round timeStarted="16.11.11 11:34" roundId="3">
+    <player name="Flo" role="CHATTER"/>
+    <player name="shariar" role="SLIDER"/>
+    <state>
+      <shape id="pink_circle" pos="-1,0" target="315,515"/>
+      <shape id="red_ellipse" pos="-1,0" target="415,333"/>
+      <shape id="gray_triangle" pos="-1,0" target="515,315"/>
+      <shape id="orange_triangle" pos="-1,0" target="415,415"/>
+      <shape id="black_rectangle" pos="-1,0" target="415,233"/>
+    </state>
+    <active player="CHATTER"/>
+    <chat message="hautfarbener kreis etwas rechts von mitte ganz unten" time="+52"/>
+    <annotation id="annotation15">
+      <spelling id="spelling15"><word id="word45">hautfarbener</word><correction id="correction45"
+          >Hautfarbener</correction>
+        <word id="word46">kreis</word><correction id="correction46">Kreis</correction>, etwas rechts
+        von <word id="word47">mitte</word><correction id="correction47">Mitte</correction>, ganz
+            unten<forms><form shape="circle">kreis</form></forms><colors><color shape="pink"
+            >hautfarbener</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="spatial+destination"
+        id="sentence17">hautfarbener kreis etwas rechts von mitte ganz unten <parsetree
+          id="parsetree17" tiefe="4" verzweigung="3.0" hoeflichkeit="2"><NP><ADJA lemma="hautfarben"
+              >Hautfarbener</ADJA><NN lemma="Kreis"
+              >Kreis</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><CS><S><PIS lemma="etwas"
+                  >etwas</PIS><PP><ADV lemma="rechts">rechts</ADV><APPR lemma="von">von</APPR><NN
+                    lemma="Mitte">Mitte</NN></PP></S><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><S><ADV
+                  lemma="ganz">ganz</ADV><ADV lemma="unten"
+              >unten</ADV></S></CS><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NP></parsetree></sentence>
+    </annotation>
+    <move shape="pink_circle" from="-1,0" to="215,215" distance="1148" time="+62"/>
+    <move shape="pink_circle" from="215,215" to="315,515" distance="1104" time="+68"/>
+    <chat message="gelbes dreieck rechte diagonale vom kreis" time="+113"/>
+    <annotation id="annotation16">
+      <spelling id="spelling16"><word id="word48">gelbes</word><correction id="correction48"
+          >Gelbes</correction>
+        <word id="word49">dreieck</word><correction id="correction49">Dreieck</correction>, rechte
+          <word id="word50">diagonale</word><correction id="correction50">Diagonale</correction> vom
+          <word id="word51">kreis</word><correction id="correction51">Kreis</correction><forms><form
+            shape="triangle">dreieck</form><form shape="circle">kreis</form></forms><colors><color
+            shape="orange">gelbes</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="spatial+relation"
+        id="sentence18"> gelbes dreieck rechte diagonale vom kreis<parsetree id="parsetree18"
+          tiefe="3" verzweigung="2.75" hoeflichkeit="2"><NUR><MPN><ADJA lemma="gelb"
+                >Gelbes</ADJA><NN lemma="Dreieck"
+                >Dreieck</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA></MPN><NP><ADJA lemma="rechts"
+                >rechte</ADJA><NN lemma="Diagonale">Diagonale</NN><PP><APPRART lemma="vom"
+                  >vom</APPRART><NN lemma="Kreis"
+              >Kreis</NN></PP></NP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NUR></parsetree></sentence>
+    </annotation>
+    <move shape="orange_triangle" from="-1,0" to="215,215" distance="976" time="+120"/>
+    <move shape="orange_triangle" from="215,215" to="415,415" distance="935" time="+121"/>
+    <chat message="mit grauem dreieck die diagonale fortsetzen" time="+165"/>
+    <annotation id="annotation17">
+      <spelling id="spelling17"><word id="word52">mit</word><correction id="correction52"
+          >Mit</correction> grauem <word id="word53">dreieck</word><correction id="correction53"
+          >Dreieck</correction>, die <word id="word54">diagonale</word><correction id="correction54"
+          >Diagonale</correction> fortsetzen<forms><form shape="triangle"
+            >dreieck</form></forms><colors><color shape="gray">grauem</color></colors></spelling>
+      <sentence no="1" value="fragment with verb" type="instruction" lok="spatial" id="sentence19"
+        >mit grauem dreieck die diagonale fortsetzen <parsetree id="parsetree19" tiefe="3"
+          verzweigung="2.75" hoeflichkeit="3"><S><PP><APPR>Mit</APPR><ADJA lemma="grau"
+                >grauem</ADJA><NN lemma="Dreieck"
+              >Dreieck</NN></PP><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><VP><NPOA><ART lemma="die"
+                  >die</ART><NN lemma="Diagonale">Diagonale</NN></NPOA><VVINF lemma="fortsetzen"
+                >fortsetzen</VVINF></VP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="gray_triangle" from="-1,0" to="215,215" distance="780" time="+172"/>
+    <move shape="gray_triangle" from="215,215" to="515,315" distance="713" time="+175"/>
+    <chat message="rotes etwas (ich weiss nicht wie das heisst!?) links neben graues dreieck"
+      time="+221"/>
+    <annotation id="annotation18">
+      <spelling id="spelling18"><word id="word55">rotes</word><correction id="correction55"
+          >Rotes</correction><word id="word56">etwas</word><correction id="correction56"
+          >Etwas</correction>, <word id="word57">ich</word><correction id="correction57"
+          >ich</correction><word id="word58">weiss</word><correction id="correction58"
+          >weiß</correction> nicht, wie das <word id="word59">heisst</word><correction
+          id="correction59">heißt</correction>, links neben graues <word id="word60"
+          >dreieck</word><correction id="correction60">Dreieck</correction><forms><form
+            shape="ellipse">etwas</form><form shape="triangle">dreieck</form></forms><colors><color
+            shape="red">rotes</color><color shape="gray">graues</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="relation"
+        id="sentence20">rotes etwas (ich weiss nicht wie das heisst!?) links neben graues dreieck
+          <parsetree id="parsetree20" tiefe="3" verzweigung="5.0" hoeflichkeit="2"><S><S><ADJA
+                lemma="rot">Rotes</ADJA><NN lemma="Etwas"
+              >Etwas</NN></S><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><PPER>ich</PPER><VVFIN
+              lemma="wissen">weiß</VVFIN><PTKNEG lemma="nicht"
+              >nicht</PTKNEG><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><S><PWAV lemma="wie"
+                >wie</PWAV><PDS>das</PDS><VVFIN lemma="heißen"
+                >heißt</VVFIN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><ADV lemma="links"
+                  >links</ADV><PP><APPR lemma="neben">neben</APPR><ADJA lemma="grau"
+                  >graues</ADJA><NN lemma="Dreieck"
+              >Dreieck</NN></PP></S><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="red_ellipse" from="-1,0" to="215,233" distance="525" time="+234"/>
+    <move shape="red_ellipse" from="215,233" to="415,333" distance="476" time="+237"/>
+    <chat message="und das schwarze rechteck ueber das rote dingens" time="+261"/>
+    <annotation id="annotation19">
+      <spelling id="spelling19"><word id="word61">und</word><correction id="correction61"
+          >Und</correction> das schwarze <word id="word62">rechteck</word><correction
+          id="correction62">Rechteck</correction>, <word id="word63">ueber</word><correction
+          id="correction63">über</correction> das rote <word id="word64">dingens</word><correction
+          id="correction64">Dingens</correction><forms><form shape="rectangle">rechteck</form><form
+            shape="ellipse">dingens</form></forms><colors><color shape="black"
+            >schwarze</color><color shape="red">rote</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="relation"
+        id="sentence22"> und das schwarze rechteck ueber das rote dingens<parsetree id="parsetree22"
+          tiefe="3" verzweigung="4.0" hoeflichkeit="2"><S><KON lemma="und">Und</KON><NPSB><ART
+                lemma="das">das</ART><ADJA lemma="schwarz">schwarze</ADJA><NN lemma="Rechteck"
+                >Rechteck</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><PP><APPR lemma="über"
+                  >über</APPR><ART lemma="das">das</ART><ADJA lemma="rot">rote</ADJA><NN
+                  lemma="Ding"
+          >Dingens</NN></PP></NPSB><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="black_rectangle" from="-1,0" to="215,233" distance="200" time="+268"/>
+    <move shape="black_rectangle" from="215,233" to="415,233" distance="0" time="+271"/>
+    <endRound timeEnd="16.11.11 11:38"/>
+    <state>
+      <shape id="pink_circle" pos="315,515" target="315,515"/>
+      <shape id="red_ellipse" pos="415,333" target="415,333"/>
+      <shape id="gray_triangle" pos="515,315" target="515,315"/>
+      <shape id="orange_triangle" pos="415,415" target="415,415"/>
+      <shape id="black_rectangle" pos="415,233" target="415,233"/>
+    </state>
+  </round>
+  <round timeStarted="16.11.11 11:38" roundId="4">
+    <player name="shariar" role="CHATTER"/>
+    <player name="Flo" role="SLIDER"/>
+    <state>
+      <shape id="orange_circle" pos="-1,0" target="215,15"/>
+      <shape id="black_triangle" pos="-1,0" target="415,15"/>
+      <shape id="black_rectangle" pos="-1,0" target="515,433"/>
+      <shape id="magenta_circle" pos="-1,0" target="415,215"/>
+      <shape id="orange_rectangle" pos="-1,0" target="215,333"/>
+    </state>
+    <active player="CHATTER"/>
+    <chat message="hallo. gelber kreis ganz oben mittig links" time="+46"/>
+    <annotation id="annotation20">
+      <spelling id="spelling20"><word id="word65">hallo</word><correction id="correction65"
+          >Hallo</correction>. <word id="word66">gelber</word><correction id="correction66"
+          >Gelber</correction>
+        <word id="word67">kreis</word><correction id="correction67">Kreis</correction>, ganz oben,
+        mittig links<forms><form shape="circle">kreis</form></forms><colors><color shape="orange"
+            >gelber</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="greeting" lok="none" id="sentence23">
+          hallo.<parsetree id="parsetree23" tiefe="1" verzweigung="2.0" hoeflichkeit="2"><NUR><ITJ
+              lemma="hallo"
+        >Hallo</ITJ><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NUR></parsetree></sentence>
+      <sentence no="2" value="fragment without verb" type="instruction" lok="destination"
+        id="sentence24">gelber kreis ganz oben mittig links<parsetree id="parsetree24" tiefe="2"
+          verzweigung="3.6666666666666665" hoeflichkeit="2"><S><NPSB><ADJA lemma="gelb"
+                >Gelber</ADJA><NN lemma="Kreis"
+              >Kreis</NN></NPSB><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><AVP><ADV lemma="ganz"
+                >ganz</ADV><ADV lemma="oben"
+              >oben</ADV></AVP><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><ADV lemma="mittig"
+              >mittig</ADV><ADV lemma="links"
+          >links</ADV><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="orange_circle" from="-1,0" to="215,215" distance="1020" time="+60"/>
+    <move shape="orange_circle" from="215,215" to="115,15" distance="1005" time="+64"/>
+    <chat message="weißt es" time="+80"/>
+    <annotation id="annotation21">
+      <spelling id="spelling21"><word id="word68">weißt</word><correction id="correction68"
+          >Weißt</correction> es</spelling>
+      <sentence no="1" value="fragment with verb" type="notice" lok="none" id="sentence25">weißt es
+          <parsetree id="parsetree25" tiefe="2" verzweigung="1.6666666666666667" hoeflichkeit="3"
+                ><S><NP><VVFIN lemma="wissen">Weißt</VVFIN></NP><NPSB><PPER lemma="es"
+              >es</PPER></NPSB><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="orange_circle" from="115,15" to="215,15" distance="1000" time="+87"/>
+    <chat message="genau. schwarzes 3eck fast daneben rechts" time="+104"/>
+    <annotation id="annotation22">
+      <spelling id="spelling22"><word id="word69">genau</word><correction id="correction69"
+          >Genau</correction>. <word id="word70">schwarzes</word><correction id="correction70"
+          >Schwarzes</correction>
+        <word id="word71">3eck</word><correction id="correction71">Dreieck</correction>, fast
+        daneben rechts<forms><form shape="triangle">3eck</form></forms><colors><color shape="black"
+            >schwarzes</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="feedback" lok="none" id="sentence26"
+        >genau. <parsetree id="parsetree26" tiefe="1" verzweigung="2.0" hoeflichkeit="2"
+              ><NUR><PTKANT lemma="Genau"
+          >Genau</PTKANT><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NUR></parsetree></sentence>
+      <sentence no="2" value="fragment without verb" type="instruction" lok="relation"
+        id="sentence27">schwarzes 3eck fast daneben rechts<parsetree id="parsetree27" tiefe="3"
+          verzweigung="3.0" hoeflichkeit="2"><NUR><ADJA lemma="schwarz">Schwarzes</ADJA><NP><NN
+                lemma="Dreieck">Dreieck</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><AVP><ADV
+                  lemma="fast">fast</ADV><PROAV lemma="daneben">daneben</PROAV><ADV lemma="rechts"
+                  >rechts</ADV></AVP></NP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NUR></parsetree></sentence>
+    </annotation>
+    <move shape="black_triangle" from="-1,0" to="215,215" distance="953" time="+113"/>
+    <move shape="black_triangle" from="215,215" to="415,15" distance="910" time="+115"/>
+    <chat message="genau. pinker kreis fast genau unter schwarz 3eck" time="+142"/>
+    <annotation id="annotation23">
+      <spelling id="spelling23"><word id="word72">genau</word><correction id="correction72"
+          >Genau</correction>. <word id="word73">pinker</word><correction id="correction73"
+          >Pinker</correction>
+        <word id="word74">kreis</word><correction id="correction74">Kreis</correction>, fast genau
+        unter <word id="word75">schwarz </word><correction id="correction75"
+          >schwarzes</correction><word id="word76">3eck</word><correction id="correction76"
+          >Dreieck</correction><forms><form shape="circle">kreis</form><form shape="triangle"
+            >3eck</form></forms><colors><color shape="magenta">pinker</color><color shape="black"
+            >schwarz</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="feedback" lok="none" id="sentence28"
+        >genau. <parsetree id="parsetree28" tiefe="1" verzweigung="2.0" hoeflichkeit="2"
+              ><NUR><PTKANT lemma="Genau"
+          >Genau</PTKANT><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NUR></parsetree></sentence>
+      <sentence no="2" value="fragment without verb" type="instruction" lok="relation"
+        id="sentence29">pinker kreis fast genau unter schwarz 3eck<parsetree id="parsetree29"
+          tiefe="2" verzweigung="3.0" hoeflichkeit="2"><NUR><NP><ADJA lemma="pink">Pinker</ADJA><NN
+                lemma="Kreis">Kreis</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA></NP><AVP><ADV
+                lemma="fast">fast</ADV><ADJD lemma="genau">genau</ADJD></AVP><PP><APPR lemma="unter"
+                >unter</APPR><ADJA lemma="schwarz">schwarzes</ADJA><NN lemma="Dreieck"
+              >Dreieck</NN></PP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NUR></parsetree></sentence>
+    </annotation>
+    <move shape="magenta_circle" from="-1,0" to="215,215" distance="806" time="+148"/>
+    <move shape="magenta_circle" from="215,215" to="415,215" distance="780" time="+153"/>
+    <chat message="gelbes 4eck unter gelben kreis legen, bissel tiefer als pinker kreis" time="+198"/>
+    <annotation id="annotation24">
+      <spelling id="spelling24"><word id="word77">gelbes</word><correction id="correction77"
+          >Gelbes</correction>
+        <word id="word78">4eck</word><correction id="correction78">Viereck</correction> unter gelben
+          <word id="word79">kreis</word><correction id="correction79">Kreis</correction> legen,
+          <word id="word80">bissel</word><correction id="correction80">ein bisschen</correction>
+        tiefer als <word id="word81">pinker</word><correction id="correction81">pinken</correction>
+        <word id="word82">kreis</word><correction id="correction82">Kreis</correction><forms><form
+            shape="rectangle">4eck</form><form shape="circle">kreis</form><form shape="circle"
+            >kreis</form></forms><colors><color shape="orange">gelbes</color><color shape="orange"
+            >gelben</color><color shape="magenta">pinker</color></colors></spelling>
+      <sentence no="1" value="fragment with verb" type="instruction" lok="relation" id="sentence30">
+        gelbes 4eck unter gelben kreis legen, bissel tiefer als pinker kreis<parsetree
+          id="parsetree30" tiefe="5" verzweigung="2.857142857142857" hoeflichkeit="3"><CS><S><ADJA
+                lemma="gelb">Gelbes</ADJA><VP><NPOA><NN lemma="Viereck">Viereck</NN><PP><APPR
+                      lemma="unter">unter</APPR><ADJA lemma="gelb">gelben</ADJA><NN lemma="Kreis"
+                      >Kreis</NN></PP></NPOA><VVINF lemma="legen"
+              >legen</VVINF></VP></S><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><S><ART lemma="ein"
+                >ein</ART><PIS lemma="bisschen">bisschen</PIS><ADJD lemma="tief"
+                  >tiefer</ADJD><PP><APPR lemma="als">als</APPR><ADJA lemma="pink">pinken</ADJA><NN
+                  lemma="Kreis"
+          >Kreis</NN></PP></S><PUNCTUATION_STOP>.</PUNCTUATION_STOP></CS></parsetree></sentence>
+    </annotation>
+    <move shape="orange_rectangle" from="-1,0" to="215,233" distance="680" time="+204"/>
+    <move shape="orange_rectangle" from="215,233" to="215,333" distance="673" time="+209"/>
+    <chat message="ja. und zu guter letzt schwarzes 4eck rechts außen bissel unter gelbem 4eck"
+      time="+254"/>
+    <annotation id="annotation25">
+      <spelling id="spelling25"><word id="word83">ja</word><correction id="correction83"
+          >Ja</correction>. <word id="word84">und</word><correction id="correction84"
+          >Und</correction> zu guter <word id="word85">letzt</word><correction id="correction85"
+          >Letzt</correction>, schwarzes <word id="word86">4eck</word><correction id="correction86"
+          >Viereck</correction> rechts außen, <word id="word87">bissel</word><correction
+          id="correction87">ein bisschen</correction>unter gelbem <word id="word88"
+          >4eck</word><correction id="correction88">Viereck</correction><forms><form
+            shape="rectangle">4eck</form><form shape="rectangle">4eck</form></forms><colors><color
+            shape="black">schwarzes</color><color shape="orange">gelbem</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="feedback" lok="none" id="sentence31">
+          ja.<parsetree id="parsetree31" tiefe="1" verzweigung="2.0" hoeflichkeit="2"><NUR><PTKANT
+              lemma="Ja"
+        >Ja</PTKANT><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NUR></parsetree></sentence>
+      <sentence no="2" value="fragment without verb" type="instruction" lok="relation"
+        id="sentence32">und zu guter letzt schwarzes 4eck rechts außen bissel unter gelbem
+          4eck<parsetree id="parsetree32" tiefe="3" verzweigung="3.5" hoeflichkeit="2"><S><KON
+              lemma="und">Und</KON><PP><PTKA lemma="zu">zu</PTKA><ADJA lemma="gut">guter</ADJA><NN
+                lemma="Letzt">Letzt</NN></PP><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><ADJA
+              lemma="schwarz">schwarzes</ADJA><NPSB><NN lemma="Viereck">Viereck</NN><AVP><ADV
+                  lemma="rechts">rechts</ADV><ADV lemma="außen"
+              >außen</ADV></AVP></NPSB><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><NP><ART lemma="ein"
+                >ein</ART><PIS lemma="bisschen">bisschen</PIS><PP><APPR lemma="unter"
+                  >unter</APPR><ADJA lemma="gelb">gelbem</ADJA><NN lemma="Viereck"
+              >Viereck</NN></PP></NP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="black_rectangle" from="-1,0" to="215,233" distance="360" time="+259"/>
+    <move shape="black_rectangle" from="215,233" to="315,433" distance="200" time="+267"/>
+    <chat message="rechts außen" time="+280"/>
+    <annotation id="annotation26">
+      <spelling id="spelling26"><word id="word89">rechts</word><correction id="correction89"
+          >Rechts</correction> außen</spelling>
+      <sentence no="1" value="fragment without verb" type="correction" lok="correction"
+        id="sentence33"> rechts außen<parsetree id="parsetree33" tiefe="1" verzweigung="3.0"
+          hoeflichkeit="2"><NUR><ADV lemma="rechts">Rechts</ADV><ADV lemma="außen"
+              >außen</ADV><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NUR></parsetree></sentence>
+    </annotation>
+    <move shape="black_rectangle" from="315,433" to="515,433" distance="0" time="+291"/>
+    <endRound timeEnd="16.11.11 11:43"/>
+    <state>
+      <shape id="orange_circle" pos="215,15" target="215,15"/>
+      <shape id="black_triangle" pos="415,15" target="415,15"/>
+      <shape id="black_rectangle" pos="515,433" target="515,433"/>
+      <shape id="magenta_circle" pos="415,215" target="415,215"/>
+      <shape id="orange_rectangle" pos="215,333" target="215,333"/>
+    </state>
+  </round>
+  <round timeStarted="16.11.11 11:43" roundId="5">
+    <player name="Flo" role="CHATTER"/>
+    <player name="shariar" role="SLIDER"/>
+    <state>
+      <shape id="cyan_square" pos="-1,0" target="15,515"/>
+      <shape id="pink_rectangle" pos="-1,0" target="515,233"/>
+      <shape id="blue_square" pos="-1,0" target="515,115"/>
+      <shape id="magenta_ellipse" pos="-1,0" target="115,533"/>
+      <shape id="yellow_circle" pos="-1,0" target="215,315"/>
+    </state>
+    <active player="CHATTER"/>
+    <chat message="hellblaues dreieck untere linke ecke" time="+35"/>
+    <annotation id="annotation27">
+      <spelling id="spelling27"><word id="word90">hellblaues</word><correction id="correction90"
+          >Hellblaues</correction>
+        <word id="word91">dreieck</word><correction id="correction91">Dreieck</correction>, untere
+        linke <word id="word92">ecke</word><correction id="correction92"
+            >Ecke</correction><forms><form shape="square">dreieck</form></forms><colors><color
+            shape="cyan">hellblaues</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="destination"
+        id="sentence34"> hellblaues dreieck untere linke ecke<parsetree id="parsetree34" tiefe="2"
+          verzweigung="3.0" hoeflichkeit="2"><NUR><MPN><ADJA lemma="hellblau">Hellblaues</ADJA><NN
+                lemma="Dreieck">Dreieck</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA></MPN><NP><ADJA
+                lemma="unten">untere</ADJA><ADJA lemma="links">linke</ADJA><NN lemma="Ecke"
+                >Ecke</NN></NP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NUR></parsetree></sentence>
+    </annotation>
+    <move shape="cyan_square" from="-1,0" to="215,215" distance="1082" time="+41"/>
+    <move shape="cyan_square" from="215,215" to="15,515" distance="1020" time="+43"/>
+    <chat message="rechts daneben das pinkne etwas" time="+63"/>
+    <annotation id="annotation28">
+      <spelling id="spelling28"><word id="word93">rechts</word><correction id="correction93"
+          >Rechts</correction> daneben, das <word id="word94">pinkne</word><correction
+          id="correction94">pinke</correction>
+        <word id="word95">etwas</word><correction id="correction95">Etwas</correction><forms><form
+            shape="ellipse">etwas</form></forms><colors><color shape="magenta"
+          >pinkne</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="relation"
+        id="sentence35"> rechts daneben das pinkne etwas<parsetree id="parsetree35" tiefe="3"
+          verzweigung="2.5" hoeflichkeit="2"><CS><S><ADV lemma="rechts">Rechts</ADV><PP><PROAV
+                  lemma="daneben"
+                >daneben</PROAV></PP></S><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><S><ART lemma="das"
+                >das</ART><ADJA lemma="pink">pinke</ADJA><NN lemma="Etwas"
+              >Etwas</NN></S><PUNCTUATION_STOP>.</PUNCTUATION_STOP></CS></parsetree></sentence>
+    </annotation>
+    <move shape="magenta_ellipse" from="-1,0" to="215,233" distance="918" time="+73"/>
+    <move shape="magenta_ellipse" from="215,233" to="115,533" distance="862" time="+75"/>
+    <chat
+      message="der gelbe kreis: spalte neben pink etwas mehr als etwas hoeher d.h. diagonal mit hellblauem viereck"
+      time="+181"/>
+    <annotation id="annotation29">
+      <spelling id="spelling29"><word id="word96">der</word><correction id="correction96"
+          >Der</correction><word id="word97">gelbe</word><correction id="correction97"
+          >gelbe</correction><word id="word98">kreis</word><correction id="correction98"
+          >Kreis</correction>: <word id="word99">spalte</word><correction id="correction99"
+          >Spalte</correction> neben <word id="word100">pink</word><correction id="correction100"
+          >Pink</correction>, etwas mehr als etwas <word id="word101">hoeher</word><correction
+          id="correction101">höher</correction>, <word id="word102">d.h.</word><correction
+          id="correction102">das heißt</correction> diagonal mit hellblauem <word id="word103"
+          >viereck</word><correction id="correction103">Viereck</correction><forms><form
+            shape="circle">kreis</form><form shape="ellipse">etwas</form><form shape="square"
+            >viereck</form></forms><colors><color shape="yellow">gelbe</color><color shape="magenta"
+            >pink</color><color shape="cyan">hellblauem</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="spatial+relation"
+        id="sentence36"> der gelbe kreis: spalte neben pink etwas mehr als etwas hoeher d.h.
+        diagonal mit hellblauem viereck<parsetree id="parsetree36" tiefe="6"
+          verzweigung="2.8181818181818183" hoeflichkeit="2"><CS><S><NPOA><ART lemma="der"
+                  >Der</ART><ADJA lemma="gelb">gelbe</ADJA><NN lemma="Kreis"
+                  >Kreis</NN><PUNCTUATION_STOP>:</PUNCTUATION_STOP><NN lemma="Spalte"
+                >Spalte</NN></NPOA><PP><APPR lemma="neben">neben</APPR><NN lemma="pink"
+                >Pink</NN></PP></S><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><S><PIS lemma="etwas"
+                >etwas</PIS><AP><AVP><ADV lemma="mehr">mehr</ADV><NP><KOKOM lemma="als"
+                      >als</KOKOM><PIS lemma="etwas">etwas</PIS></NP></AVP><ADJD lemma="höher"
+                  >höher</ADJD><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><S><PDS lemma="das"
+                    >das</PDS><VVFIN lemma="heißen">heißt</VVFIN><AP><ADJD lemma="diagonal"
+                      >diagonal</ADJD><PP><APPR lemma="mit">mit</APPR><ADJA lemma="hellblau"
+                        >hellblauem</ADJA><NN lemma="Viereck"
+              >Viereck</NN></PP></AP></S></AP></S><PUNCTUATION_STOP>.</PUNCTUATION_STOP></CS></parsetree></sentence>
+    </annotation>
+    <move shape="yellow_circle" from="-1,0" to="215,215" distance="780" time="+196"/>
+    <move shape="yellow_circle" from="215,215" to="215,315" distance="774" time="+207"/>
+    <chat
+      message="schoen, dass du das verstanden hast! hautfarbenes rechteck eine zeile hoeher als kreis, ganz rechts aussen"
+      time="+256"/>
+    <annotation id="annotation30">
+      <spelling id="spelling30"><word id="word104">schoen</word><correction id="correction104"
+          >Schön</correction>, dass du das verstanden hast! <word id="word105"
+          >hautfarbenes</word><correction id="correction105">Hautfarbenes</correction>
+        <word id="word106">rechteck</word><correction id="correction106">Rechteck</correction>, eine
+          <word id="word107">zeile</word><correction id="correction107">Zeile</correction>
+        <word id="word108">hoeher</word><correction id="correction108">höher</correction> als <word
+          id="word109">kreis</word><correction id="correction109">Kreis</correction>, ganz rechts
+          <word id="word110">aussen</word><correction id="correction110"
+            >außen</correction><forms><form shape="rectangle">rechteck</form><form shape="circle"
+            >kreis</form></forms><colors><color shape="pink"
+        >hautfarbenes</color></colors></spelling>
+      <sentence no="1" value="sentence declarative" type="feedback" lok="none" syn="complex"
+        top="no" ellipse="ja" transORintrans="none" paraORhypo="hypo" verbMC="none" verbC1="VEnd"
+        id="sentence37"> schoen, dass du das verstanden hast!<parsetree id="parsetree37" tiefe="3"
+          verzweigung="3.3333333333333335" hoeflichkeit="-98"><NP><ADJA lemma="schön"
+              >Schön</ADJA><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><S><KOUS lemma="dass"
+                >dass</KOUS><PPER lemma="du">du</PPER><VP><PDS lemma="das">das</PDS><VVPP
+                  lemma="verstehen">verstanden</VVPP></VP><VAFIN lemma="haben"
+              >hast</VAFIN></S><PUNCTUATION_STOP>!</PUNCTUATION_STOP></NP></parsetree></sentence>
+      <sentence no="2" value="fragment without verb" type="instruction" lok="spatial+relation"
+        id="sentence38"> hautfarbenes rechteck eine zeile hoeher als kreis, ganz rechts
+          aussen<parsetree id="parsetree38" tiefe="4" verzweigung="2.3333333333333335"
+          hoeflichkeit="2"><CS><S><NPSB><MPN><ADJA lemma="hautfarben">Hautfarbenes</ADJA><NN
+                    lemma="Rechteck"
+                    >Rechteck</NN></MPN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><NP><ART
+                    lemma="eine">eine</ART><NN lemma="Zeile">Zeile</NN></NP></NPSB><AP><ADJD
+                  lemma="höher">höher</ADJD><NP><KOKOM lemma="als">als</KOKOM><NN lemma="Kreis"
+                    >Kreis</NN></NP></AP></S><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><S><ADV
+                lemma="ganz">ganz</ADV><AVP><ADV lemma="rechts">rechts</ADV><ADV lemma="außen"
+                  >außen</ADV></AVP></S><PUNCTUATION_STOP>.</PUNCTUATION_STOP></CS></parsetree></sentence>
+    </annotation>
+    <move shape="pink_rectangle" from="-1,0" to="215,233" distance="607" time="+268"/>
+    <move shape="pink_rectangle" from="215,233" to="515,233" distance="528" time="+274"/>
+    <chat message="und zu guter letzt: dunkelblaues quadrat genau ueber dem haufarbenen rechteck"
+      time="+306"/>
+    <annotation id="annotation31">
+      <spelling id="spelling31"><word id="word111">und</word><correction id="correction111"
+          >Und</correction> zu guter <word id="word112">letzt</word><correction id="correction112"
+          >Letzt</correction>: dunkelblaues <word id="word113">quadrat</word><correction
+          id="correction113">Quadrat</correction>, genau <word id="word114">ueber</word><correction
+          id="correction114">über</correction> dem haufarbenen <word id="word115"
+          >rechteck</word><correction id="correction115">Rechteck</correction><forms><form
+            shape="square">quadrat</form><form shape="rectangle"
+            >rechteck</form></forms><colors><color shape="blue">dunkelblaues</color><color
+            shape="pink">hautfarbenen</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="relation"
+        id="sentence39"> und zu guter letzt: dunkelblaues quadrat genau ueber dem haufarbenen
+          rechteck<parsetree id="parsetree39" tiefe="4" verzweigung="3.1666666666666665"
+          hoeflichkeit="2"><S><KON lemma="und">Und</KON><S><NPSB><AP><PTKA lemma="zu">zu</PTKA><ADJA
+                    lemma="gut">guter</ADJA></AP><NN lemma="Letzt"
+                >Letzt</NN></NPSB><PUNCTUATION_STOP>:</PUNCTUATION_STOP><NP><ADJA lemma="dunkelblau"
+                  >dunkelblaues</ADJA><NN lemma="Quadrat"
+              >Quadrat</NN></NP></S><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><PP><ADJD lemma="genau"
+                >genau</ADJD><APPR lemma="über">über</APPR><ART lemma="dem">dem</ART><ADJA
+                lemma="hautfarben">haufarbenen</ADJA><NN lemma="Rechteck"
+              >Rechteck</NN></PP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="blue_square" from="-1,0" to="215,215" distance="316" time="+316"/>
+    <move shape="blue_square" from="215,215" to="515,115" distance="0" time="+318"/>
+    <endRound timeEnd="16.11.11 11:49"/>
+    <state>
+      <shape id="cyan_square" pos="15,515" target="15,515"/>
+      <shape id="pink_rectangle" pos="515,233" target="515,233"/>
+      <shape id="blue_square" pos="515,115" target="515,115"/>
+      <shape id="magenta_ellipse" pos="115,533" target="115,533"/>
+      <shape id="yellow_circle" pos="215,315" target="215,315"/>
+    </state>
+  </round>
+  <round timeStarted="16.11.11 11:49" roundId="6">
+    <player name="shariar" role="CHATTER"/>
+    <player name="Flo" role="SLIDER"/>
+    <state>
+      <shape id="yellow_triangle" pos="-1,0" target="215,415"/>
+      <shape id="green_ellipse" pos="-1,0" target="415,333"/>
+      <shape id="black_rectangle" pos="-1,0" target="515,533"/>
+      <shape id="red_circle" pos="-1,0" target="515,115"/>
+      <shape id="blue_triangle" pos="-1,0" target="215,515"/>
+    </state>
+    <active player="CHATTER"/>
+    <chat message="war gut erklärt. schwarzes 4eck unten rechts außen" time="+36"/>
+    <annotation id="annotation32">
+      <spelling id="spelling32"><word id="word116">war</word><correction id="correction116"
+          >War</correction> gut erklärt. <word id="word117">schwarzes</word><correction
+          id="correction117">Schwarzes</correction>
+        <word id="word118">4eck</word><correction id="correction118">Viereck</correction>, unten
+        rechts außen<forms><form shape="rectangle">4eck</form></forms><colors><color shape="black"
+            >schwarzes</color></colors></spelling>
+      <sentence no="1" value="fragment with verb" type="feedback" lok="none" id="sentence40"> war
+        gut erklärt.<parsetree id="parsetree40" tiefe="2" verzweigung="2.5" hoeflichkeit="3"
+              ><S><VAFIN lemma="sein">War</VAFIN><VP><ADJD lemma="gut">gut</ADJD><VVPP
+                lemma="erklären"
+          >erklärt</VVPP></VP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+      <sentence no="2" value="fragment with verb" type="instruction" lok="destination"
+        id="sentence41"> schwarzes 4eck unten rechts außen<parsetree id="parsetree41" tiefe="3"
+          verzweigung="3.0" hoeflichkeit="3"><NUR><ADJA lemma="schwarz">Schwarzes</ADJA><NP><NN
+                lemma="Viereck">Viereck</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><AVP><ADV
+                  lemma="unten">unten</ADV><ADV lemma="rechts">rechts</ADV><ADV lemma="außen"
+                  >außen</ADV></AVP></NP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NUR></parsetree></sentence>
+    </annotation>
+    <move shape="black_rectangle" from="-1,0" to="215,233" distance="1127" time="+43"/>
+    <move shape="black_rectangle" from="215,233" to="515,533" distance="1044" time="+46"/>
+    <chat message="roter kreis gleiche spalte, fast ganz oben" time="+67"/>
+    <annotation id="annotation33">
+      <spelling id="spelling33"><word id="word119">roter</word><correction id="correction119"
+          >Roter</correction>
+        <word id="word120">kreis</word><correction id="correction120">Kreis</correction>, gleiche
+          <word id="word121">spalte</word><correction id="correction121">Spalte</correction>, fast
+        ganz oben<forms><form shape="circle">kreis</form></forms><colors><color shape="red"
+            >roter</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="spatial"
+        id="sentence42"> roter kreis gleiche spalte, fast ganz oben<parsetree id="parsetree42"
+          tiefe="4" verzweigung="2.5" hoeflichkeit="2"><CS><S><ADJA lemma="rot">Roter</ADJA><NP><NN
+                  lemma="Kreis">Kreis</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><NP><ADJA
+                    lemma="gleich">gleiche</ADJA><NN lemma="Spalte"
+              >Spalte</NN></NP></NP></S><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><S><ADV lemma="fast"
+                >fast</ADV><AVP><ADV lemma="ganz">ganz</ADV><ADV lemma="oben"
+              >oben</ADV></AVP></S><PUNCTUATION_STOP>.</PUNCTUATION_STOP></CS></parsetree></sentence>
+    </annotation>
+    <move shape="red_circle" from="-1,0" to="215,215" distance="955" time="+72"/>
+    <move shape="red_circle" from="215,215" to="515,115" distance="901" time="+74"/>
+    <chat message="genau. blaues viereck zeile wie schwarzes viereck, aber fast daneben" time="+110"/>
+    <annotation id="annotation34">
+      <spelling id="spelling34"><word id="word122">genau</word><correction id="correction122"
+          >Genau</correction>. <word id="word123">blaues</word><correction id="correction123"
+          >Blaues</correction>
+        <word id="word124">viereck</word><correction id="correction124">Viereck</correction>, <word
+          id="word125">zeile</word><correction id="correction125">Zeile</correction>, wie schwarzes
+          <word id="word126">viereck</word><correction id="correction126">Viereck</correction>, aber
+        fast daneben<forms><form shape="triangle">viereck</form><form shape="rectangle"
+            >viereck</form></forms><colors><color shape="blue">blaues</color><color shape="black"
+            >schwarzes</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="feedback" lok="none" id="sentence43">
+        genau. <parsetree id="parsetree43" tiefe="1" verzweigung="2.0" hoeflichkeit="2"><NUR><PTKANT
+              lemma="genau"
+        >Genau</PTKANT><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NUR></parsetree></sentence>
+      <sentence no="2" value="fragment without verb" type="instruction" lok="spatial+relation"
+        id="sentence44"> blaues viereck zeile wie schwarzes viereck, aber fast daneben<parsetree
+          id="parsetree44" tiefe="3" verzweigung="3.0" hoeflichkeit="2"><S><NP><ADJA lemma="blau"
+                >Blaues</ADJA><CNP><NN lemma="Viereck"
+                  >Viereck</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><NN lemma="Zeile"
+                >Zeile</NN></CNP></NP><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><NP><KOKOM lemma="wie"
+                >wie</KOKOM><ADJA lemma="schwarz">schwarzes</ADJA><NN lemma="Viereck"
+              >Viereck</NN></NP><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><AVP><KON lemma="aber"
+                >aber</KON><ADV lemma="fast">fast</ADV></AVP><PP><PROAV lemma="daneben"
+                >daneben</PROAV></PP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="blue_triangle" from="-1,0" to="215,215" distance="768" time="+120"/>
+    <move shape="blue_triangle" from="215,215" to="315,515" distance="714" time="+125"/>
+    <chat
+      message="ubs, war ein 3eck... schräg diagonal rechts zu blauem 3eck mit einem kästchen lücke gruene ellipse (so würd ich das nennen)"
+      time="+217"/>
+    <annotation id="annotation35">
+      <spelling id="spelling35"><word id="word127">ubs</word><correction id="correction127"
+          >Ups</correction>, war ein <word id="word128">3eck</word><correction id="correction128"
+          >Dreieck</correction>. <word id="word129">schräg</word><correction id="correction129"
+          >Schräg</correction> diagonal rechts, zu blauem <word id="word130">3eck</word><correction
+          id="correction130">Dreieck</correction>, mit einem <word id="word131"
+          >kästchen</word><correction id="correction131">Kästchen</correction>
+        <word id="word132">lücke</word><correction id="correction132">Lücke</correction>, gruene
+          <word id="word133">ellipse</word><correction id="correction133">Ellipse</correction>.
+          <word id="word134">so</word><correction id="correction134">So</correction>
+        <word id="word135">würd</word><correction id="correction135">würde</correction> ich das
+            nennen.<forms><form shape="triangle">3eck</form><form shape="triangle">3eck</form><form
+            shape="ellipse">ellipse</form></forms><colors><color shape="blue">blauem</color><color
+            shape="green">gruene</color></colors></spelling>
+      <sentence no="1" value="fragment with verb" type="correction" lok="none" id="sentence45">ups,
+        war ein 3eck... <parsetree id="parsetree45" tiefe="2" verzweigung="3.5" hoeflichkeit="3"
+              ><S><XY>Ups</XY><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><VAFIN lemma="sein"
+              >war</VAFIN><NPSB><ART lemma="ein">ein</ART><NN lemma="Dreieck"
+              >Dreieck</NN></NPSB><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+      <sentence no="2" value="fragment with verb" type="instruction" lok="spatial+relation"
+        id="sentence46">schräg diagonal rechts zu blauem 3eck mit einem kästchen lücke gruene
+        ellipse <parsetree id="parsetree46" tiefe="3" verzweigung="4.75" hoeflichkeit="3"><S><ADJD
+              lemma="schräg">Schräg</ADJD><ADV lemma="diagonal">diagonal</ADV><ADV lemma="rechts"
+              >rechts</ADV><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><VP><VZ><PTKZU lemma="zu"
+                  >zu</PTKZU><ADJA lemma="blau">blauem</ADJA></VZ></VP><NN lemma="Dreieck"
+              >Dreieck</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><PP><APPR lemma="mit"
+                >mit</APPR><ART lemma="ein">einem</ART><NN lemma="Kästchen">Kästchen</NN><NN
+                lemma="Lücke">Lücke</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><ADJA lemma="grün"
+                >gruene</ADJA><NN lemma="Ellipse"
+              >Ellipse</NN></PP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+      <sentence no="3" value="sentence conjunktive" type="notice" lok="none" syn="simple" top="yes"
+        ellipse="nein" transORintrans="trans" ParaORHypo="none" verbMC="V2" verbC="none"
+        id="sentence47">so würd ich das nennen <parsetree id="parsetree47" tiefe="2"
+          verzweigung="3.5" hoeflichkeit="1"><S><ADV lemma="so">So</ADV><VAFIN lemma="würden"
+              >würde</VAFIN><PPER lemma="ich">ich</PPER><VP><PDS lemma="das">das</PDS><VVINF
+                lemma="nennen"
+          >nennen</VVINF></VP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="green_ellipse" from="-1,0" to="215,233" distance="527" time="+250"/>
+    <move shape="green_ellipse" from="215,233" to="515,333" distance="487" time="+268"/>
+    <chat
+      message="richtig, aber habe gemerkt, dass das blaue 3eck bissel weiter nach links muss - so geht dann auch das gruene teil eins weiter nach links auf gleicher höhe"
+      time="+346"/>
+    <annotation id="annotation36">
+      <spelling id="spelling36"><word id="word136">richtig</word><correction id="correction136"
+          >Richtig</correction>, aber habe gemerkt, dass das blaue <word id="word137"
+          >3eck</word><correction id="correction137">Dreieck</correction>
+        <word id="word138">bissel</word><correction id="correction138">ein bisschen</correction>
+        weiter nach links muss, so geht dann auch das gruene <word id="word139">
+          teil</word><correction id="correction139"> Teil</correction> eins weiter nach links, auf
+        gleicher <word id="word140">höhe</word><correction id="correction140"
+            >Höhe</correction><forms><form shape="triangle">3eck</form><form shape="ellipse"
+            >teil</form></forms><colors><color shape="blue">blaue</color><color shape="green"
+            >gruene</color></colors></spelling>
+      <sentence no="1" value="fragment with verb" type="correction with feedback" lok="destination"
+        id="sentence48"> richtig, aber habe gemerkt, dass das blaue 3eck bissel weiter nach links
+        muss - so geht dann auch das gruene teil eins weiter nach links auf gleicher höhe<parsetree
+          id="parsetree48" tiefe="5" verzweigung="4.2" hoeflichkeit="3"><CS><S><ADJD lemma="richtig"
+                >Richtig</ADJD><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><KON lemma="aber"
+                >aber</KON><VAFIN lemma="haben">habe</VAFIN><VVPP lemma="merken"
+                >gemerkt</VVPP><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><S><KOUS lemma="dass"
+                  >dass</KOUS><NPSB><ART lemma="das">das</ART><ADJA lemma="blau">blaue</ADJA><NN
+                    lemma="Dreieck">Dreieck</NN><NP><ART lemma="ein">ein</ART><PIS lemma="bisschen"
+                      >bisschen</PIS></NP></NPSB><ADV lemma="weiter">weiter</ADV><PP><APPR
+                    lemma="nach">nach</APPR><ADV lemma="links">links</ADV></PP><VVFIN lemma="müssen"
+                  >muss</VVFIN></S></S><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><S><ADV lemma="so"
+                >so</ADV><VVFIN lemma="gehen">geht</VVFIN><ADV lemma="dann">dann</ADV><NPSB><ADV
+                  lemma="auch">auch</ADV><ART lemma="das">das</ART><ADJA lemma="grün"
+                  >gruene</ADJA><NN lemma="Teil">Teil</NN><CARD lemma="eins">eins</CARD></NPSB><ADV
+                lemma="weiter">weiter</ADV><PP><APPR lemma="nach">nach</APPR><ADV lemma="links"
+                  >links</ADV></PP><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><PP><APPR lemma="auf"
+                  >auf</APPR><ADJA lemma="gleich">gleicher</ADJA><NN lemma="Höhe"
+              >Höhe</NN></PP></S><PUNCTUATION_STOP>.</PUNCTUATION_STOP></CS></parsetree></sentence>
+    </annotation>
+    <move shape="blue_triangle" from="315,515" to="215,515" distance="477" time="+362"/>
+    <chat message="gut, gruen auch" time="+379"/>
+    <annotation id="annotation37">
+      <spelling id="spelling37"><word id="word141">gut</word><correction id="correction141"
+          >Gut</correction>, <word id="word142">gruen</word><correction id="correction142"
+          >Grün</correction> auch<colors><color shape="green">gruen</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction with feedback" lok="none"
+        id="sentence49"> gut, gruen auch<parsetree id="parsetree49" tiefe="2" verzweigung="3.0"
+          hoeflichkeit="2"><S><ADJD lemma="gut"
+                >Gut</ADJD><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><NPSB><NN lemma="grün"
+                >Grün</NN><ADV lemma="auch"
+            >auch</ADV></NPSB><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="green_ellipse" from="515,333" to="415,333" distance="467" time="+383"/>
+    <chat message="gut. gelbes 3eck über blaues. fertig :-)" time="+399"/>
+    <annotation id="annotation38">
+      <spelling id="spelling38"><word id="word143">gut</word><correction id="correction143"
+          >Gut</correction>. <word id="word144">gelbes</word><correction id="correction144"
+          >Gelbes</correction>
+        <word id="word145">3eck</word><correction id="correction145">Dreieck</correction>, über
+        blaues. <word id="word146">fertig</word><correction id="correction146"
+            >Fertig</correction><forms><form shape="triangle">3eck</form><form shape="triangle"
+            >blaues</form></forms><colors><color shape="yellow">gelbes</color><color shape="blue"
+            >blaues</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="feedback" lok="none" id="sentence50">
+          gut.<parsetree id="parsetree50" tiefe="1" verzweigung="2.0" hoeflichkeit="2"><NUR><ADJD
+              lemma="gut"
+        >Gut</ADJD><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NUR></parsetree></sentence>
+      <sentence no="2" value="fragment without verb" type="instruction" lok="relation"
+        id="sentence51">gelbes 3eck über blaues.<parsetree id="parsetree51" tiefe="3"
+          verzweigung="2.6666666666666665" hoeflichkeit="2"><NUR><NP><ADJA lemma="gelb"
+                >Gelbes</ADJA><NN lemma="Dreieck"
+                >Dreieck</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><VP><ADV lemma="über"
+                  >über</ADV><ADJA lemma="blau"
+                >blaues</ADJA></VP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NP></NUR></parsetree></sentence>
+      <sentence no="3" value="fragment without verb" type="notice" lok="none" id="sentence52">fertig
+          :-)<parsetree id="parsetree52" tiefe="1" verzweigung="2.0" hoeflichkeit="2"><NUR><ADJD
+              lemma="fertig"
+        >Fertig</ADJD><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NUR></parsetree></sentence>
+    </annotation>
+    <move shape="yellow_triangle" from="-1,0" to="215,215" distance="200" time="+403"/>
+    <move shape="yellow_triangle" from="215,215" to="215,415" distance="0" time="+405"/>
+    <endRound timeEnd="16.11.11 11:56"/>
+    <state>
+      <shape id="yellow_triangle" pos="215,415" target="215,415"/>
+      <shape id="green_ellipse" pos="415,333" target="415,333"/>
+      <shape id="black_rectangle" pos="515,533" target="515,533"/>
+      <shape id="red_circle" pos="515,115" target="515,115"/>
+      <shape id="blue_triangle" pos="215,515" target="215,515"/>
+    </state>
+  </round>
+  <round timeStarted="16.11.11 11:56" roundId="7">
+    <player name="Flo" role="CHATTER"/>
+    <player name="shariar" role="SLIDER"/>
+    <state>
+      <shape id="blue_ellipse" pos="-1,0" target="15,133"/>
+      <shape id="blue_rectangle" pos="-1,0" target="415,33"/>
+      <shape id="magenta_triangle" pos="-1,0" target="215,215"/>
+      <shape id="cyan_ellipse" pos="-1,0" target="15,533"/>
+      <shape id="green_square" pos="-1,0" target="415,315"/>
+    </state>
+    <active player="CHATTER"/>
+    <chat message="hellblaue ellipse(!) untere linke ecke" time="+44"/>
+    <annotation id="annotation39">
+      <spelling id="spelling39"><word id="word147">hellblaue</word><correction id="correction147"
+          >Hellblaue</correction>
+        <word id="word148">ellipse</word><correction id="correction148">Ellipse</correction>, untere
+        linke <word id="word149">ecke</word><correction id="correction149"
+            >Ecke</correction><forms><form shape="ellipse">ellipse</form></forms><colors><color
+            shape="cyan">hellblaue</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="destination"
+        id="sentence53">hellblaue ellipse(!) untere linke ecke <parsetree id="parsetree53" tiefe="3"
+          verzweigung="3.0" hoeflichkeit="2"><NP><ADJA lemma="hellblau">Hellblaue</ADJA><NP><NN
+                lemma="Ellipse">Ellipse</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><NP><ADJA
+                  lemma="unten">untere</ADJA><ADJA lemma="links">linke</ADJA><NN lemma="Ecke"
+                  >Ecke</NN></NP></NP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NP></parsetree></sentence>
+    </annotation>
+    <move shape="cyan_ellipse" from="-1,0" to="215,233" distance="827" time="+51"/>
+    <move shape="cyan_ellipse" from="215,233" to="15,533" distance="745" time="+53"/>
+    <chat message="dunkelblaue ellipse gleiche spalte fast ganz oben" time="+72"/>
+    <annotation id="annotation40">
+      <spelling id="spelling40"><word id="word150">dunkelblaue</word><correction id="correction150"
+          >Dunkelblaue</correction>
+        <word id="word151">ellipse</word><correction id="correction151">Ellipse</correction>,
+        gleiche <word id="word152">spalte</word><correction id="correction152">Spalte</correction>,
+        fast ganz oben<forms><form shape="ellipse">ellipse</form></forms><colors><color shape="blue"
+            >dunkelblaue</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="spatial"
+        id="sentence54"> dunkelblaue ellipse gleiche spalte fast ganz oben<parsetree
+          id="parsetree54" tiefe="3" verzweigung="3.25" hoeflichkeit="2"><NUR><NP><ADJA
+                lemma="dunkelblau">Dunkelblaue</ADJA><NN lemma="Ellipse"
+                >Ellipse</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA></NP><ADJA lemma="gleich"
+              >gleiche</ADJA><NP><NN lemma="Spalte"
+                >Spalte</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><AVP><ADV lemma="fast"
+                  >fast</ADV><ADV>ganz</ADV><ADV lemma="oben"
+              >oben</ADV></AVP></NP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NUR></parsetree></sentence>
+    </annotation>
+    <move shape="blue_ellipse" from="-1,0" to="215,233" distance="766" time="+77"/>
+    <move shape="blue_ellipse" from="215,233" to="15,133" distance="733" time="+78"/>
+    <chat message="blaues rechteck obere zeile fast ganz rechts aussen" time="+113"/>
+    <annotation id="annotation41">
+      <spelling id="spelling41"><word id="word153">blaues</word><correction id="correction153"
+          >Blaues</correction>
+        <word id="word154">rechteck</word><correction id="correction154">Rechteck</correction>,
+        obere <word id="word155">zeile</word><correction id="correction155">Zeile</correction>, fast
+        ganz rechts <word id="word156">aussen</word><correction id="correction156"
+          >außen</correction><forms><form shape="rectangle">rechteck</form></forms><colors><color
+            shape="blue">blaues</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="spatial"
+        id="sentence55"> blaues rechteck obere zeile fast ganz rechts aussen<parsetree
+          id="parsetree55" tiefe="2" verzweigung="3.5" hoeflichkeit="2"><S><NPSB><ADJA lemma="blau"
+                >Blaues</ADJA><NN lemma="Rechteck"
+              >Rechteck</NN></NPSB><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><ADJA lemma="oben"
+              >obere</ADJA><NPSB><NN lemma="Zeile"
+              >Zeile</NN></NPSB><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><ADV lemma="fast"
+              >fast</ADV><ADV lemma="ganz">ganz</ADV><AVP><ADV lemma="rechts">rechts</ADV><ADV
+                lemma="außen"
+          >außen</ADV></AVP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="blue_rectangle" from="-1,0" to="215,233" distance="665" time="+119"/>
+    <move shape="blue_rectangle" from="215,233" to="415,33" distance="603" time="+122"/>
+    <chat
+      message="quadrat gleiche spalte wie rechteck aber etwas weiter unten als genaue mitte der spalte"
+      time="+188"/>
+    <annotation id="annotation42">
+      <spelling id="spelling42"><word id="word157">quadrat</word><correction id="correction157"
+          >Quadrat</correction>, gleiche <word id="word158">spalte</word><correction
+          id="correction158">Spalte</correction> wie <word id="word159">rechteck</word><correction
+          id="correction159">Rechteck</correction>, aber etwas weiter unten, als genaue <word
+          id="word160">mitte</word><correction id="correction160">Mitte</correction> der <word
+          id="word161">spalte</word><correction id="correction161">Spalte</correction><forms><form
+            shape="square">quadrat</form><form shape="rectangle">rechteck</form></forms></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="spatial+relation"
+        id="sentence56"> quadrat gleiche spalte wie rechteck aber etwas weiter unten als genaue
+        mitte der spalte<parsetree id="parsetree56" tiefe="3" verzweigung="3.125" hoeflichkeit="2"
+                ><S><NP><NN lemma="Quadrat"
+                >Quadrat</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><ADJA lemma="gleich"
+                >gleiche</ADJA><NN lemma="Spalte">Spalte</NN><NP><KOKOM lemma="wie">wie</KOKOM><NN
+                  lemma="Rechteck"
+                >Rechteck</NN></NP></NP><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><AVP><KON
+                lemma="aber">aber</KON><AVP><PIS lemma="etwas">etwas</PIS><ADV lemma="weiter"
+                  >weiter</ADV></AVP><ADV lemma="unten"
+              >unten</ADV></AVP><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><S><KOKOM lemma="als"
+                >als</KOKOM><NPSB><ADJA lemma="genau">genaue</ADJA><NN lemma="Mitte"
+                >Mitte</NN></NPSB><NPOA><ART lemma="der">der</ART><NN lemma="Spalte"
+                >Spalte</NN></NPOA></S><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="green_square" from="-1,0" to="215,215" distance="377" time="+201"/>
+    <move shape="green_square" from="215,215" to="415,315" distance="304" time="+208"/>
+    <chat message="dreieck: in die zeile zw dunkelbl ellipse und quadrat links neben der mitte"
+      time="+319"/>
+    <annotation id="annotation43">
+      <spelling id="spelling43"><word id="word162">dreieck</word><correction id="correction162"
+          >Dreieck</correction>: in die <word id="word163">zeile</word><correction
+          id="correction163">Zeile</correction>
+        <word id="word164">zw</word><correction id="correction164">zwischen</correction>
+        <word id="word165">dunkelbl</word><correction id="correction165">dunkelblauer</correction>
+        <word id="word166">ellipse</word><correction id="correction166">Ellipse</correction> und
+          <word id="word167">quadrat</word><correction id="correction167">Quadrat</correction>,
+        links neben der <word id="word168">mitte</word><correction id="correction168"
+          >Mitte</correction><forms><form shape="triangle">dreieck</form><form shape="ellipse"
+            >ellipse</form><form shape="square">quadrat</form></forms><colors><color shape="blue"
+            >dunkelbl</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="spatial+relation"
+        id="sentence57"> dreieck: in die zeile zw dunkelbl ellipse und quadrat links neben der
+          mitte<parsetree id="parsetree57" tiefe="4" verzweigung="3.2857142857142856"
+          hoeflichkeit="2"><S><NN lemma="Dreieck"
+                  >Dreieck</NN><PUNCTUATION_STOP>:</PUNCTUATION_STOP><SSB><PP><APPR lemma="in"
+                  >in</APPR><ART>die</ART><NN lemma="Zeile">Zeile</NN></PP><PP><APPR
+                  lemma="zwischen">zwischen</APPR><AP><ADJA lemma="dunkelblau"
+                  >dunkelblauer</ADJA></AP><CNP><NN lemma="Ellipse">Ellipse</NN><KON lemma="und"
+                    >und</KON><NN lemma="Quadrat"
+                >Quadrat</NN></CNP></PP><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><PP><ADV
+                  lemma="links">links</ADV><APPR lemma="neben">neben</APPR><ART lemma="der"
+                  >der</ART><NN lemma="Mitte"
+              >Mitte</NN></PP></SSB><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="magenta_triangle" from="-1,0" to="215,215" distance="0" time="+333"/>
+    <endRound timeEnd="16.11.11 12:02"/>
+    <state>
+      <shape id="blue_ellipse" pos="15,133" target="15,133"/>
+      <shape id="blue_rectangle" pos="415,33" target="415,33"/>
+      <shape id="magenta_triangle" pos="215,215" target="215,215"/>
+      <shape id="cyan_ellipse" pos="15,533" target="15,533"/>
+      <shape id="green_square" pos="415,315" target="415,315"/>
+    </state>
+  </round>
+  <round timeStarted="16.11.11 12:02" roundId="8">
+    <player name="shariar" role="CHATTER"/>
+    <player name="Flo" role="SLIDER"/>
+    <state>
+      <shape id="pink_circle" pos="-1,0" target="515,215"/>
+      <shape id="black_circle" pos="-1,0" target="115,415"/>
+      <shape id="black_ellipse" pos="-1,0" target="15,333"/>
+      <shape id="pink_triangle" pos="-1,0" target="415,315"/>
+      <shape id="green_ellipse" pos="-1,0" target="415,533"/>
+    </state>
+    <active player="CHATTER"/>
+    <chat
+      message="wahrscheinlich letztes spiel. schwarze ellipse ganz links genau unter mittellinie"
+      time="+73"/>
+    <annotation id="annotation44">
+      <spelling id="spelling44"><word id="word169">wahrscheinlich </word><correction
+          id="correction169">Wahrscheinlich </correction>letztes <word id="word170"
+          >spiel</word><correction id="correction170">Spiel</correction>. <word id="word171"
+          >schwarze</word><correction id="correction171">Schwarze</correction>
+        <word id="word172">ellipse</word><correction id="correction172">Ellipse</correction> ganz
+        links, genau unter <word id="word173">mittellinie</word><correction id="correction173"
+          >Mittellinie</correction><forms><form shape="ellipse">ellipse</form></forms><colors><color
+            shape="black">schwarze</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="notice" lok="none" id="sentence58">
+        wahrscheinlich letztes spiel.<parsetree id="parsetree58" tiefe="2" verzweigung="2.5"
+          hoeflichkeit="2"><NP><AP><ADJD lemma="wahrscheinlich">Wahrscheinlich</ADJD><ADJA
+                lemma="letzte">letztes</ADJA></AP><NN lemma="Spiel"
+              >Spiel</NN><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NP></parsetree></sentence>
+      <sentence no="2" value="fragment without verb" type="instruction" lok="spatial+destination"
+        id="sentence59">schwarze ellipse ganz links genau unter mittellinie <parsetree
+          id="parsetree59" tiefe="3" verzweigung="3.6666666666666665" hoeflichkeit="2"><NP><ADJA
+              lemma="schwarz">Schwarze</ADJA><NN lemma="Ellipse"
+                >Ellipse</NN><AVP><ADV>ganz</ADV><ADV>links</ADV><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><PP><ADJD
+                  lemma="genau">genau</ADJD><APPR>unter</APPR><NN lemma="Mittellinie"
+                  >Mittellinie</NN></PP></AVP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></NP></parsetree></sentence>
+    </annotation>
+    <move shape="black_ellipse" from="-1,0" to="215,233" distance="1129" time="+81"/>
+    <move shape="black_ellipse" from="215,233" to="15,333" distance="1107" time="+86"/>
+    <chat message="schwarzer kreis diagonal darunter" time="+110"/>
+    <annotation id="annotation45">
+      <spelling id="spelling45"><word id="word174">schwarzer </word><correction id="correction174"
+          >Schwarzer </correction><word id="word175">kreis</word><correction id="correction175"
+          >Kreis</correction>, diagonal darunter<forms><form shape="circle"
+            >kreis</form></forms><colors><color shape="black">schwarzer</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="spatial+relation"
+        id="sentence60">schwarzer kreis diagonal darunter<parsetree id="parsetree60" tiefe="2"
+          verzweigung="3.5" hoeflichkeit="2"><S><NPSB><ADJA lemma="schwarz">Schwarzer</ADJA><NN
+                lemma="Kreis">Kreis</NN></NPSB><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><ADV
+              lemma="diagonal">diagonal</ADV><PROAV lemma="darunter"
+              >darunter</PROAV><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="black_circle" from="-1,0" to="215,215" distance="1044" time="+115"/>
+    <move shape="black_circle" from="215,215" to="115,415" distance="1020" time="+117"/>
+    <chat message="gruene ellipse unten fast rechts" time="+165"/>
+    <annotation id="annotation46">
+      <spelling id="spelling46"><word id="word176">gruene</word><correction id="correction176"
+          >Grüne</correction>
+        <word id="word177">ellipse</word><correction id="correction177">Ellipse</correction>, unten
+        fast rechts<forms><form shape="ellipse">ellipse</form></forms><colors><color shape="green"
+            >gruene</color></colors></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="destination"
+        id="sentence61"> gruene ellipse unten fast rechts<parsetree id="parsetree61" tiefe="2"
+          verzweigung="3.0" hoeflichkeit="2"><S><S><ADJA lemma="grün">Grüne</ADJA><NN
+                lemma="Ellipse">Ellipse</NN></S><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><ADV
+              lemma="unten">unten</ADV><AVP><ADV lemma="fast">fast</ADV><ADV lemma="rechts"
+                >rechts</ADV></AVP><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="green_ellipse" from="-1,0" to="215,233" distance="844" time="+169"/>
+    <move shape="green_ellipse" from="215,233" to="415,533" distance="764" time="+172"/>
+    <chat message="dreieck fast genau darüber" time="+187"/>
+    <annotation id="annotation47">
+      <spelling id="spelling47"><word id="word178">dreieck</word><correction id="correction178"
+          >Dreieck</correction>, fast genau darüber<forms><form shape="triangle"
+          >dreieck</form></forms></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="relation"
+        id="sentence62"> dreieck fast genau darüber<parsetree id="parsetree62" tiefe="3"
+          verzweigung="2.6666666666666665" hoeflichkeit="2"><CS><NN lemma="Dreieck"
+              >Dreieck</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><S><ADV lemma="fast"
+                  >fast</ADV><AP><ADJD lemma="genau">genau</ADJD><PROAV lemma="darüber"
+                  >darüber</PROAV></AP></S><PUNCTUATION_STOP>.</PUNCTUATION_STOP></CS></parsetree></sentence>
+    </annotation>
+    <move shape="pink_triangle" from="-1,0" to="215,215" distance="601" time="+191"/>
+    <move shape="pink_triangle" from="215,215" to="415,315" distance="559" time="+193"/>
+    <chat message="kreis diagonal oben rechts" time="+206"/>
+    <annotation id="annotation48">
+      <spelling id="spelling48"><word id="word179">kreis</word><correction id="correction179"
+          >Kreis</correction>, diagonal oben rechts<forms><form shape="circle"
+        >kreis</form></forms></spelling>
+      <sentence no="1" value="fragment without verb" type="instruction" lok="spatial+destination"
+        id="sentence63"> kreis diagonal oben rechts<parsetree id="parsetree63" tiefe="1"
+          verzweigung="6.0" hoeflichkeit="2"><S><NN lemma="Kreis"
+              >Kreis</NN><PUNCTUATION_COMMA>,</PUNCTUATION_COMMA><ADV lemma="diagonal"
+              >diagonal</ADV><ADV lemma="oben">oben</ADV><ADV lemma="rechts"
+              >rechts</ADV><PUNCTUATION_STOP>.</PUNCTUATION_STOP></S></parsetree></sentence>
+    </annotation>
+    <move shape="pink_circle" from="-1,0" to="215,215" distance="300" time="+212"/>
+    <move shape="pink_circle" from="215,215" to="515,215" distance="0" time="+215"/>
+    <endRound timeEnd="16.11.11 12:05"/>
+    <state>
+      <shape id="pink_circle" pos="515,215" target="515,215"/>
+      <shape id="black_circle" pos="115,415" target="115,415"/>
+      <shape id="black_ellipse" pos="15,333" target="15,333"/>
+      <shape id="pink_triangle" pos="415,315" target="415,315"/>
+      <shape id="green_ellipse" pos="415,533" target="415,533"/>
+    </state>
+  </round>
+</match>
