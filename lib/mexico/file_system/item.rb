@@ -41,6 +41,23 @@ class Mexico::FileSystem::Item
   # collection of Mexico::FileSystem::Data
   xml_accessor :data, :as => Mexico::FileSystem::Data, :from => "Data"
 
+  attr_accessor :document
+
+
+  # POSEIdON-based RDF augmentation
+  include Poseidon
+  self_uri %q(http://cats.sfb673.org/Item)
+  instance_uri_scheme %q(#{document.self_uri}##{identifier})
+  rdf_property :identifier, %q(http://cats.sfb673.org/identifier)
+  rdf_property :name, %q(http://cats.sfb673.org/name)
+
+  rdf_include :layer_links, %q(http://cats.sfb673.org/hasLayerLink)
+  rdf_include :item_links, %q(http://cats.sfb673.org/hasItemLink)
+  rdf_include :point_links, %q(http://cats.sfb673.org/hasPointLink)
+  rdf_include :interval_links, %q(http://cats.sfb673.org/hasIntervalLink)
+  rdf_include :data, %q(http://cats.sfb673.org/hasData)
+
+
   def initialize(args={})
     args.each do |k,v|
       if self.respond_to?("#{k}=")

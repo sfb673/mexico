@@ -26,6 +26,14 @@ class ::Mexico::FileSystem::Layer
 
   attr_accessor :document
 
+  # POSEIdON-based RDF augmentation
+  include Poseidon
+  self_uri %q(http://cats.sfb673.org/Layer)
+  instance_uri_scheme %q(#{document.self_uri}##{identifier})
+  rdf_property :identifier, %q(http://cats.sfb673.org/identifier)
+  rdf_property :name, %q(http://cats.sfb673.org/name)
+
+
   # data type
   # content structure
 

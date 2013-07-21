@@ -16,6 +16,8 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
+require 'poseidon'
+
 # An URL object stands for a resource representation at the given location.
 class Mexico::FileSystem::URL
   
@@ -31,6 +33,14 @@ class Mexico::FileSystem::URL
 
   xml_accessor :href, :from => "@href"
 
+  # POSEIdON-based RDF augmentation
+  include Poseidon
+  self_uri %q(http://cats.sfb673.org/URL)
+  instance_uri_scheme %q(http://phoibos.sfb673.org/corpora/#{corpus.identifier}/urls/#{identifier})
+  rdf_property :identifier, %q(http://cats.sfb673.org/identifier)
+  rdf_property :name, %q(http://cats.sfb673.org/name)
+  rdf_property :description, %q(http://cats.sfb673.org/description)
+  rdf_property :href, %q(http://cats.sfb673.org/href)
 
   def initialize(opts={})
     # @corpus = corpus

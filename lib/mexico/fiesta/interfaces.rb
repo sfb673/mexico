@@ -25,3 +25,4 @@ module Mexico::Fiesta::Interfaces
 end
 
 require 'mexico/fiesta/interfaces/b6_chat_game_interface.rb'
+require 'mexico/fiesta/interfaces/dot_interface.rb'

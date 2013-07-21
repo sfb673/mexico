@@ -20,10 +20,14 @@
 # A central Corpus definition file in the top-level folder contains an
 # XML representation of the corpus structure, and all actual resources are found
 # as files on a file system reachable from the top-level folder.
+
+require 'poseidon'
+
 class Mexico::FileSystem::Corpus
   
   ### include Mexico::FileSystem::FileSystemUtils
-  
+
+
   include Mexico::Core::CorpusCore
   
   attr_accessor :base_path
@@ -52,7 +56,20 @@ class Mexico::FileSystem::Corpus
 
   # collection of ::Mexico::FileSystem::Resource
   xml_accessor :resources,         :as => [::Mexico::FileSystem::Resource],        :from => "Resource",        :in => "Resources"
-  
+
+
+  # POSEIdON-based RDF augmentation
+  include Poseidon
+  self_uri %q(http://cats.sfb673.org/Corpus)
+  instance_uri_scheme %q(http://phoibos.sfb673.org/corpora/#{identifier})
+  rdf_property :identifier, %q(http://cats.sfb673.org/identifier)
+  rdf_property :name, %q(http://cats.sfb673.org/name)
+  rdf_property :description, %q(http://cats.sfb673.org/description)
+  rdf_include :designs, %q(http://cats.sfb673.org/hasDesign)
+  rdf_include :trials, %q(http://cats.sfb673.org/hasTrial)
+  rdf_include :resources, %q(http://cats.sfb673.org/hasResource)
+
+
   public
   
   # corpus_file  : the XML file

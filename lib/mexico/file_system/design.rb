@@ -16,6 +16,8 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
+require 'poseidon'
+
 class Mexico::FileSystem::Design
 
   include Mexico::FileSystem::BoundToCorpus
@@ -36,6 +38,18 @@ class Mexico::FileSystem::Design
   # collection of ::Mexico::FileSystem::DesignComponent
   xml_accessor :design_components, :as => [::Mexico::FileSystem::DesignComponent], :from => "DesignComponent" #, :in => "Designs"
 
+  # POSEIdON-based RDF augmentation
+  include Poseidon
+
+  self_uri %q(http://cats.sfb673.org/Design)
+  instance_uri_scheme %q(http://phoibos.sfb673.org/corpora/#{corpus.identifier}/designs/#{identifier})
+
+  rdf_property :identifier, %q(http://cats.sfb673.org/identifier)
+  rdf_property :name, %q(http://cats.sfb673.org/name)
+  rdf_property :description, %q(http://cats.sfb673.org/description)
+
+  rdf_include :design_components, %q(http://cats.sfb673.org/hasDesignComponent)
+
   # Creates a new design object.
   # @option opts [String] :identifier The identifier of the new design (required).
   # @option opts [String] :name The name of the new design. (required).
@@ -52,4 +66,10 @@ class Mexico::FileSystem::Design
     @corpus.trials.select{ |i| i.design === self }
   end
 
+
+  def after_parse
+    design_components.each do |dc|
+      dc.design = self
+    end
+  end
 end
