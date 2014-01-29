@@ -23,7 +23,7 @@ class Mexico::FileSystem::Data
   xml_name 'D'
 
   xml_accessor :string_value, :from => "String" # , :to_xml => proc{|val| (@type=='string' ? val : '')}
-      xml_accessor :int_value, :as => Integer, :from => "Int"
+  xml_accessor :int_value, :as => Integer, :from => "Int"
   xml_accessor :float_value, :as => Float, :from => "Float"
   xml_accessor :map, :as => Mexico::FileSystem::FiestaMap, :from => "Map"
   #xml_accessor :list, :as => Mexico::FileSystem::FiestaList, :from => "List"

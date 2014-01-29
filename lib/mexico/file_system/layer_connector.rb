@@ -32,6 +32,12 @@ class Mexico::FileSystem::LayerConnector
 
   attr_accessor :document
 
+
+  def initialize(new_source, new_target)
+    self.source= new_source
+    self.target= new_target
+  end
+
   def source
     @source
   end
