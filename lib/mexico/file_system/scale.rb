@@ -72,6 +72,8 @@ class Mexico::FileSystem::Scale
     ::Mexico::FileSystem::FiestaDocument.store(self.identifier, self)
   end
 
+  # Creates an RDF representation in Turtle notation for this class.
+  # @return [String] An RDF representation in Turtle notation for this class.
   def self.to_turtle
     rdf_writer = RDF::Turtle::Writer
     return rdf_writer.buffer(:base_uri => 'http://phoibos.sfb673.org/',
@@ -89,6 +91,8 @@ class Mexico::FileSystem::Scale
     end
   end
 
+  # Creates an RDF representation in Turtle notation for this object.
+  # @return [String] An RDF representation in Turtle notation for this object.
   def to_turtle
     rdf_writer = RDF::Turtle::Writer
     return rdf_writer.buffer(:base_uri => 'http://phoibos.sfb673.org/',
