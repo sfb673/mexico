@@ -131,6 +131,8 @@ class Mexico::FileSystem::FiestaDocument
     self.from_xml(File.open(filename))
   end
 
+  # Creates a new, empty instance of a FiESTA document.
+  # @todo Check if all standard or default values are set correctly.
   def initialize
     super
     @scales = []
@@ -140,6 +142,9 @@ class Mexico::FileSystem::FiestaDocument
     link_document
   end
 
+  # Adds a standard timeline scale to the document.
+  # @param unit [String] The unit to be used for this timeline.
+  # @return [Scale] The created timeline scale object.
   def add_standard_timeline(unit="ms")
     @scales << Mexico::FileSystem::Scale.new(identifier: 'timeline01', name: 'Timeline', unit: unit)
     @scales.last.document = self
@@ -154,6 +159,7 @@ class Mexico::FileSystem::FiestaDocument
     # then clear cache
     @@CACHE.clear
   end
+
 
   def link_document
     # process xml ids
