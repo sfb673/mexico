@@ -1,5 +1,5 @@
 # This file is part of the MExiCo gem.
-# Copyright (c) 2012, 2013 Peter Menke, SFB 673, Universität Bielefeld
+# Copyright (c) 2012-2014 Peter Menke, SFB 673, Universität Bielefeld
 # http://www.sfb673.org
 #
 # MExiCo is free software: you can redistribute it and/or modify
@@ -146,7 +146,7 @@ class Mexico::FileSystem::FiestaDocument
   # @param unit [String] The unit to be used for this timeline.
   # @return [Scale] The created timeline scale object.
   def add_standard_timeline(unit="ms")
-    @scales << Mexico::FileSystem::Scale.new(identifier: 'timeline01', name: 'Timeline', unit: unit)
+    @scales << Mexico::FileSystem::Scale.new(identifier: 'timeline01', name: 'Timeline', unit: unit, dimension: Mexico::FileSystem::Scale::DIM_TIME)
     @scales.last.document = self
     @scales.last
   end
