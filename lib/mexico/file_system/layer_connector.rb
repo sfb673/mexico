@@ -1,6 +1,6 @@
 # encoding: utf-8
 # This file is part of the MExiCo gem.
-# Copyright (c) 2012, 2013 Peter Menke, SFB 673, Universität Bielefeld
+# Copyright (c) 2012-2014 Peter Menke, SFB 673, Universität Bielefeld
 # http://www.sfb673.org
 #
 # MExiCo is free software: you can redistribute it and/or modify
@@ -33,9 +33,14 @@ class Mexico::FileSystem::LayerConnector
   attr_accessor :document
 
 
-  def initialize(new_source, new_target)
+  def initialize(new_source, new_target, args={})
     self.source= new_source
     self.target= new_target
+    args.each do |k,v|
+      if self.respond_to?("#{k}=")
+        send("#{k}=", v)
+      end
+    end
   end
 
   # Retrieves the source layer for this layer connector.

@@ -16,16 +16,13 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
-# The Design core module contains methods for implementations of the
-# design class that are independent of the implementation.
-module Mexico::Core::DesignCore
-  
-  # simple test method that can be called to see whether the module
-  # was included successfully
-  def core_included?
-    true
-  end  
-  
+# This class provides a corpus representation that is backed up by the filesystem.
+# A central Corpus definition file in the top-level folder contains an
+# XML representation of the corpus structure, and all actual resources are found
+# as files on a file system reachable from the top-level folder.
+
+class NotYetImplementedError < StandardError
+
+
+
 end
-
-

@@ -1,5 +1,5 @@
 # This file is part of the MExiCo gem.
-# Copyright (c) 2012, 2013 Peter Menke, SFB 673, Universität Bielefeld
+# Copyright (c) 2012-2014 Peter Menke, SFB 673, Universität Bielefeld
 # http://www.sfb673.org
 #
 # MExiCo is free software: you can redistribute it and/or modify
@@ -26,7 +26,17 @@ class Mexico::Fiesta::Interfaces::ElanInterface
   include Singleton
   include Mexico::FileSystem
 
+  def self.import(io=$stdin, params = {})
+    puts 'class method import'
+    instance.import(io, params)
+  end
+
+  def self.export(doc, io=$stdout, params = {})
+    instance.export(doc, io, params)
+  end
+
   def import(io=$stdin, params = {})
+    puts 'instance method import'
     encoding = params.has_key?(:encoding) ? params[:encoding] : 'UTF-8'
     xmldoc = ::Nokogiri::XML(io)
 
@@ -47,14 +57,37 @@ class Mexico::Fiesta::Interfaces::ElanInterface
     layerHash = Hash.new
 
     xmldoc.xpath("//TIER").each do |t|
+
       # @todo (DEFAULT_LOCALE="en") (LINGUISTIC_TYPE_REF="default-lt")
       tierID = t["TIER_ID"]
+      puts 'Read layers, %s' % tierID
 
       layer = Mexico::FileSystem::Layer.new(identifier: tierID,
-                                            name: tierID,
-                                            document: document)
+                                   name: tierID,
+                                   document: document)
       #layer.name = tierID
       #layer.id = ToE::Util::to_xml_id(tierID)
+
+      document.layers << layer
+
+      puts t.attributes
+      puts t.attributes.has_key?('PARENT_REF')
+      if t.attributes.has_key?('PARENT_REF')
+        # puts "TATT: %s" % t['PARENT_REF']
+        document.layers.each do |l|
+          puts "LAYER %s %s" % [l.identifier, l.name]
+        end
+        parent_layer = document.get_layer_by_id(t['PARENT_REF'])
+        puts parent_layer
+        if parent_layer
+          layer_connector = Mexico::FileSystem::LayerConnector.new parent_layer, layer, {
+              identifier: "#{parent_layer.identifier}_TO_#{layer.identifier}",
+              role: 'PARENT_CHILD',
+              document: document
+            }
+          document.add_layer_connector(layer_connector)
+        end
+      end
 
       layerHash[tierID] = layer
       t.xpath("./ANNOTATION").each do |annoContainer|
@@ -66,34 +99,34 @@ class Mexico::Fiesta::Interfaces::ElanInterface
 
             # puts anno.xpath("./ANNOTATION_VALUE/text()").first
             if annoVal!=nil && annoVal.strip != ""
-              i.interval_links << Mexico::FileSystem::IntervalLink.new(identifier: "#{i.identifier}-int",
+              i.add_interval_link Mexico::FileSystem::IntervalLink.new(identifier: "#{i.identifier}-int",
                                                     min: timeslots[anno["TIME_SLOT_REF1"]].to_f,
                                                     max: timeslots[anno["TIME_SLOT_REF2"]].to_f,
-                                                    target: timeline.identifier)
+                                                    target_object: timeline)
             end
           end
           if anno.name == "REF_ANNOTATION"
-            i.item_links << Mexico::FileSystem::ItemLink.new(identifier: "#{i.identifier}-itm",
-                                        target: anno["ANNOTATION_REF"]) #document.items.first{|x| x.identifier == anno["ANNOTATION_REF"]})
+            i.add_item_link Mexico::FileSystem::ItemLink.new(identifier: "#{i.identifier}-itm",
+                                        target_object: document.items.first{|x| x.identifier == anno["ANNOTATION_REF"]},
+                                        role: Mexico::FileSystem::ItemLink::ROLE_PARENT) #document.items.first{|x| x.identifier == anno["ANNOTATION_REF"]})
           end
-          i.layer_links << Mexico::FileSystem::LayerLink.new(identifier: "#{i.identifier}-lay",
-                                                             target: layer.identifier)
+          i.add_layer_link Mexico::FileSystem::LayerLink.new(identifier: "#{i.identifier}-lay",
+                                                             target_object: layer)
           i.data = Mexico::FileSystem::Data.new(string_value: annoVal)
           document.items << i
         end
       end
-      document.layers << layer
 
-      if t["PARENT_REF"]
-        parent = layerHash[t["PARENT_REF"]]
-        if parent
-          document.layer_connectors << Mexico::FileSystem::LayerConnector.new(parent, layer)
-          # structure.connect(parent, layer)
-        end
-      end
+      #if t["PARENT_REF"]
+      #  parent = layerHash[t["PARENT_REF"]]
+      #  if parent
+      #    document.layer_connectors << Mexico::FileSystem::LayerConnector.new(parent, layer)
+      #    # structure.connect(parent, layer)
+      #  end
+      #end
 
     end
-
+    puts 'instance method over'
     document
   end
 

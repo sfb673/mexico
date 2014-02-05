@@ -1,5 +1,5 @@
 # This file is part of the MExiCo gem.
-# Copyright (c) 2012, 2013 Peter Menke, SFB 673, Universität Bielefeld
+# Copyright (c) 2012-2014 Peter Menke, SFB 673, Universität Bielefeld
 # http://www.sfb673.org
 #
 # MExiCo is free software: you can redistribute it and/or modify
@@ -18,6 +18,18 @@
 
 # A link from an item to a layer.
 class Mexico::FileSystem::ItemLink
+
+  ROLE_PARENT = 'parent'
+  ROLE_CHILD = 'child'
+  ROLE_PREDECESSOR = 'predecessor'
+  ROLE_SUCCESSOR = 'successor'
+
+  INVERSE_ROLES = {
+      ROLE_PARENT => ROLE_CHILD,
+      ROLE_CHILD => ROLE_PARENT,
+      ROLE_PREDECESSOR => ROLE_SUCCESSOR,
+      ROLE_SUCCESSOR => ROLE_PREDECESSOR
+  }
 
   include ::ROXML
   xml_name 'ItemLink'
@@ -80,5 +92,7 @@ class Mexico::FileSystem::ItemLink
     #   ::Mexico::FileSystem::FiestaDocument.watch(target, item, :target_object=)
     # end
   end
+
+  alias_method :target_item, :target_object
 
 end

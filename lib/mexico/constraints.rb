@@ -16,16 +16,12 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
-# The Design core module contains methods for implementations of the
-# design class that are independent of the implementation.
-module Mexico::Core::DesignCore
-  
-  # simple test method that can be called to see whether the module
-  # was included successfully
-  def core_included?
-    true
-  end  
-  
+# This module aggregates all constant (type-level) objects that
+# are needed for corpus management.
+
+module Mexico::Constraints
+
 end
 
-
+require 'mexico/constraints/constraint.rb'
+require 'mexico/constraints/fiesta_constraints.rb'

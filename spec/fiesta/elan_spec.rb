@@ -1,5 +1,5 @@
 # This file is part of the MExiCo gem.
-# Copyright (c) 2012, 2013 Peter Menke, SFB 673, Universität Bielefeld
+# Copyright (c) 2012-2014 Peter Menke, SFB 673, Universität Bielefeld
 # http://www.sfb673.org
 #
 # MExiCo is free software: you can redistribute it and/or modify
@@ -31,7 +31,7 @@ describe Mexico::Fiesta::Interfaces::ElanInterface do
         it 'reads data from a test file' do
           path = File.join @assetspath, 'fiesta', 'elan'
           filename = File.join path, 'ElanFileFormat.eaf'
-          @fdoc = ::Mexico::Fiesta::Interfaces::ElanInterface.instance.import(File.read(filename))
+          @fdoc = ::Mexico::Fiesta::Interfaces::ElanInterface.import(File.open(filename))
           File.open(File.join(path,'test.out.fst'),'w') do |f|
             f << @fdoc.to_xml
           end
