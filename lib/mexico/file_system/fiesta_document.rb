@@ -23,12 +23,15 @@
 
 require 'poseidon'
 
-# ToE Document
+# FiESTA Document
 class Mexico::FileSystem::FiestaDocument
 
   # This class stands for an XML document in the Toe format.
 
   include ::ROXML
+
+  extend ::Mexico::Util::FancyContainer
+
   xml_name 'FiestaDocument'
 
   # identifier
@@ -41,18 +44,23 @@ class Mexico::FileSystem::FiestaDocument
   xml_accessor :head,       :from => "Description", :as => [Mexico::FileSystem::Head]
 
   # collection of Mexico::FileSystem::Scale
-  xml_accessor :scales, :as => [::Mexico::FileSystem::Scale],     :from => "Scale",     :in => "ScaleSet"
+  xml_accessor :scales_container, :as => [::Mexico::FileSystem::Scale],     :from => "Scale",     :in => "ScaleSet"
 
   # collection of Mexico::FileSystem::Layer
-  xml_accessor :layers, :as => [::Mexico::FileSystem::Layer],     :from => "Layer",     :in => "LayerSet"
+  xml_accessor :layers_container, :as => [::Mexico::FileSystem::Layer],     :from => "Layer",     :in => "LayerSet"
 
   # collection of Mexico::FileSystem::Layer
   xml_accessor :layer_connectors, :as => [::Mexico::FileSystem::LayerConnector], :from => "LayerConnector", :in => "LayerSet"
 
   # collection of Mexico::FileSystem::Item
-  xml_accessor :items, :as => [::Mexico::FileSystem::Item],     :from => "Item",     :in => "ItemSet"
+  xml_accessor :items_container, :as => [::Mexico::FileSystem::Item],     :from => "Item",     :in => "ItemSet"
 
   attr_accessor :resource
+
+  add_fancy_container :scales
+  add_fancy_container :layers
+  add_fancy_container :items
+
 
   # POSEIdON-based RDF augmentation
   include Poseidon
@@ -87,11 +95,7 @@ class Mexico::FileSystem::FiestaDocument
   def self.store(xml_id, ruby_object)
     @@CACHE = {} unless defined?(@@CACHE)
     @@CACHE["#{Thread.current.__id__}.#{xml_id}"] = ruby_object
-    #puts "Stored '%s' at '%s', cache size is now %i" % [ruby_object, "#{Thread.current.__id__}.#{xml_id}", @@CACHE.size]
     ::Mexico::FileSystem::FiestaDocument.check_watch(xml_id, ruby_object)
-    #@@CACHE.each_pair do |i,j|
-    #  puts "  %32s %32s %32s" % [i, j.class.name, j.__id__]
-    #end
   end
 
   # Put an xml id into the watch list, along with an object and a method
@@ -99,7 +103,6 @@ class Mexico::FileSystem::FiestaDocument
     @@WATCHLIST = {} unless defined?(@@WATCHLIST)
     @@WATCHLIST["#{Thread.current.__id__}.#{needed_id}"] = [] unless @@WATCHLIST.has_key?("#{Thread.current.__id__}.#{needed_id}")
     @@WATCHLIST["#{Thread.current.__id__}.#{needed_id}"] << [object, method]
-    # puts "Watching out for ID %s, to call %s object's method %s" % [needed_id, object.to_s, method.to_s]
   end
 
   # Checks whether the given id/object pair is watched, and takes appropriate action
@@ -110,12 +113,7 @@ class Mexico::FileSystem::FiestaDocument
   def self.check_watch(needed_id, needed_object)
     if defined?(@@WATCHLIST)
       if @@WATCHLIST.has_key?("#{Thread.current.__id__}.#{needed_id}")
-        # puts ""
-        # puts "   Watchlist has key %s" % needed_id
-        # puts "   iterate %i elements." % @@WATCHLIST["#{Thread.current.__id__}.#{needed_id}"].size
         @@WATCHLIST["#{Thread.current.__id__}.#{needed_id}"].each do |entry|
-          # puts "      entry: %s :: %s,   %s :: %s, %s" % [entry[0].class.name, entry[0].to_s, entry[1].class.name, entry[1].to_s, entry.__id__]
-          # puts "      calling %s on %s object with value %s" % [ entry[1].to_s, entry[0].identifier, needed_object.identifier ]
           entry[0].send(entry[1], needed_object)
         end
         @@WATCHLIST.delete("#{Thread.current.__id__}.#{needed_id}")
@@ -127,7 +125,6 @@ class Mexico::FileSystem::FiestaDocument
   # @param (String) filename The path that points to the file to be opened.
   # @return (Mexico::FileSystem::FiestaDocument) a toe document with that file's contents.
   def self.open(filename)
-    #puts "opening %s" % filename
     self.from_xml(File.open(filename))
   end
 
@@ -135,10 +132,10 @@ class Mexico::FileSystem::FiestaDocument
   # @todo Check if all standard or default values are set correctly.
   def initialize
     super
-    @scales = []
-    @layers = []
+    @scales_container = []
+    @layers_container = []
     @layer_connectors = []
-    @items  = []
+    @items_container  = []
     link_document
   end
 
@@ -146,9 +143,23 @@ class Mexico::FileSystem::FiestaDocument
   # @param unit [String] The unit to be used for this timeline.
   # @return [Scale] The created timeline scale object.
   def add_standard_timeline(unit="ms")
-    @scales << Mexico::FileSystem::Scale.new(identifier: 'timeline01', name: 'Timeline', unit: unit, dimension: Mexico::FileSystem::Scale::DIM_TIME)
-    @scales.last.document = self
-    @scales.last
+    @scales_container << Mexico::FileSystem::Scale.new(identifier: 'timeline01', name: 'Timeline', unit: unit, dimension: Mexico::FileSystem::Scale::DIM_TIME)
+    @scales_container.last.document = self
+    @scales_container.last
+  end
+
+  def add_layer(args)
+    if args.is_a?(Hash)
+      new_layer = Mexico::FileSystem::Layer.new(args.merge({document: self}))
+      @layers_container << new_layer
+      return new_layer
+    end
+    if args.is_a?(Mexico::FileSystem::Layer)
+      @layers_container << args
+      return args
+    end
+    # @TODO catch error if parameter has wrong object type
+    return nil
   end
 
   # This method attempts to link objects from other locations of the XML/object tree
@@ -159,7 +170,6 @@ class Mexico::FileSystem::FiestaDocument
     # then clear cache
     @@CACHE.clear
   end
-
 
   def link_document
     # process xml ids
@@ -187,21 +197,25 @@ class Mexico::FileSystem::FiestaDocument
   end
 
   def add_item(item=nil)
-    new_item = item.nil? ? Mexico::FileSystem::Item.new(identifier: "item#{rand(2**16)}") : item
-    puts new_item
-    # puts init_block
-    # return
+    if item.nil?
+      new_item = Mexico::FileSystem::Item.new(identifier: "item#{rand(2**16)}")
+      # @TODO check if that random ID is still available!
+    end
+    if item.is_a?(Hash)
+      new_item = Mexico::FileSystem::Item.new(item.merge({document: self}))
+    end
+    if item.is_a?(Mexico::FileSystem::Item)
+      new_item = item
+    end
+    # @TODO catch error if parameter has wrong object type
     yield new_item
     # check if item is not in the array already
-    @items << new_item
+    @items_container << new_item
     new_item
   end
 
   def add_layer_connector(layer_connector)
-    puts "adding a layer connector #{layer_connector} to the doc"
-    puts @layer_connectors.size
     @layer_connectors << layer_connector
-    puts @layer_connectors.size
   end
 
   def get_layer_by_id(id)
@@ -225,7 +239,6 @@ class Mexico::FileSystem::FiestaDocument
   def layers_form_a_forest?
     # check whether all layers have at most one parent layer
     self.layers.each do |layer|
-      puts "Layer %s: %i, %s" % [layer.identifier, layer.predecessor_layers.size, layer.predecessor_layers.to_s]
       return false if layer.predecessor_layers.size > 1
     end
     return true
