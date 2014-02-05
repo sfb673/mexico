@@ -28,9 +28,9 @@ module Mexico
 end
 
 require "mexico/core.rb"
+require "mexico/util.rb"
 require "mexico/constraints.rb"
 require "mexico/file_system.rb"
 require "mexico/constants.rb"
 require "mexico/fiesta.rb"
-require "mexico/util.rb"
 require 'mexico/cmd.rb'
