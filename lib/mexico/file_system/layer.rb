@@ -45,6 +45,10 @@ class ::Mexico::FileSystem::Layer
     end
   end
 
+  def items
+    @document.items.select{|i| i.layers.include?(self) }
+  end
+
   # overrides method in ROXML
   # callback after xml parsing process, to store this element in the
   # document cache.
@@ -62,6 +66,23 @@ class ::Mexico::FileSystem::Layer
   # is the source, and the result layer is the target.
   def successor_layers
     document.layer_connectors.select{|c| c.source==self}.collect{|c| [c.target, c.role]}
+  end
+
+  def items_form_a_forest?
+
+    # I need precise semantics what kinds of item links
+    # are supposed to model an actual parent-child-relationship.
+    self.items.each do |item|
+      puts "sources size for items %s: %i" % [item.identifier, item.sources.size]
+      return false if item.sources.size > 1
+    end
+    return true
+  end
+
+  def items_form_an_edgeless_graph?
+    self.items.each do |item|
+      return false if item.item_links.size > 1
+    end
   end
 
 

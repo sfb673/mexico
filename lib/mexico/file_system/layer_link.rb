@@ -60,7 +60,7 @@ class Mexico::FileSystem::LayerLink
   # @return (void)
   def target_object=(new_target)
     @target_object=new_target
-    @target=target_object.identifier
+    @target=@target_object.identifier
   end
 
   # This method attempts to link objects from other locations of the XML/object tree
@@ -69,5 +69,7 @@ class Mexico::FileSystem::LayerLink
   def after_parse
 
   end
+
+  alias_method :layer, :target_object
 
 end

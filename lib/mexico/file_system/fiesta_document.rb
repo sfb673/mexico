@@ -185,10 +185,144 @@ class Mexico::FileSystem::FiestaDocument
       end
     end
   end
-  def add_item(item)
-    yield(item)
+
+  def add_item(item=nil)
+    new_item = item.nil? ? Mexico::FileSystem::Item.new(identifier: "item#{rand(2**16)}") : item
+    puts new_item
+    # puts init_block
+    # return
+    yield new_item
     # check if item is not in the array already
-    @items << item
+    @items << new_item
+    new_item
+  end
+
+  def add_layer_connector(layer_connector)
+    puts "adding a layer connector #{layer_connector} to the doc"
+    puts @layer_connectors.size
+    @layer_connectors << layer_connector
+    puts @layer_connectors.size
+  end
+
+  def get_layer_by_id(id)
+    matches = layers.select{|l| l.identifier == id}
+    return matches[0] if matches.size>0
+    return nil
+  end
+
+  def layers_form_a_graph?
+    true
+  end
+
+  def layers_form_a_dag?
+    raise Mexico::NotYetImplementedError.new('This method has not been implemented yet.')
+  end
+
+  def layers_form_a_cdag?
+    raise Mexico::NotYetImplementedError.new('This method has not been implemented yet.')
+  end
+
+  def layers_form_a_forest?
+    # check whether all layers have at most one parent layer
+    self.layers.each do |layer|
+      puts "Layer %s: %i, %s" % [layer.identifier, layer.predecessor_layers.size, layer.predecessor_layers.to_s]
+      return false if layer.predecessor_layers.size > 1
+    end
+    return true
+  end
+
+  def layers_form_a_tree?
+    # check whether all layers but one have exactly one parent layer
+    other_than_ones = []
+    self.layers.each do |layer|
+      s = layer.predecessor_layers.size
+      other_than_ones << s if s != 1
+    end
+    true if s.size == 1 && s.first==0
+  end
+
+  def layers_form_an_edgeless_graph?
+    @layer_connectors.empty?
+  end
+
+  def layers_form_an_empty_graph?
+   layers.empty?
+  end
+
+  def inter_layer_graph(layer1, layer2)
+    # 0: source items, 1: target items, 2: links
+    result_graph = {
+        sources:    Set.new,
+        sinks:      Set.new,
+        links:      Set.new,
+        source_map: Hash.new,
+        sink_map:   Hash.new
+    }
+
+    result_graph[:sources].merge layer1.items
+    result_graph[:sinks].merge layer2.items
+
+    links = result_graph[:sources].collect{|i| i.item_links }.flatten
+    links = links.select{|l| l.target_object.layers.include?(layer2) }
+    result_graph[:links] = links
+
+    # fill the source and target maps with data
+    result_graph[:sources].each do |node|
+      result_graph[:source_map][node] = Set.new
+    end
+    result_graph[:sinks].each do |node|
+      result_graph[:sink_map][node] = Set.new
+    end
+
+    result_graph[:links].each do |link|
+      source = link.item
+      sink = link.target_item
+      result_graph[:source_map][source] << sink
+      result_graph[:sink_map][sink] << source
+    end
+
+    result_graph
+  end
+
+  def inter_layer_graph_list
+    # collect all parent child pairs of layers
+    # calculate layer graphs for all of them
+    ilg_list = Hash.new
+    layers.each do |parent_layer|
+      parent_layer.successor_layers.each do |child_layer|
+        ilg_list[ [parent_layer, child_layer[0]] ] = inter_layer_graph(parent_layer, child_layer[0])
+      end
+    end
+    ilg_list
+  end
+
+  def source_cardinality_for_layer(layer1, layer2)
+    inter_layer_graph_list[[layer1,layer2]][:sink_map].values.collect{|m| m.size}.max
+  end
+
+  def sink_cardinality_for_layer(layer1, layer2)
+    inter_layer_graph_list[[layer1,layer2]][:source_map].values.collect{|m| m.size}.max
+  end
+
+
+  # Cardinality of source elements: how many links are connected to the source nodes?
+  def inter_layer_source_cardinality
+    card = 0
+    inter_layer_graph_list.each do |k,v|
+      graph_card = v[:sink_map].values.collect{|m| m.size}.max
+      card = [card,graph_card].max
+    end
+    card
+  end
+
+  # Cardinality of source elements: how many links are connected to the source nodes?
+  def inter_layer_sink_cardinality
+    card = 0
+    inter_layer_graph_list.each do |k,v|
+      graph_card = v[:source_map].values.collect{|m| m.size}.max
+      card = [card,graph_card].max
+    end
+    card
   end
 
 end

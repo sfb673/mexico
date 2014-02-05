@@ -33,9 +33,14 @@ class Mexico::FileSystem::LayerConnector
   attr_accessor :document
 
 
-  def initialize(new_source, new_target)
+  def initialize(new_source, new_target, args={})
     self.source= new_source
     self.target= new_target
+    args.each do |k,v|
+      if self.respond_to?("#{k}=")
+        send("#{k}=", v)
+      end
+    end
   end
 
   # Retrieves the source layer for this layer connector.

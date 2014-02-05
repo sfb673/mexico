@@ -53,28 +53,44 @@ class Mexico::FileSystem::Data
 
 
   def map_value
-    return nil unless @type=="map"
-    @map_value ||= JSON::load(@string_value)
+    # return nil unless @type=="map"
+    @map # ||= JSON::load(@string_value)
   end
 
   def list_value
-    return nil unless @type=="list"
-    @list_value ||= JSON::load(@string_value)
+    # return nil unless @type=="list"
+    @list # ||= JSON::load(@string_value)
   end
 
   def map_value=(val)
-    # todo eliminate all other value types
+    @string_value = nil
+    @list = nil
     @map = Mexico::FileSystem::FiestaMap.new(val)
   end
 
   def list_value=(val=Array.new)
-    # todo eliminate all other value types
+    @string_value = nil
+    @map = nil
     @list = val
+  end
+
+  def string_value=(new_string)
+    @map = nil
+    @list = nil
+    @string_value = new_string
   end
 
   def to_s
     return string_value unless string_value.nil?
     return @map.to_s unless @map.nil?
+  end
+
+  def is_string?
+    (!string_value.nil? && map_value.nil? && list_value.nil?)
+  end
+
+  def is_map?
+    (string_value.nil? && !map_value.nil? && list_value.nil?)
   end
 
 end
