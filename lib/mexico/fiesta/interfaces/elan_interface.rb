@@ -93,8 +93,8 @@ class Mexico::Fiesta::Interfaces::ElanInterface
       t.xpath("./ANNOTATION").each do |annoContainer|
         annoContainer.xpath("child::*").each do |anno|
           annoVal = anno.xpath("./ANNOTATION_VALUE/text()").first.to_s
-          i = Mexico::FileSystem::Item.new identifier: anno["ANNOTATION_ID"],
-                                           document: document
+          i = document.add_item identifier: anno["ANNOTATION_ID"]
+
           if anno.name == "ALIGNABLE_ANNOTATION"
 
             # puts anno.xpath("./ANNOTATION_VALUE/text()").first
@@ -106,14 +106,19 @@ class Mexico::Fiesta::Interfaces::ElanInterface
             end
           end
           if anno.name == "REF_ANNOTATION"
+
+            puts pp anno
+            puts document.items.collect{|x| x.identifier}.join(', ')
+            puts '-'*80
+
             i.add_item_link Mexico::FileSystem::ItemLink.new(identifier: "#{i.identifier}-itm",
-                                        target_object: document.items.first{|x| x.identifier == anno["ANNOTATION_REF"]},
-                                        role: Mexico::FileSystem::ItemLink::ROLE_PARENT) #document.items.first{|x| x.identifier == anno["ANNOTATION_REF"]})
+                                        target_object: document.items({identifier: anno["ANNOTATION_REF"]}).first,
+                                        role: Mexico::FileSystem::ItemLink::ROLE_PARENT)
           end
           i.add_layer_link Mexico::FileSystem::LayerLink.new(identifier: "#{i.identifier}-lay",
                                                              target_object: layer)
           i.data = Mexico::FileSystem::Data.new(string_value: annoVal)
-          document.items << i
+
         end
       end
 
