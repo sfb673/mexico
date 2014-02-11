@@ -26,4 +26,6 @@ end
 
 require 'mexico/fiesta/interfaces/b6_chat_game_interface.rb'
 require 'mexico/fiesta/interfaces/elan_interface.rb'
+require 'mexico/fiesta/interfaces/short_text_grid_interface.rb'
+require 'mexico/fiesta/interfaces/text_grid_interface.rb'
 # require 'mexico/fiesta/interfaces/dot_interface.rb'
