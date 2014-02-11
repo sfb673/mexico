@@ -1,5 +1,5 @@
 # This file is part of the MExiCo gem.
-# Copyright (c) 2012, 2013 Peter Menke, SFB 673, Universität Bielefeld
+# Copyright (c) 2012-2014 Peter Menke, SFB 673, Universität Bielefeld
 # http://www.sfb673.org
 #
 # MExiCo is free software: you can redistribute it and/or modify
@@ -27,7 +27,7 @@ class Mexico::FileSystem::Item
   # @todo compound links (later)
 
   # collection of Mexico::FileSystem::ItemLink
-  xml_accessor :item_links,     :as => [Mexico::FileSystem::ItemLink],     :from => "ItemLink",     :in => "Links"
+  xml_accessor :explicit_item_links, :as => [Mexico::FileSystem::ItemLink],     :from => "ItemLink",     :in => "Links"
 
   # collection of Mexico::FileSystem::LayerLink
   xml_accessor :layer_links,    :as => [Mexico::FileSystem::LayerLink],    :from => "LayerLink",    :in => "Links"
@@ -43,6 +43,7 @@ class Mexico::FileSystem::Item
 
   attr_accessor :document
 
+  attr_accessor :implicit_item_links
 
   # POSEIdON-based RDF augmentation
   include Poseidon
@@ -57,14 +58,15 @@ class Mexico::FileSystem::Item
   rdf_include :interval_links, %q(http://cats.sfb673.org/hasIntervalLink)
   rdf_include :data, %q(http://cats.sfb673.org/hasData)
 
-
   def initialize(args={})
     args.each do |k,v|
       if self.respond_to?("#{k}=")
         send("#{k}=", v)
       end
     end
-    @item_links = []
+    @explicit_item_links = []
+    @implicit_item_links = []
+    @inverse_linked_items = []
     @layer_links = []
     @point_links = []
     @interval_links = []
@@ -89,6 +91,76 @@ class Mexico::FileSystem::Item
 
     end
 
+  end
+
+  def item_links
+    @explicit_item_links + @implicit_item_links
+  end
+
+  def add_inverse_linked_item(item)
+    @inverse_linked_items << item
+  end
+
+  def add_item_link(new_item_link)
+    # add the item link
+    add_explicit_item_link(new_item_link)
+
+    other_item = new_item_link.target_item
+
+    # add an inverse item link for _every_ item link
+    # this is for retrieving item links from the other direction
+    other_item.add_inverse_linked_item(self)
+
+    # if an inverse relation for the role exists,
+    # puts Mexico::FileSystem::ItemLink::INVERSE_ROLES.has_key?(new_item_link.role)
+    if Mexico::FileSystem::ItemLink::INVERSE_ROLES.has_key?(new_item_link.role)
+      # add an implicit link for this inverse relation
+      # puts new_item_link.target_item
+
+      other_item.add_implicit_item_link Mexico::FileSystem::ImplicitItemLink.new(
+                                            role: Mexico::FileSystem::ItemLink::INVERSE_ROLES[new_item_link.role],
+                                            target_object: self, item: other_item )
+    end
+  end
+
+  def add_explicit_item_link(new_item_link)
+    @explicit_item_links << new_item_link
+  end
+
+  def add_implicit_item_link(new_item_link)
+    @implicit_item_links << new_item_link
+  end
+
+  def add_point_link(new_point_link)
+    @point_links << new_point_link
+  end
+
+
+  def add_interval_link(new_interval_link)
+    @interval_links << new_interval_link
+  end
+
+
+  def add_layer_link(new_layer_link)
+    @layer_links << new_layer_link
+  end
+
+  def layers
+    #puts layer_links.collect{|l| l.target}.join
+    #puts layer_links.collect{|l| l.target.class }.join
+    layer_links.collect{|l| l.layer }
+  end
+
+  # Retrieves all items that act as a source (or predecessor)
+  # in the item link graph.
+  def sources
+    @inverse_linked_items
+  end
+
+  # Retrieves all items that act as a target (or successor)
+  # in the item link graph.
+  def targets
+    item_links.collect{|l| l.target_object }
   end
 
 end

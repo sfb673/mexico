@@ -1,5 +1,5 @@
 # This file is part of the MExiCo gem.
-# Copyright (c) 2012, 2013 Peter Menke, SFB 673, Universität Bielefeld
+# Copyright (c) 2012-2014 Peter Menke, SFB 673, Universität Bielefeld
 # http://www.sfb673.org
 #
 # MExiCo is free software: you can redistribute it and/or modify
@@ -26,6 +26,10 @@ class Mexico::Fiesta::Interfaces::B6ChatGameInterface
   include Singleton
   include Mexico::FileSystem
 
+
+  # Imports a B6 chat game document by reading contents from the given IO object.
+  # @param io [IO] The IO object to read from.
+  # @return [FiestaDocument] on success, the corresponding FiESTA document.
   def import(io=$stdin)
     fiesta_document = FiestaDocument.new
     f = fiesta_document
@@ -164,10 +168,18 @@ class Mexico::Fiesta::Interfaces::B6ChatGameInterface
     return fiesta_document
   end
 
+  # Attempts to export the given FiESTA document to the B6 chat game format.
+  # Currently, this does not work since the B6 format is too specialised.
   def export(doc, io=$stdout)
 
   end
 
+  # A recursive method that converts phrase structures with variable depth into a linked FiESTA annotation structure.
+  # @param fdoc        [FiestaDocument] The FiESTA document to which all items shall be added.
+  # @param parent_item [Item]           The parent item object to which children shall be added.
+  # @param layer       [Layer]          The FiESTA layer that shall contain all annotations.
+  # @param node        [Node]           The XML node that contains the phrase structures to be parsed.
+  # @return nil
   def convert_phrases(fdoc, parent_item, layer, node)
 
     k = 1

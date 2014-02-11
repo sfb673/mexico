@@ -1,6 +1,6 @@
 # encoding: utf-8
 # This file is part of the MExiCo gem.
-# Copyright (c) 2012, 2013 Peter Menke, SFB 673, Universität Bielefeld
+# Copyright (c) 2012-2014 Peter Menke, SFB 673, Universität Bielefeld
 # http://www.sfb673.org
 #
 # MExiCo is free software: you can redistribute it and/or modify
@@ -32,21 +32,42 @@ class Mexico::FileSystem::LayerConnector
 
   attr_accessor :document
 
+
+  def initialize(new_source, new_target, args={})
+    self.source= new_source
+    self.target= new_target
+    args.each do |k,v|
+      if self.respond_to?("#{k}=")
+        send("#{k}=", v)
+      end
+    end
+  end
+
+  # Retrieves the source layer for this layer connector.
+  # @return [Layer] The source layer.
   def source
     @source
   end
 
-  def source=(param)
-    @source = param
+  # Sets a new source layer for this layer connector.
+  # @param new_source_layer [Layer] The layer to be set as the new source.
+  # @return [void]
+  def source=(new_source_layer)
+    @source = new_source_layer
     @source_id = @source.identifier
   end
 
+  # Retrieves the target layer for this layer connector.
+  # @return [Layer] The target layer.
   def target
     @target
   end
 
-  def target=(param)
-    @target = param
+  # Sets a new target layer for this layer connector.
+  # @param new_target_layer [Layer] The layer to be set as the new target.
+  # @return [void]
+  def target=(new_target_layer)
+    @target = new_target_layer
     @target_id = @target.identifier
   end
 

@@ -1,5 +1,5 @@
 # This file is part of the MExiCo gem.
-# Copyright (c) 2012, 2013 Peter Menke, SFB 673, Universität Bielefeld
+# Copyright (c) 2012-2014 Peter Menke, SFB 673, Universität Bielefeld
 # http://www.sfb673.org
 #
 # MExiCo is free software: you can redistribute it and/or modify
@@ -18,6 +18,10 @@
 
 # A generic scale.
 class Mexico::FileSystem::Scale
+
+  DIM_TIME = 'time'
+  DIM_SPACE = 'space'
+  DIM_OTHER = 'other'
 
   include ::ROXML
   xml_name 'Scale'
@@ -72,6 +76,8 @@ class Mexico::FileSystem::Scale
     ::Mexico::FileSystem::FiestaDocument.store(self.identifier, self)
   end
 
+  # Creates an RDF representation in Turtle notation for this class.
+  # @return [String] An RDF representation in Turtle notation for this class.
   def self.to_turtle
     rdf_writer = RDF::Turtle::Writer
     return rdf_writer.buffer(:base_uri => 'http://phoibos.sfb673.org/',
@@ -89,6 +95,8 @@ class Mexico::FileSystem::Scale
     end
   end
 
+  # Creates an RDF representation in Turtle notation for this object.
+  # @return [String] An RDF representation in Turtle notation for this object.
   def to_turtle
     rdf_writer = RDF::Turtle::Writer
     return rdf_writer.buffer(:base_uri => 'http://phoibos.sfb673.org/',
@@ -104,6 +112,14 @@ class Mexico::FileSystem::Scale
         writer << statement
       end
     end
+  end
+
+  def is_timeline?
+    self.dimension == DIM_TIME
+  end
+
+  def is_spatial_axis?
+    self.dimension == DIM_SPACE
   end
 
 end
