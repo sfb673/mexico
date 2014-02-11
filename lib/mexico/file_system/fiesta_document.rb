@@ -208,7 +208,9 @@ class Mexico::FileSystem::FiestaDocument
       new_item = item
     end
     # @TODO catch error if parameter has wrong object type
-    yield new_item
+    if block_given?
+      yield new_item
+    end
     # check if item is not in the array already
     @items_container << new_item
     new_item
