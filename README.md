@@ -10,6 +10,15 @@ Its central organising unit is the **Corpus** class which allows researchers to 
 
 ## Last Changes
 
+## 0.0.9
+
+Completed on February 11 2014.
+
++ **#94**: Added implementation of constraints, and specs and assets for testing or debugging constraints.
++ **#150**: Created a first version of the import and export interface.
++ **#152**: Importers for Praat TextGrid and ShortTextGrid formats are now integrated.
++ **#153**: Completed first implementation of ELAN EAF import (still incomplete).
++ **#215**: The library now has flexible accessors for scales, layers, and items.
 
 ### 0.0.8
 
