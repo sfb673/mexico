@@ -63,3 +63,6 @@ doc/
 /vendor/
 mexico.gemspec
 ElanFileFormatComplexInterLayerLinks.pfsx
+assets/fiesta/praat/mexico.ShortTextGrid.out.fst
+assets/fiesta/praat/mexico.ShortTextGrid.out.pp.txt
+assets/fiesta/praat/mexico.TextGrid.out.fst
