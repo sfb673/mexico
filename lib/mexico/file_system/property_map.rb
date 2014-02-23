@@ -1,3 +1,4 @@
+# encoding: utf-8
 # This file is part of the MExiCo gem.
 # Copyright (c) 2012-2014 Peter Menke, SFB 673, Universität Bielefeld
 # http://www.sfb673.org
@@ -21,13 +22,16 @@
 # XML representation of the corpus structure, and all actual resources are found
 # as files on a file system reachable from the top-level folder.
 
-# Add class documentation here
-class Mexico::FileSystem::Head
+class Mexico::FileSystem::PropertyMap
 
   include ::ROXML
-  xml_name 'Head'
+  xml_name 'PropertyMap'
 
-  # many HeadSections with keys
-  xml_accessor :sections, :as => [::Mexico::FileSystem::Section],     :from => "Section"
+  xml_accessor :key, :from => '@key'
+
+  xml_accessor :properties, :as => [::Mexico::FileSystem::Property], :from => "Property"
+  xml_accessor :property_maps, :as => [::Mexico::FileSystem::PropertyMap],  :from => "PropertyMap"
+
+  attr_accessor :values
 
 end
