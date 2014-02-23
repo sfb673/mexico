@@ -1,3 +1,4 @@
+# encoding: utf-8
 # This file is part of the MExiCo gem.
 # Copyright (c) 2012-2014 Peter Menke, SFB 673, Universität Bielefeld
 # http://www.sfb673.org
@@ -21,13 +22,38 @@
 # XML representation of the corpus structure, and all actual resources are found
 # as files on a file system reachable from the top-level folder.
 
-# Add class documentation here
-class Mexico::FileSystem::Head
+class Mexico::FileSystem::Entry
 
   include ::ROXML
-  xml_name 'Head'
+  xml_name 'Entry'
 
-  # many HeadSections with keys
-  xml_accessor :sections, :as => [::Mexico::FileSystem::Section],     :from => "Section"
+  xml_accessor :key, :from => '@key'
+
+  xml_accessor :entries, :as => [::Mexico::FileSystem::Entry], :from => "Entry"
+
+  attr_accessor :values
+
+  def self.from_xml(node, args={})
+    @values = {}
+    node.elements.each do |el|
+      key = el['key']
+      val = el.text
+      @values[key] = val
+    end
+  end
+
+  def to_xml(params = {})
+    params.reverse_merge!(:name => self.class.tag_name, :namespace => self.class.roxml_namespace)
+    params[:namespace] = nil if ['*', 'xmlns'].include?(params[:namespace])
+    node = XML.new_node([params[:namespace], params[:name]].compact.join(':')).tap do |root|
+      @values.each do |k,v|
+        root.children << XML.new_node([params[:namespace], 'Entry']).tap do |ent|
+          ent['key'] = k
+          ent.text = v
+        end
+      end
+    end
+    node
+  end
 
 end
