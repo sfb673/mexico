@@ -21,7 +21,7 @@ gem 'poseidon', '~> 1.1.1', :require => true, :git => 'git://github.com/sfb673/p
 # Include everything needed to run rake, tests, features, etc.
 group :development do
   gem "minitest", ">= 0"
-  gem "bluecloth"
+  # gem "bluecloth"
   gem "yard", "~> 0.8.3"
   # gem "cucumber", ">= 0"
   gem "bundler" #, "~> 1.0.0"
