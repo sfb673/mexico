@@ -37,6 +37,9 @@ class Mexico::Fiesta::Interfaces::ElanInterface
 
   def import(io=$stdin, params = {})
     puts 'instance method import'
+
+    io.rewind
+
     encoding = params.has_key?(:encoding) ? params[:encoding] : 'UTF-8'
     xmldoc = ::Nokogiri::XML(io)
 

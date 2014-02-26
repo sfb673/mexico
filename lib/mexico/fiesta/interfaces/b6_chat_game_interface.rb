@@ -31,6 +31,9 @@ class Mexico::Fiesta::Interfaces::B6ChatGameInterface
   # @param io [IO] The IO object to read from.
   # @return [FiestaDocument] on success, the corresponding FiESTA document.
   def import(io=$stdin)
+
+    io.rewind
+
     fiesta_document = FiestaDocument.new
     f = fiesta_document
 
