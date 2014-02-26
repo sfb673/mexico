@@ -10,6 +10,14 @@ Its central organising unit is the **Corpus** class which allows researchers to 
 
 ## Last Changes
 
+## 0.0.10
+
+Completed on February 26 2014.
+
++ [**#214**](http://intranet.sfb673.org/issues/214): FiESTA documents now have a first version of the head structure.
++ [**#236**](http://intranet.sfb673.org/issues/236): Some useless or outdated requirements in the Gemfile were removed.
++ [**#245**](http://intranet.sfb673.org/issues/245): IO objects in import methods now rewind before reading.
+
 ## 0.0.9
 
 Completed on February 11 2014.
