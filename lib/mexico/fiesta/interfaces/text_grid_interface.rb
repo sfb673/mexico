@@ -34,6 +34,8 @@ class Mexico::Fiesta::Interfaces::TextGridInterface
 
   def import(io=$stdin, params = {})
 
+    io.rewind
+
     fdoc = FiestaDocument.new
     timeline = fdoc.add_standard_timeline('s')
 
