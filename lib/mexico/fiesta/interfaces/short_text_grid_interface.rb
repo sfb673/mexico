@@ -34,6 +34,9 @@ class Mexico::Fiesta::Interfaces::ShortTextGridInterface
 
   def import(io=$stdin, params = {})
     puts 'instance method import'
+
+    io.rewind
+
     encoding = params.has_key?(:encoding) ? params[:encoding] : 'UTF-16'
 
     fdoc = FiestaDocument.new

@@ -41,7 +41,7 @@ class Mexico::FileSystem::FiestaDocument
   xml_accessor :name,       :from => '@name'
 
   # type Mexico::FileSystem::Head
-  xml_accessor :head,       :from => "Description", :as => [Mexico::FileSystem::Head]
+  xml_accessor :head,       :from => "Head", :as => Mexico::FileSystem::Head
 
   # collection of Mexico::FileSystem::Scale
   xml_accessor :scales_container, :as => [::Mexico::FileSystem::Scale],     :from => "Scale",     :in => "ScaleSet"
@@ -61,7 +61,7 @@ class Mexico::FileSystem::FiestaDocument
   add_fancy_container :layers
   add_fancy_container :items
 
-
+  @@CACHE = {}
   # POSEIdON-based RDF augmentation
   include Poseidon
   self_uri %q(http://cats.sfb673.org/FiestaDocument)
@@ -132,6 +132,7 @@ class Mexico::FileSystem::FiestaDocument
   # @todo Check if all standard or default values are set correctly.
   def initialize
     super
+    @head = Mexico::FileSystem::Head.new
     @scales_container = []
     @layers_container = []
     @layer_connectors = []
