@@ -110,9 +110,9 @@ class Mexico::Fiesta::Interfaces::ElanInterface
           end
           if anno.name == "REF_ANNOTATION"
 
-            puts pp anno
-            puts document.items.collect{|x| x.identifier}.join(', ')
-            puts '-'*80
+            #puts pp anno
+            #puts document.items.collect{|x| x.identifier}.join(', ')
+            #puts '-'*80
 
             i.add_item_link Mexico::FileSystem::ItemLink.new(identifier: "#{i.identifier}-itm",
                                         target_object: document.items({identifier: anno["ANNOTATION_REF"]}).first,
