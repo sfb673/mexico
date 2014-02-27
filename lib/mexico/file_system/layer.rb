@@ -45,6 +45,11 @@ class ::Mexico::FileSystem::Layer
         send("#{k}=", v)
       end
     end
+
+    if properties.nil?
+      properties = ::Mexico::FileSystem::PropertyMap.new(key: 'layerProperties')
+    end
+
   end
 
   def items

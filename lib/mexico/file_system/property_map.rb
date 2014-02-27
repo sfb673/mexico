@@ -34,6 +34,14 @@ class Mexico::FileSystem::PropertyMap
 
   attr_accessor :values
 
+  def initialize(args={})
+    args.each do |k,v|
+      if self.respond_to?("#{k}=")
+        send("#{k}=", v)
+      end
+    end
+  end
+
   def has_key?(key)
     properties.any?{|x| x.key == key} or property_maps.any?{|x| x.key == key}
   end
