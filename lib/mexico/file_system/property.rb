@@ -27,6 +27,22 @@ class Mexico::FileSystem::Property
   include ::ROXML
   xml_name 'Property'
 
+  def initialize(arg1=nil, arg2=nil)
+    if arg1.kind_of?(Hash)
+      args.each do |k,v|
+        if self.respond_to?("#{k}=")
+          send("#{k}=", v)
+        end
+      end
+    else
+      unless (arg1.nil? || arg2.nil?)
+        self.key = arg1
+        self.value = arg2
+      end
+    end
+  end
+
+
   xml_accessor :key, :from => '@key'
 
   xml_accessor :value, :from => :content

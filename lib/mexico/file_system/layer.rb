@@ -24,6 +24,8 @@ class ::Mexico::FileSystem::Layer
   xml_accessor :identifier, :from => '@id'
   xml_accessor :name,       :from => '@name'
 
+  xml_accessor :properties, :as => ::Mexico::FileSystem::PropertyMap,  :from => "PropertyMap"
+
   attr_accessor :document
 
   # POSEIdON-based RDF augmentation
@@ -43,6 +45,11 @@ class ::Mexico::FileSystem::Layer
         send("#{k}=", v)
       end
     end
+
+    if properties.nil?
+      properties = ::Mexico::FileSystem::PropertyMap.new(key: 'layerProperties')
+    end
+
   end
 
   def items
