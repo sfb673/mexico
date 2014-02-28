@@ -43,7 +43,8 @@ module Mexico::Util
     UMLAUTS.each_pair do |u,v|
       result.gsub!(/#{u}/, v)
     end
-    return result.gsub(/[^\w\d]/, '')
+    result.gsub!(/[^\w\d]/, '_')
+    return result.gsub(/_+/, '_')
   end
 
 end
