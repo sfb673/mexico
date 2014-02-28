@@ -30,7 +30,7 @@ describe Mexico::Fiesta::Interfaces::ElanInterface do
       context 'Elan ' do
         it 'reads data from a test file' do
           path = File.join @assetspath, 'fiesta', 'elan'
-          filename = File.join path, 'ElanFileFormat.eaf'
+          filename = File.join path, 'Trial04.eaf' #'ElanFileFormat.eaf'
           @fdoc = ::Mexico::Fiesta::Interfaces::ElanInterface.import(File.open(filename))
           File.open(File.join(path,'test.out.fst'),'w') do |f|
             f << @fdoc.to_xml

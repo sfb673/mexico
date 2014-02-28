@@ -56,18 +56,54 @@ class Mexico::Fiesta::Interfaces::ElanInterface
       timeslots[slot] = val
     end
 
+    # read cv entries
+
+    # cvs = Hash.new
+
+    xmldoc.xpath("//CONTROLLED_VOCABULARY").each do |c|
+
+
+      container_map = Mexico::FileSystem::PropertyMap.new(key: c['CV_ID'])
+
+      metamap = Mexico::FileSystem::PropertyMap.new(key: 'info')
+      metamap.properties << Mexico::FileSystem::Property.new('identifier', c['CV_ID'])
+
+      valuemap = Mexico::FileSystem::PropertyMap.new(key: 'data')
+
+      c.xpath("./CV_ENTRY").each do |entry|
+
+        desc = entry['DESCRIPTION']
+        val = entry.text
+
+        valprop = Mexico::FileSystem::PropertyMap.new
+
+        valprop.properties <<  Mexico::FileSystem::Property.new('description', desc)
+        valprop.properties <<  Mexico::FileSystem::Property.new('value', val)
+
+        valuemap.property_maps << valprop
+
+      end
+
+      container_map.property_maps << metamap
+      container_map.property_maps << valuemap
+
+      document.head.section(Mexico::FileSystem::Section::VOCABULARIES).property_maps << container_map
+    end
+
     # Read ling type entries
 
     lingTypes = Hash.new
 
     xmldoc.xpath("//LINGUISTIC_TYPE").each do |lingtype|
 
+      cnstrs, cntvoc = nil
       cnstrs = lingtype['CONSTRAINTS'] unless lingtype['CONSTRAINTS'].nil?
       graphr = lingtype['GRAPHIC_REFERENCES']=="true" ? true : false
       lngtid = lingtype['LINGUISTIC_TYPE_ID']
       timeal = lingtype['TIME_ALIGNABLE']=="true" ? true : false
+      cntvoc = lingtype['CONTROLLED_VOCABULARY_REF'] unless lingtype['CONTROLLED_VOCABULARY_REF'].nil?
 
-      lingTypeEntry = { constraints: cnstrs, graphicReferences: graphr, timeAlignable: timeal }
+      lingTypeEntry = { constraints: cnstrs, graphicReferences: graphr, timeAlignable: timeal, controlledVocabulary: cntvoc }
 
       lingTypes[lngtid] = lingTypeEntry
 
