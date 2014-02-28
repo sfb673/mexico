@@ -22,7 +22,12 @@ class Mexico::FileSystem::LayerConnector
 
   include ROXML
 
-  xml_accessor :identifier, :from => '@id'
+  xml_reader :identifier,        :from => '@id'
+
+  def identifier=(new_id)
+    @identifier = Mexico::Util::to_xml_id(new_id)
+  end
+
   xml_accessor :name,       :from => '@name'
 
   xml_accessor :source_id, :from => '@source'

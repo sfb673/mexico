@@ -341,4 +341,8 @@ class Mexico::FileSystem::FiestaDocument
     card
   end
 
+  def identifier=(new_id)
+    @identifier = Mexico::Util::to_xml_id(new_id)
+  end
+
 end

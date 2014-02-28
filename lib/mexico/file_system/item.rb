@@ -22,7 +22,11 @@ class Mexico::FileSystem::Item
   include ::ROXML
   xml_name 'I'
 
-  xml_accessor :identifier, :from => '@id'
+  xml_reader :identifier,        :from => '@id'
+
+  def identifier=(new_id)
+    @identifier = Mexico::Util::to_xml_id(new_id)
+  end
 
   # @todo compound links (later)
 

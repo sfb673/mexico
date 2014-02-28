@@ -26,7 +26,12 @@ class Mexico::FileSystem::Scale
   include ::ROXML
   xml_name 'Scale'
 
-  xml_accessor :identifier, :from => '@id'
+  xml_reader :identifier,        :from => '@id'
+
+  def identifier=(new_id)
+    @identifier = Mexico::Util::to_xml_id(new_id)
+  end
+
   xml_accessor :name,       :from => '@name'
 
   xml_accessor :unit, :from => '@unit'

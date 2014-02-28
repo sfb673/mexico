@@ -35,7 +35,11 @@ class Mexico::FileSystem::ItemLink
   xml_name 'ItemLink'
 
   # identifier
-  xml_accessor :identifier, :from => '@id'
+  xml_reader :identifier,        :from => '@id'
+
+  def identifier=(new_id)
+    @identifier = Mexico::Util::to_xml_id(new_id)
+  end
 
   # type String
   xml_accessor :role, :from => '@role'
