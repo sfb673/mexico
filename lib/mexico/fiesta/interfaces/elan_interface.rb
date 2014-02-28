@@ -99,7 +99,7 @@ class Mexico::Fiesta::Interfaces::ElanInterface
           if anno.name == "ALIGNABLE_ANNOTATION"
 
             # puts anno.xpath("./ANNOTATION_VALUE/text()").first
-            if annoVal!=nil && annoVal.strip != ""
+            if annoVal!=nil # && annoVal.strip != ""
               i.add_interval_link Mexico::FileSystem::IntervalLink.new(identifier: "#{i.identifier}-int",
                                                     min: timeslots[anno["TIME_SLOT_REF1"]].to_f,
                                                     max: timeslots[anno["TIME_SLOT_REF2"]].to_f,
