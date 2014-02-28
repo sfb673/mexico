@@ -65,13 +65,11 @@ class Mexico::Fiesta::Interfaces::ElanInterface
       tierID = t["TIER_ID"]
       puts 'Read layers, %s' % tierID
 
-      layer = Mexico::FileSystem::Layer.new(identifier: tierID,
-                                   name: tierID,
-                                   document: document)
+      layer = document.add_layer(identifier: tierID, name: tierID)
       #layer.name = tierID
       #layer.id = ToE::Util::to_xml_id(tierID)
 
-      document.layers << layer
+      # document.layers << layer
 
       puts t.attributes
       puts t.attributes.has_key?('PARENT_REF')
