@@ -49,6 +49,8 @@ class ::Mexico::FileSystem::Layer
       if self.respond_to?("#{k}=")
         send("#{k}=", v)
       end
+
+      @properties = Mexico::FileSystem::PropertyMap.new
     end
 
     if properties.nil?
@@ -95,6 +97,10 @@ class ::Mexico::FileSystem::Layer
     self.items.each do |item|
       return false if item.item_links.size > 1
     end
+  end
+
+  def add_property(prop)
+    properties.properties << prop
   end
 
 

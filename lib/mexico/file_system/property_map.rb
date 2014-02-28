@@ -40,6 +40,8 @@ class Mexico::FileSystem::PropertyMap
         send("#{k}=", v)
       end
     end
+    @properties = []
+    @property_maps = []
   end
 
   def has_key?(key)

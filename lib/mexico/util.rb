@@ -39,6 +39,7 @@ module Mexico::Util
   # @param string [String] The string to be converted to an ID.
   # @return       [String] The resulting ID.
   def self.to_xml_id(string)
+    return nil if string.nil? # @todo auto-assign IDs
     result = string.downcase
     UMLAUTS.each_pair do |u,v|
       result.gsub!(/#{u}/, v)

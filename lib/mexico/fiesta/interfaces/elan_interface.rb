@@ -56,6 +56,34 @@ class Mexico::Fiesta::Interfaces::ElanInterface
       timeslots[slot] = val
     end
 
+    # Read ling type entries
+
+    lingTypes = Hash.new
+
+    xmldoc.xpath("//LINGUISTIC_TYPE").each do |lingtype|
+
+      cnstrs = lingtype['CONSTRAINTS'] unless lingtype['CONSTRAINTS'].nil?
+      graphr = lingtype['GRAPHIC_REFERENCES']=="true" ? true : false
+      lngtid = lingtype['LINGUISTIC_TYPE_ID']
+      timeal = lingtype['TIME_ALIGNABLE']=="true" ? true : false
+
+      lingTypeEntry = { constraints: cnstrs, graphicReferences: graphr, timeAlignable: timeal }
+
+      lingTypes[lngtid] = lingTypeEntry
+
+    end
+
+    lingTypes.each do |key,val|
+      sec = document.head[Mexico::FileSystem::Section::LAYER_TYPES]
+      pmap = Mexico::FileSystem::PropertyMap.new(key: key)
+      val.each do |skey,sval|
+        unless sval.nil?
+          pmap.properties << Mexico::FileSystem::Property::new(skey,sval)
+        end
+      end
+      sec.property_maps << pmap
+    end
+
     # create temporary hash for storage of layers
     layerHash = Hash.new
 
@@ -69,15 +97,16 @@ class Mexico::Fiesta::Interfaces::ElanInterface
       #layer.name = tierID
       #layer.id = ToE::Util::to_xml_id(tierID)
 
+      layer.add_property Mexico::FileSystem::Property.new('elanTierType', t['LINGUISTIC_TYPE_REF'])
       # document.layers << layer
 
       puts t.attributes
       puts t.attributes.has_key?('PARENT_REF')
       if t.attributes.has_key?('PARENT_REF')
         # puts "TATT: %s" % t['PARENT_REF']
-        document.layers.each do |l|
-          puts "LAYER %s %s" % [l.identifier, l.name]
-        end
+        # document.layers.each do |l|
+        #   puts "LAYER %s %s" % [l.identifier, l.name]
+        # end
         parent_layer = document.get_layer_by_id(t['PARENT_REF'])
         puts parent_layer
         if parent_layer

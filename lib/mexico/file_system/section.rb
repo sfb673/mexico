@@ -25,8 +25,10 @@
 class Mexico::FileSystem::Section
 
   LIFECYCLE = 'lifecycle'
-
   VOCABULARIES = 'vocabularies'
+  LAYER_TYPES = 'layerTypes'
+
+  SECTION_KEYS = [LIFECYCLE, VOCABULARIES, LAYER_TYPES]
 
   include ::ROXML
   xml_name 'Section'
@@ -35,6 +37,12 @@ class Mexico::FileSystem::Section
 
   xml_accessor :properties,    :as => [::Mexico::FileSystem::Property],     :from => "Property"
   xml_accessor :property_maps, :as => [::Mexico::FileSystem::PropertyMap],  :from => "PropertyMap"
+
+  def initialize(key)
+    @key = key
+    @properties = []
+    @property_maps = []
+  end
 
 
 
