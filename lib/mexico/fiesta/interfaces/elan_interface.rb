@@ -133,6 +133,10 @@ class Mexico::Fiesta::Interfaces::ElanInterface
       #layer.id = ToE::Util::to_xml_id(tierID)
 
       layer.add_property Mexico::FileSystem::Property.new('elanTierType', t['LINGUISTIC_TYPE_REF'])
+
+      if t.attributes.has_key?('ANNOTATOR')
+        layer.add_property Mexico::FileSystem::Property.new('annotator', t['ANNOTATOR'])
+      end
       # document.layers << layer
 
       puts t.attributes
@@ -289,6 +293,9 @@ class Mexico::Fiesta::Interfaces::ElanInterface
         doc.layers.each do |layer|
           ling_type = layer.properties['elanTierType'].value
           attrs = {TIER_ID: layer.identifier, LINGUISTIC_TYPE_REF: ling_type}
+
+          annotator = layer.properties['annotator'].value
+          attrs.merge!({ANNOTATOR: annotator}) unless annotator.nil?
 
           # check if this layer is the child of another one.
           # if yes: add attribute PARENT_REF
