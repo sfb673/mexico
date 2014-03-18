@@ -36,6 +36,30 @@ describe Mexico::Fiesta::Interfaces::ElanInterface do
             f << @fdoc.to_xml
           end
         end
+
+        it 'exports a FiESTA file to EAF' do
+          @fdoc = ::Mexico::FileSystem::FiestaDocument.open(File.join(@assetspath, 'fiesta', 'elan', 'test.out.fst'))  # Fiesta::Interfaces::ElanInterface.import(File.open(filename))
+          @fdoc.should_not be nil
+          File.open(File.join(@assetspath, 'fiesta', 'elan', 'test.out.eaf'),'w') do |f|
+            ::Mexico::Fiesta::Interfaces::ElanInterface::export(@fdoc, f)
+          end
+        end
+
+        it 'imports and exports an EAF document and mostly preserves its structure and contents' do
+          path = File.join @assetspath, 'fiesta', 'elan'
+          filename = File.join path, 'Trial04.eaf'
+          @fdoc = ::Mexico::Fiesta::Interfaces::ElanInterface.import(File.open(filename))
+          # ::Mexico::FileSystem::FiestaDocument.open(File.join(@assetspath, 'fiesta', 'elan', 'test.out.fst'))  # Fiesta::Interfaces::ElanInterface.import(File.open(filename))
+          @fdoc.should_not be nil
+          File.open(File.join(@assetspath, 'fiesta', 'elan', 'Trial04.fst'),'w') do |f|
+            f << @fdoc.to_xml
+          end
+          File.open(File.join(@assetspath, 'fiesta', 'elan', 'Trial04.OUT.eaf'),'w') do |f|
+            ::Mexico::Fiesta::Interfaces::ElanInterface::export(@fdoc, f)
+          end
+        end
+
+
       end
     end
   end

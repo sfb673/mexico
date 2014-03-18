@@ -36,7 +36,6 @@ class Mexico::Fiesta::Interfaces::ElanInterface
   end
 
   def import(io=$stdin, params = {})
-    puts 'instance method import'
 
     io.rewind
 
@@ -203,6 +202,134 @@ class Mexico::Fiesta::Interfaces::ElanInterface
 
   def export(doc, io=$stdout, params = {})
 
+    # Create an XML builder object that serialises into an XML structure
+    builder = Nokogiri::XML::Builder.new do |xml|
+
+      xml.ANNOTATION_DOCUMENT do
+
+        xml.HEADER do
+
+          # @TODO implement the export of the header
+
+        end
+
+        # create the time stamp data structure
+        time_hash = Hash.new
+        counter = 1
+
+          # @todo #254 rework to use unit conversions!
+          doc.items.each do |item|
+            item.point_links.each do |pl|
+              unless time_hash.has_key?(pl.point)
+                time_hash[pl.point] = "ts#{counter}"
+                counter += 1
+              end
+            end
+            item.interval_links.each do |il|
+              unless time_hash.has_key?(il.min)
+                time_hash[il.min] = "ts#{counter}"
+                counter += 1
+              end
+              unless time_hash.has_key?(il.max)
+                 time_hash[il.max] = "ts#{counter}"
+                 counter += 1
+              end
+            end
+          end
+
+        xml.TIME_ORDER do
+          # collect all timestamps
+          # create a hash for them
+          time_hash.each do |tkey, tval|
+            xml.TIME_SLOT({'TIME_SLOT_ID' => tval, 'TIME_VALUE'=>tkey.to_i.to_s})
+          end
+        end
+        inverted_time_hash = time_hash.invert
+
+
+        # read ling types from map
+        ling_types = Hash.new
+
+        lt_section = doc.head.section(Mexico::FileSystem::Section::LAYER_TYPES)
+        lt_section.property_maps.each do |pm|
+          key = pm.key
+          puts key
+
+          pm.properties.each do |p|
+            puts "  ..  %s -> %s" % [p.key, p.value]
+
+          end
+          # puts pm.size
+          ling_type = Hash.new
+
+          if pm.has_key?('constraints')
+            ling_type['constraints'] = pm['constraints'].value
+          end
+          if pm.has_key?('graphicReferences')
+            ling_type['graphicReferences'] = pm['graphicReferences'].value
+          end
+          if pm.has_key?('timeAlignable')
+            ling_type['timeAlignable'] = pm['timeAlignable'].value
+          end
+          if pm.has_key?('controlledVocabulary')
+            ling_type['controlledVocabulary'] = pm['controlledVocabulary'].value
+          end
+          ling_types[key] = ling_type
+        end
+        puts ling_types
+
+
+
+        # export layer by layer
+        # caveat: only annotations with at least one layer link will be exported.
+        # caveat 2: annotations with multiple layer links will be exported multiple times.
+
+
+
+        doc.layers.each do |layer|
+          ling_type = layer.properties['elanTierType'].value
+          attrs = {TIER_ID: layer.identifier, LINGUISTIC_TYPE_REF: ling_type}
+
+          # check if this layer is the child of another one.
+          # if yes: add attribute PARENT_REF
+
+          tier = xml.TIER(attrs) do
+
+            puts "inside tier"
+
+            layer.items.each do |item|
+
+              xml.ANNOTATION do
+
+                # depending on the layer type, use either ALIGNABLE or REF annotations
+                if %w(Symbolic_Subdivision Symbolic_Association).include?(ling_type)
+
+
+                  xml.REF_ANNOTATION({ANNOTATION_ID: item.identifier})
+                else
+                  tsref1, tsref2 = nil
+                  unless item.interval_links.empty?
+                    tsref1 = time_hash[item.interval_links.first.min]
+                    tsref2 = time_hash[item.interval_links.first.max]
+                  end
+
+                  xml.ALIGNABLE_ANNOTATION({'ANNOTATION_ID'=>item.identifier,TIME_SLOT_REF1: tsref1,TIME_SLOT_REF2: tsref2}) do
+                    xml.ANNOTATION_VALUE item.data.string_value
+                  end
+                end
+
+              end
+            end
+
+          end
+          puts "%s :: %s" % [tier["TIER_ID"], layer.identifier]
+        end
+
+      end
+
+    end
+
+    io << builder.to_xml
   end
 
 

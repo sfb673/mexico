@@ -71,3 +71,6 @@ gem_graph.png
 out.fst
 
 /assets/fiesta/elan/Trial04.eaf
+assets/fiesta/elan/Trial04.OUT.eaf
+assets/fiesta/elan/Trial04.fst
+test.out.eaf

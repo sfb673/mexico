@@ -49,7 +49,7 @@ class Mexico::FileSystem::PropertyMap
   end
 
   def [](key)
-    properties.first{|x| x.key == key} or property_maps.first{|x| x.key == key}
+    properties.find{|x| x.key == key} or property_maps.find{|x| x.key == key}
   end
 
 end

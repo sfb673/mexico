@@ -38,7 +38,7 @@ class Mexico::FileSystem::Section
   xml_accessor :properties,    :as => [::Mexico::FileSystem::Property],     :from => "Property"
   xml_accessor :property_maps, :as => [::Mexico::FileSystem::PropertyMap],  :from => "PropertyMap"
 
-  def initialize(key)
+  def initialize(key='NOTGIVEN')
     @key = key
     @properties = []
     @property_maps = []
