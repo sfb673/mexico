@@ -139,15 +139,18 @@ class Mexico::Fiesta::Interfaces::ElanInterface
       end
       # document.layers << layer
 
-      puts t.attributes
-      puts t.attributes.has_key?('PARENT_REF')
+      puts "Attributes: %s" % t.attributes.to_s
+      puts "Parent ref? %s" % t.attributes.has_key?('PARENT_REF')
       if t.attributes.has_key?('PARENT_REF')
         # puts "TATT: %s" % t['PARENT_REF']
         # document.layers.each do |l|
         #   puts "LAYER %s %s" % [l.identifier, l.name]
         # end
-        parent_layer = document.get_layer_by_id(t['PARENT_REF'])
-        puts parent_layer
+        puts 'ID of parent layer %s' % t['PARENT_REF']
+        puts 'ID, xmlified       %s' % Mexico::Util::to_xml_id(t['PARENT_REF'])
+        puts 'available ids:     %s' % (document.layers.collect{|l| l.identifier}).join(' ')
+        parent_layer = document.get_layer_by_id(Mexico::Util::to_xml_id(t['PARENT_REF']))
+        puts "Found parent layer: %s" % parent_layer
         if parent_layer
           layer_connector = Mexico::FileSystem::LayerConnector.new parent_layer, layer, {
               identifier: "#{parent_layer.identifier}_TO_#{layer.identifier}",
@@ -292,13 +295,21 @@ class Mexico::Fiesta::Interfaces::ElanInterface
 
         doc.layers.each do |layer|
           ling_type = layer.properties['elanTierType'].value
-          attrs = {TIER_ID: layer.identifier, LINGUISTIC_TYPE_REF: ling_type}
+          attrs = {TIER_ID: layer.name, LINGUISTIC_TYPE_REF: ling_type}
 
           annotator = layer.properties['annotator'].value
           attrs.merge!({ANNOTATOR: annotator}) unless annotator.nil?
 
           # check if this layer is the child of another one.
           # if yes: add attribute PARENT_REF
+
+          # find a parent layer
+          parent_id=nil
+          parent_connectors = doc.layer_connectors.select{|c| c.target == layer}
+          if parent_connectors.size>0
+            parent_id = parent_connectors.first.source.name
+            attrs.merge!({PARENT_REF: parent_id})
+          end
 
           tier = xml.TIER(attrs) do
 
