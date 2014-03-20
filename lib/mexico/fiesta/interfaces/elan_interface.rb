@@ -26,6 +26,13 @@ class Mexico::Fiesta::Interfaces::ElanInterface
   include Singleton
   include Mexico::FileSystem
 
+  CONSTRAINTS = {
+      'Included_In'          => "Time alignable annotations within the parent annotation's time interval, gaps are allowed",
+      'Time_Subdivision'     => "Time subdivision of parent annotation's time interval, no time gaps allowed within this interval",
+      'Symbolic_Subdivision' => 'Symbolic subdivision of a parent annotation. Annotations refering to the same parent are ordered',
+      'Symbolic_Association' => '1-1 association with a parent annotation'
+  }
+
   def self.import(io=$stdin, params = {})
     puts 'class method import'
     instance.import(io, params)
@@ -44,6 +51,40 @@ class Mexico::Fiesta::Interfaces::ElanInterface
 
     document = Mexico::FileSystem::FiestaDocument.new
 
+
+    # import heaader
+    # - @MEDIA_FILE
+    # - @TIME_UNITS
+    # - MEDIA DESCRIPTOR
+    # - PROPERTY/@name=lastUsedAnnotationId
+
+    xmldoc.xpath("//HEADER").each do |header|
+      header['MEDIA_FILE']
+      header['TIME_UNTIS']
+
+      document.head[Mexico::FileSystem::Section::MEDIA_CONTEXT].property_maps << Mexico::FileSystem::PropertyMap.new(key: 'referencedMedia')
+      refMediaMap = document.head[Mexico::FileSystem::Section::MEDIA_CONTEXT].property_maps.find{|m| m.key=='referencedMedia'}
+      datModelSec = document.head[Mexico::FileSystem::Section::DATA_MODEL]
+
+      refMediaMap.properties << Mexico::FileSystem::Property.new('primaryMediaUrl', header['MEDIA_FILE'])
+
+      # time units should go into another section!
+      datModelSec.properties << Mexico::FileSystem::Property.new('timeUnits', header['TIME_UNITS'])
+
+      header.xpath('./MEDIA_DESCRIPTOR').each_with_index do |mediafile,n|
+        file_map = Mexico::FileSystem::PropertyMap.new(key: "#{n}")
+        # prop = Mexico::FileSystem::Property.new('path', mediafile['RELATIVE_MEDIA_URL'])
+        #puts " %s : %s" % [prop.key, prop.value]
+        file_map.properties << Mexico::FileSystem::Property.new('path', mediafile['RELATIVE_MEDIA_URL'])
+        file_map.properties << Mexico::FileSystem::Property.new('mimeType', mediafile['MIME_TYPE'])
+        file_map.properties << Mexico::FileSystem::Property.new('uri', mediafile['MEDIA_URL'])
+        refMediaMap.property_maps << file_map
+      end
+      header.xpath('./PROPERTY').each do |property|
+        datModelSec.properties << Mexico::FileSystem::Property.new(property['NAME'], property.text)
+      end
+    end
+    # actual data:
     # 1. create a standard timeline
     timeline = document.add_standard_timeline('s')
 
@@ -60,52 +101,35 @@ class Mexico::Fiesta::Interfaces::ElanInterface
     # cvs = Hash.new
 
     xmldoc.xpath("//CONTROLLED_VOCABULARY").each do |c|
-
-
       container_map = Mexico::FileSystem::PropertyMap.new(key: c['CV_ID'])
-
       metamap = Mexico::FileSystem::PropertyMap.new(key: 'info')
       metamap.properties << Mexico::FileSystem::Property.new('identifier', c['CV_ID'])
-
+      metamap.properties << Mexico::FileSystem::Property.new('description', c['DESCRIPTION'])
       valuemap = Mexico::FileSystem::PropertyMap.new(key: 'data')
-
       c.xpath("./CV_ENTRY").each do |entry|
-
         desc = entry['DESCRIPTION']
         val = entry.text
-
         valprop = Mexico::FileSystem::PropertyMap.new
-
         valprop.properties <<  Mexico::FileSystem::Property.new('description', desc)
         valprop.properties <<  Mexico::FileSystem::Property.new('value', val)
-
         valuemap.property_maps << valprop
-
       end
-
       container_map.property_maps << metamap
       container_map.property_maps << valuemap
-
       document.head.section(Mexico::FileSystem::Section::VOCABULARIES).property_maps << container_map
     end
 
     # Read ling type entries
-
     lingTypes = Hash.new
-
     xmldoc.xpath("//LINGUISTIC_TYPE").each do |lingtype|
-
       cnstrs, cntvoc = nil
       cnstrs = lingtype['CONSTRAINTS'] unless lingtype['CONSTRAINTS'].nil?
       graphr = lingtype['GRAPHIC_REFERENCES']=="true" ? true : false
       lngtid = lingtype['LINGUISTIC_TYPE_ID']
       timeal = lingtype['TIME_ALIGNABLE']=="true" ? true : false
       cntvoc = lingtype['CONTROLLED_VOCABULARY_REF'] unless lingtype['CONTROLLED_VOCABULARY_REF'].nil?
-
       lingTypeEntry = { constraints: cnstrs, graphicReferences: graphr, timeAlignable: timeal, controlledVocabulary: cntvoc }
-
       lingTypes[lngtid] = lingTypeEntry
-
     end
 
     lingTypes.each do |key,val|
@@ -213,11 +237,18 @@ class Mexico::Fiesta::Interfaces::ElanInterface
     builder = Nokogiri::XML::Builder.new do |xml|
 
       xml.ANNOTATION_DOCUMENT do
+        # @TODO implement the export of the header
+        mediaFile = ''
+        mediaFile = doc.head[Mexico::FileSystem::Section::MEDIA_CONTEXT]['primaryMediaUrl'].value unless doc.head[Mexico::FileSystem::Section::MEDIA_CONTEXT]['primaryMediaUrl'].nil?
+        timeUnits = doc.head[Mexico::FileSystem::Section::DATA_MODEL]['timeUnits'].value
+        xml.HEADER({MEDIA_FILE: mediaFile, TIME_UNITS: timeUnits}) do
+          doc.head[Mexico::FileSystem::Section::MEDIA_CONTEXT]['referencedMedia'].property_maps.each do |m|
+            uri = m['uri'].value
+            path = m['path'].value
+            mimeType = m['mimeType'].value
 
-        xml.HEADER do
-
-          # @TODO implement the export of the header
-
+            xml.MEDIA_DESCRIPTOR({MEDIA_URL: uri, MIME_TYPE: mimeType, RELATIVE_MEDIA_URL: path})
+          end
         end
 
         # create the time stamp data structure
@@ -295,6 +326,12 @@ class Mexico::Fiesta::Interfaces::ElanInterface
 
         doc.layers.each do |layer|
           ling_type = layer.properties['elanTierType'].value
+          ling_type_object = doc.head[Mexico::FileSystem::Section::LAYER_TYPES].property_maps.find{|m| m.key == ling_type}
+          puts "ling type object %s" % ling_type_object
+          constraint = ling_type_object['constraints']
+          unless constraint.nil?
+            constraint = constraint.value
+          end
           attrs = {TIER_ID: layer.name, LINGUISTIC_TYPE_REF: ling_type}
 
           annotator = layer.properties['annotator'].value
@@ -312,17 +349,11 @@ class Mexico::Fiesta::Interfaces::ElanInterface
           end
 
           tier = xml.TIER(attrs) do
-
             puts "inside tier"
-
             layer.items.each do |item|
-
               xml.ANNOTATION do
-
                 # depending on the layer type, use either ALIGNABLE or REF annotations
-                if %w(Symbolic_Subdivision Symbolic_Association).include?(ling_type)
-
-
+                if %w(Symbolic_Subdivision Symbolic_Association).include?(constraint)
                   xml.REF_ANNOTATION({ANNOTATION_ID: item.identifier})
                 else
                   tsref1, tsref2 = nil
@@ -330,23 +361,63 @@ class Mexico::Fiesta::Interfaces::ElanInterface
                     tsref1 = time_hash[item.interval_links.first.min]
                     tsref2 = time_hash[item.interval_links.first.max]
                   end
-
                   xml.ALIGNABLE_ANNOTATION({'ANNOTATION_ID'=>item.identifier,TIME_SLOT_REF1: tsref1,TIME_SLOT_REF2: tsref2}) do
                     xml.ANNOTATION_VALUE item.data.string_value
                   end
                 end
-
               end
             end
-
           end
           puts "%s :: %s" % [tier["TIER_ID"], layer.identifier]
         end
 
+        # @todo #257 a :: LINGUISTIC_TYPE
+        types = doc.head[Mexico::FileSystem::Section::LAYER_TYPES]
+        types.property_maps.each do |tp|
+          puts tp.class.name
+          puts tp.properties.size
+          puts tp.property_maps.size
+          puts "PROPMAP: %s" % tp.properties.collect{|m| "#{m.key}: #{m.value}"}.join(' ')
+          puts "TIME ALIGNABLE? %s" % tp.has_key?('timeAlignable')
+          puts "TIME ALIGNABLE? %s" % tp['timeAlignable']
+          # puts "TIME ALIGNABLE? %s" % tp['timeAlignable'].value
+
+          time_alignable            = tp.has_key?('timeAlignable')        ? tp['timeAlignable'].value        : nil
+          graphic_references        = tp.has_key?('graphicReferences')    ? tp['graphicReferences'].value    : nil
+          controlled_vocabulary_ref = tp.has_key?('controlledVocabulary') ? tp['controlledVocabulary'].value : nil
+          constraints               = tp.has_key?('constraints')          ? tp['constraints'].value          : nil
+
+          puts "TIME ALIGNABLE? %s" % time_alignable
+
+          attrs = {LINGUISTIC_TYPE_ID: tp.key}
+          attrs.merge!({           TIME_ALIGNABLE: time_alignable})            unless time_alignable.nil?
+          attrs.merge!({       GRAPHIC_REFERENCES: graphic_references})        unless graphic_references.nil?
+          attrs.merge!({CONTROLLED_VOCABULARY_REF: controlled_vocabulary_ref}) unless controlled_vocabulary_ref.nil?
+          attrs.merge!({              CONSTRAINTS: constraints})               unless constraints.nil?
+
+          xml.LINGUISTIC_TYPE(attrs)
+        end
+
+        # Exports ELAN constraints.
+        # These are static, so the same for all documents.
+        Mexico::Fiesta::Interfaces::ElanInterface::CONSTRAINTS.each do |conk,conv|
+          xml.CONSTRAINT STEREOTYPE: conk, DESCRIPTION: conv
+        end
+
+        # CONTROLLED_VOCABULARY
+        vocs = doc.head[Mexico::FileSystem::Section::VOCABULARIES]
+        vocs.property_maps.each do |voc|
+          metamap = voc['info']
+          datamap = voc['data']
+          xml.CONTROLLED_VOCABULARY({CV_ID: voc.key, DESCRIPTION: metamap['description'].value }) do
+            datamap.property_maps.each do |cv_entry|
+              xml.CV_ENTRY(cv_entry['value'].value, {DESCRIPTION: cv_entry['description'].value})
+            end
+          end
+        end
+
       end
-
     end
-
     io << builder.to_xml
   end
 
