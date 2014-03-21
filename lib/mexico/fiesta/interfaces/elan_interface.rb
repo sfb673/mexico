@@ -51,6 +51,34 @@ class Mexico::Fiesta::Interfaces::ElanInterface
 
     document = Mexico::FileSystem::FiestaDocument.new
 
+    sec_datamodel = document.head[Mexico::FileSystem::Section::DATA_MODEL]
+
+    sec_datamodel.properties << Mexico::FileSystem::Property.new('sourceFormat', 'ELAN/EAF')
+    sec_datamodel.properties << Mexico::FileSystem::Property.new('converterClass', 'Mexico::Fiesta::Interfaces::ElanInterface')
+
+    # import attributes on root element
+
+    xmldoc.xpath("/ANNOTATION_DOCUMENT").each do |annodoc|
+      # atts: DATE, AUTHOR, VERSION, FORMAT
+      #       xmlns:xsi xsi:noNamespaceSchemaLocation
+
+      puts xmldoc.namespaces
+      sec_lifecycle = document.head[Mexico::FileSystem::Section::LIFECYCLE]
+      date = DateTime.iso8601(annodoc['DATE'])
+      sec_lifecycle.properties << Mexico::FileSystem::Property.new('creationDate', date)
+      puts date.class.name
+      sec_lifecycle.properties << Mexico::FileSystem::Property.new('authorKey', annodoc['AUTHOR'])
+
+
+      sec_datamodel.properties << Mexico::FileSystem::Property.new('annotationToolVersion', annodoc['VERSION'])
+      sec_datamodel.properties << Mexico::FileSystem::Property.new('annotationToolFormat', annodoc['FORMAT'])
+      sec_datamodel.properties << Mexico::FileSystem::Property.new('xmlSchemaDeclaration', xmldoc.namespaces['xmlns:xsi'])
+      sec_datamodel.properties << Mexico::FileSystem::Property.new('xsiNoNamespaceSchemaLocation', annodoc['xsi:noNamespaceSchemaLocation'])
+
+      annodoc.attributes.each do |a|
+        puts a
+      end
+    end
 
     # import heaader
     # - @MEDIA_FILE
@@ -210,6 +238,13 @@ class Mexico::Fiesta::Interfaces::ElanInterface
             i.add_item_link Mexico::FileSystem::ItemLink.new(identifier: "#{i.identifier}-itm",
                                         target_object: document.items({identifier: anno["ANNOTATION_REF"]}).first,
                                         role: Mexico::FileSystem::ItemLink::ROLE_PARENT)
+
+            # @todo add previous anno if present
+            if anno.has_attribute?('PREVIOUS_ANNOTATION')
+              i.add_item_link Mexico::FileSystem::ItemLink.new(identifier: "#{i.identifier}-pre",
+                                                               target_object: document.items({identifier: anno["PREVIOUS_ANNOTATION"]}).first,
+                                                               role: Mexico::FileSystem::ItemLink::ROLE_PREDECESSOR)
+            end
           end
           i.add_layer_link Mexico::FileSystem::LayerLink.new(identifier: "#{i.identifier}-lay",
                                                              target_object: layer)
@@ -236,7 +271,23 @@ class Mexico::Fiesta::Interfaces::ElanInterface
     # Create an XML builder object that serialises into an XML structure
     builder = Nokogiri::XML::Builder.new do |xml|
 
-      xml.ANNOTATION_DOCUMENT do
+      sec_datamodel = doc.head[Mexico::FileSystem::Section::DATA_MODEL]
+      sec_lifecycle = doc.head[Mexico::FileSystem::Section::LIFECYCLE]
+
+      date = sec_lifecycle['creationDate'].value
+      author = sec_lifecycle['authorKey'].value
+      format = sec_datamodel['annotationToolFormat'].value
+      version = sec_datamodel['annotationToolVersion'].value
+      schema_location = sec_datamodel['xsiNoNamespaceSchemaLocation'].value
+      ad_attrs = {
+          DATE: date, AUTHOR: author,
+          FORMAT: format, VERSION: version,
+          'xmlns:xsi'=>'http://www.w3.org/2001/XMLSchema-instance',
+          'xsi:noNamespaceSchemaLocation' => schema_location
+      }
+      #xml.root() do
+      #end
+      xml.ANNOTATION_DOCUMENT(ad_attrs) do
         # @TODO implement the export of the header
         mediaFile = ''
         mediaFile = doc.head[Mexico::FileSystem::Section::MEDIA_CONTEXT]['primaryMediaUrl'].value unless doc.head[Mexico::FileSystem::Section::MEDIA_CONTEXT]['primaryMediaUrl'].nil?
@@ -354,7 +405,18 @@ class Mexico::Fiesta::Interfaces::ElanInterface
               xml.ANNOTATION do
                 # depending on the layer type, use either ALIGNABLE or REF annotations
                 if %w(Symbolic_Subdivision Symbolic_Association).include?(constraint)
-                  xml.REF_ANNOTATION({ANNOTATION_ID: item.identifier})
+                  ref_attrs = {ANNOTATION_ID: item.identifier}
+                  parent_ref = item.item_links.find{|l| l.role == Mexico::FileSystem::ItemLink::ROLE_PARENT}
+                  unless parent_ref.nil?
+                    ref_attrs.merge!({ANNOTATION_REF: parent_ref.target_item.identifier})
+                  end
+                  pre_ref = item.item_links.find{|l| l.role == Mexico::FileSystem::ItemLink::ROLE_PREDECESSOR}
+                  unless pre_ref.nil?
+                    ref_attrs.merge!({PREVIOUS_ANNOTATION: pre_ref.target_item.identifier})
+                  end
+                  xml.REF_ANNOTATION(ref_attrs) do
+                    xml.ANNOTATION_VALUE item.data.string_value
+                  end
                 else
                   tsref1, tsref2 = nil
                   unless item.interval_links.empty?
