@@ -51,3 +51,4 @@ module Mexico::Util
 end
 
 require 'mexico/util/fancy_container'
+require 'mexico/util/fancy_writer'
