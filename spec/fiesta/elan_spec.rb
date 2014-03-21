@@ -37,6 +37,15 @@ describe Mexico::Fiesta::Interfaces::ElanInterface do
           end
         end
 
+        it 'reads data from the all-formats file' do
+          path = File.join @assetspath, 'fiesta', 'elan'
+          filename = File.join path, 'ElanFileFormat.eaf' #'ElanFileFormat.eaf'
+          @fdoc = ::Mexico::Fiesta::Interfaces::ElanInterface.import(File.open(filename))
+          File.open(File.join(path,'ElanFileFormat.fst'),'w') do |f|
+            f << @fdoc.to_xml
+          end
+        end
+
         it 'exports a FiESTA file to EAF' do
           @fdoc = ::Mexico::FileSystem::FiestaDocument.open(File.join(@assetspath, 'fiesta', 'elan', 'test.out.fst'))  # Fiesta::Interfaces::ElanInterface.import(File.open(filename))
           @fdoc.should_not be nil
@@ -45,7 +54,7 @@ describe Mexico::Fiesta::Interfaces::ElanInterface do
           end
         end
 
-        it 'imports and exports an EAF document and mostly preserves its structure and contents' do
+        it 'imports and exports an EAF document and preserves its structure and contents' do
           path = File.join @assetspath, 'fiesta', 'elan'
           filename = File.join path, 'Trial04.eaf'
           @fdoc = ::Mexico::Fiesta::Interfaces::ElanInterface.import(File.open(filename))

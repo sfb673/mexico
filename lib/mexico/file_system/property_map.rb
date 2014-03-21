@@ -44,12 +44,32 @@ class Mexico::FileSystem::PropertyMap
     @property_maps = []
   end
 
-  def has_key?(key)
-    properties.any?{|x| x.key == key} or property_maps.any?{|x| x.key == key}
+  def has_key?(p_key)
+    # compare_list(p_key)
+    return true if properties.any?{|x| x.key.to_sym == p_key.to_sym}
+    return true if property_maps.any?{|x| x.key.to_sym == p_key.to_sym}
+    false
   end
 
-  def [](key)
-    properties.find{|x| x.key == key} or property_maps.find{|x| x.key == key}
+  def [](p_key)
+    # compare_list(p_key)
+    if properties.any?{|x| x.key.to_sym == p_key.to_sym}
+      return properties.find{|x| x.key.to_sym == p_key.to_sym}
+    end
+    if property_maps.any?{|x| x.key.to_sym == p_key.to_sym}
+      return property_maps.find{|x| x.key.to_sym == p_key.to_sym}
+    end
+    return nil
+  end
+
+  def compare_list(p_key)
+    puts "    <=>   %s  ::  %s" % %w(ENTRY COMPARE_VAL)
+    properties.each do |p|
+      puts "    <=>  >%s< :: >%s<  -  %s" % [p.key, p_key, (p.key.to_sym==p_key.to_sym)]
+    end
+    property_maps.each do |p|
+      puts "    <=>  >%s< :: >%s<  -  %s" % [p.key, p_key, (p.key==p_key)]
+    end
   end
 
 end
