@@ -47,6 +47,15 @@ describe Mexico::Fiesta::Interfaces::ShortTextGridInterface do
           end
         end
 
+
+        it 'writes data to a short text grid file' do
+          path = File.join @assetspath, 'fiesta', 'praat'
+          filename = File.join path, 'mexico.ShortTextGrid'
+          @fdoc = ::Mexico::Fiesta::Interfaces::ShortTextGridInterface.import(File.open(filename))
+
+          @outfile = File.join path, 'mexico.OUT.ShortTextGrid'
+          ::Mexico::Fiesta::Interfaces::ShortTextGridInterface.export(@fdoc, File.open(@outfile, 'w'))
+        end
       end
     end
   end

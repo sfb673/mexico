@@ -99,4 +99,63 @@ class Mexico::Fiesta::Interfaces::ShortTextGridInterface
     fdoc
   end
 
+  def export(doc, io=$stdout, params = {})
+    Mexico::Util::FancyWriter.new(io) do
+      line 'File type = "ooTextFile"'
+      line 'Object class = "TextGrid"'
+      line
+
+      # overall min and max values
+      total_item_links = doc.items.collect{|i| i.interval_links}.flatten
+      total_min = total_item_links.collect{|l| l.min}.min
+      total_max = total_item_links.collect{|l| l.max}.max
+      line total_min, total_max
+      line '<exists>'
+      line doc.layers.size
+
+      # FOREACH layer : print layer header block
+      doc.layers.each do |layer|
+        # "IntervalTier", "name", min, max, annocount
+
+        line '"IntervalTier"'
+        line %Q("#{layer.name}")
+        layer_item_links = doc.items.collect{|i| i.interval_links}.flatten
+        layer_min = layer_item_links.collect{|l| l.min}.min
+        layer_max = layer_item_links.collect{|l| l.max}.max
+        line layer_min, layer_max
+
+        # FOREACH item in layer : min, max, value
+        sorted_items = layer.items.sort{|i,j| i.interval_links.first.min <=> i.interval_links.first.min}
+       time_points = [total_min, total_max, layer_min, layer_max]
+        sorted_items.each do |i|
+          time_points << i.interval_links.first.min
+          time_points << i.interval_links.first.max
+        end
+        time_points.uniq!.sort!
+        # print effective number of annotations
+        line time_points.size-1
+        time_points.each_with_index do |current_point, n|
+          next_point = nil
+          unless n == time_points.size-1
+            next_point = time_points[n+1]
+          end
+          unless next_point.nil?
+            #puts "-"*48
+            #puts "TL:   %20.18f - %20.18f" % [current_point, next_point]
+            #sorted_items.each do |it|
+            #  puts "IT:   %20.18f - %20.18f  --  %20.18f - %20.18f, %s" % [it.interval_links.first.min, it.interval_links.first.max, (it.interval_links.first.min-current_point), (it.interval_links.first.max-next_point), ((it.interval_links.first.min-current_point).abs<0.00001 && (it.interval_links.first.max-next_point).abs<0.00001)]
+            #end
+            item = sorted_items.select{|i| (i.interval_links.first.min-current_point).abs<0.00001 && (i.interval_links.first.max-next_point).abs<0.00001}.first
+            #puts item
+            line current_point, next_point
+            if item.nil?
+              line '""'
+            else
+              line %Q("#{item.data.string_value}")
+            end
+          end
+        end
+      end
+    end
+  end
 end

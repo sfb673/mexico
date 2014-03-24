@@ -33,8 +33,12 @@ class Mexico::Util::FancyWriter
     prepend("\t"*number, &block)
   end
 
-  def write(line)
-    stream << "%s%s%s" %[@prefix_stack.join(''),line,"\n"]
+  def write(*line)
+    lines = line
+    lines = [''] if lines == []
+    lines.each do |l|
+    stream << "%s%s%s" %[@prefix_stack.join(''),l,"\n"]
+    end
   end
 
   alias :w    :write
