@@ -10,6 +10,27 @@ Its central organising unit is the **Corpus** class which allows researchers to 
 
 ## Last Changes
 
+## 0.0.11
+
+Completed on March 24 2014.
+
++ [**#258**](http://intranet.sfb673.org/issues/258): Adds first working version of FancyWriter for creating formatted plain text file formats.
+
+    + [**#154**](http://intranet.sfb673.org/issues/154): Adds export routine into the Praat ShortTextGrid format.
+    + [**#155**](http://intranet.sfb673.org/issues/155): Adds TextGrid export functionality.
+
++ [**#156**](http://intranet.sfb673.org/issues/156): EAF export should now be complete, including metadata:
+
+    + [**#234**](http://intranet.sfb673.org/issues/234): Spec test files are adopted to reflect additional ELAN features.
+    + [**#248**](http://intranet.sfb673.org/issues/248): Layers now use property structures for additional configuration.
+    + [**#251**](http://intranet.sfb673.org/issues/251): ELAN import now uses up-to-date method for adding layers.
+    + [**#252**](http://intranet.sfb673.org/issues/252): Adds custom setter methods for identifiers in order to produce XML-valid IDs.
+    + [**#253**](http://intranet.sfb673.org/issues/253): Fixes a bug where annotations with empty string values were skipped.
+    + [**#255**](http://intranet.sfb673.org/issues/255): Persists the ANNOTATOR attribute from ELAN during import and export.
+    + [**#256**](http://intranet.sfb673.org/issues/256): Resolves and exports Elan parent refs correctly.
+    + [**#257**](http://intranet.sfb673.org/issues/257): Implements various missing ELAN (meta)data.
+
+
 ## 0.0.10
 
 Completed on February 26 2014.
