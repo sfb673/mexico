@@ -68,3 +68,13 @@ assets/fiesta/praat/mexico.ShortTextGrid.out.pp.txt
 assets/fiesta/praat/mexico.TextGrid.out.fst
 head.OUT.fst
 gem_graph.png
+out.fst
+
+/assets/fiesta/elan/Trial04.eaf
+assets/fiesta/elan/Trial04.OUT.eaf
+assets/fiesta/elan/Trial04.fst
+test.out.eaf
+assets/fiesta/elan/ElanFileFormat.fst
+assets/fiesta/elan/Trial04.OUT.pfsx
+mexico.OUT.ShortTextGrid
+mexico.OUT.TextGrid

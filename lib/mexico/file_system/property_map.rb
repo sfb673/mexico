@@ -34,4 +34,42 @@ class Mexico::FileSystem::PropertyMap
 
   attr_accessor :values
 
+  def initialize(args={})
+    args.each do |k,v|
+      if self.respond_to?("#{k}=")
+        send("#{k}=", v)
+      end
+    end
+    @properties = []
+    @property_maps = []
+  end
+
+  def has_key?(p_key)
+    # compare_list(p_key)
+    return true if properties.any?{|x| x.key.to_sym == p_key.to_sym}
+    return true if property_maps.any?{|x| x.key.to_sym == p_key.to_sym}
+    false
+  end
+
+  def [](p_key)
+    # compare_list(p_key)
+    if properties.any?{|x| x.key.to_sym == p_key.to_sym}
+      return properties.find{|x| x.key.to_sym == p_key.to_sym}
+    end
+    if property_maps.any?{|x| x.key.to_sym == p_key.to_sym}
+      return property_maps.find{|x| x.key.to_sym == p_key.to_sym}
+    end
+    return nil
+  end
+
+  def compare_list(p_key)
+    puts "    <=>   %s  ::  %s" % %w(ENTRY COMPARE_VAL)
+    properties.each do |p|
+      puts "    <=>  >%s< :: >%s<  -  %s" % [p.key, p_key, (p.key.to_sym==p_key.to_sym)]
+    end
+    property_maps.each do |p|
+      puts "    <=>  >%s< :: >%s<  -  %s" % [p.key, p_key, (p.key==p_key)]
+    end
+  end
+
 end

@@ -25,8 +25,12 @@
 class Mexico::FileSystem::Section
 
   LIFECYCLE = 'lifecycle'
-
   VOCABULARIES = 'vocabularies'
+  LAYER_TYPES = 'layerTypes'
+  MEDIA_CONTEXT = 'mediaContext'
+  DATA_MODEL = 'dataModel'
+
+  SECTION_KEYS = [LIFECYCLE, VOCABULARIES, LAYER_TYPES, MEDIA_CONTEXT, DATA_MODEL]
 
   include ::ROXML
   xml_name 'Section'
@@ -36,6 +40,28 @@ class Mexico::FileSystem::Section
   xml_accessor :properties,    :as => [::Mexico::FileSystem::Property],     :from => "Property"
   xml_accessor :property_maps, :as => [::Mexico::FileSystem::PropertyMap],  :from => "PropertyMap"
 
+  def initialize(key='NOTGIVEN')
+    @key = key
+    @properties = []
+    @property_maps = []
+  end
 
+  def has_key?(p_key)
+    # compare_list(p_key)
+    return true if properties.any?{|x| x.key.to_sym == p_key.to_sym}
+    return true if property_maps.any?{|x| x.key.to_sym == p_key.to_sym}
+    false
+  end
+
+  def [](p_key)
+    # compare_list(p_key)
+    if properties.any?{|x| x.key.to_sym == p_key.to_sym}
+      return properties.find{|x| x.key.to_sym == p_key.to_sym}
+    end
+    if property_maps.any?{|x| x.key.to_sym == p_key.to_sym}
+      return property_maps.find{|x| x.key.to_sym == p_key.to_sym}
+    end
+    return nil
+  end
 
 end

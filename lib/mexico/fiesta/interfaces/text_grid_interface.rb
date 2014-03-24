@@ -70,14 +70,11 @@ class Mexico::Fiesta::Interfaces::TextGridInterface
       layer = fdoc.add_layer({identifier:tierName, name:tierName})
 
       for anno_num in (1..tierSize)
-
         io.gets
         annoMin = io.gets.match(/(\d+(\.\d+)?)/)[1].to_f
         annoMax = io.gets.match(/(\d+(\.\d+)?)/)[1].to_f
         annoVal = io.gets.match(/"(.*)"/)[1]
-
         if annoVal.strip != ""
-
           item = fdoc.add_item({identifier:"l#{tier_num}a#{anno_num}"}) do |i|
             i.add_interval_link IntervalLink.new(
                                     identifier:"#{i.identifier}-il",
@@ -89,17 +86,82 @@ class Mexico::Fiesta::Interfaces::TextGridInterface
                                  identifier:"#{i.identifier}-ll",
                                  target_object: layer )
           end
-
-          puts item
-
+          # puts item
         end
-
       end
-
     end
-
     fdoc
-
   end
 
+
+  def export(doc, io=$stdout, params = {})
+    Mexico::Util::FancyWriter.new(io) do
+      line 'File type = "ooTextFile"'
+      line 'Object class = "TextGrid"'
+      line
+
+      # overall min and max values
+      total_item_links = doc.items.collect{|i| i.interval_links}.flatten
+      total_min = total_item_links.collect{|l| l.min}.min
+      total_max = total_item_links.collect{|l| l.max}.max
+      line "xmin = %f" % total_min
+      line "xmax = %f" % total_max
+      line 'tiers? <exists>'
+      line "size = %i" % doc.layers.size
+      line 'item []:'
+      indent 4 do
+        # FOREACH layer : print layer header block
+        doc.layers.each_with_index do |layer,layer_index|
+          line 'item [%i]:' % (layer_index+1)
+
+          indent 4 do
+            # "IntervalTier", "name", min, max, annocount
+            line 'class = "IntervalTier"'
+            line %Q(name = "#{layer.name}")
+            layer_item_links = doc.items.collect{|i| i.interval_links}.flatten
+            layer_min = layer_item_links.collect{|l| l.min}.min
+            layer_max = layer_item_links.collect{|l| l.max}.max
+            line "xmin = %f" % layer_min
+            line "xmax = %f" % layer_max
+
+            # FOREACH item in layer : min, max, value
+            sorted_items = layer.items.sort{|i,j| i.interval_links.first.min <=> i.interval_links.first.min}
+            time_points = [total_min, total_max, layer_min, layer_max]
+            sorted_items.each do |i|
+              time_points << i.interval_links.first.min
+              time_points << i.interval_links.first.max
+            end
+            time_points.uniq!.sort!
+            # print effective number of annotations
+            line "intervals: size = %i" % (time_points.size-1)
+            time_points.each_with_index do |current_point, n|
+              next_point = nil
+              unless n == time_points.size-1
+                next_point = time_points[n+1]
+              end
+              unless next_point.nil?
+                #puts "-"*48
+                #puts "TL:   %20.18f - %20.18f" % [current_point, next_point]
+                #sorted_items.each do |it|
+                #  puts "IT:   %20.18f - %20.18f  --  %20.18f - %20.18f, %s" % [it.interval_links.first.min, it.interval_links.first.max, (it.interval_links.first.min-current_point), (it.interval_links.first.max-next_point), ((it.interval_links.first.min-current_point).abs<0.00001 && (it.interval_links.first.max-next_point).abs<0.00001)]
+                #end
+                line 'intervals [%i]:' % (n+1)
+                indent 4 do
+                  item = sorted_items.select{|i| (i.interval_links.first.min-current_point).abs<0.00001 && (i.interval_links.first.max-next_point).abs<0.00001}.first
+                  #puts item
+                  line 'xmin = %f' % current_point
+                  line 'xmax = %f' % next_point
+                  if item.nil?
+                    line 'text = ""'
+                  else
+                    line %Q(text = "#{item.data.string_value}")
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
 end

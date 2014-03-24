@@ -21,8 +21,15 @@ class ::Mexico::FileSystem::Layer
 
   include ROXML
 
-  xml_accessor :identifier, :from => '@id'
+  xml_reader :identifier,        :from => '@id'
+
+  def identifier=(new_id)
+    @identifier = Mexico::Util::to_xml_id(new_id)
+  end
+
   xml_accessor :name,       :from => '@name'
+
+  xml_accessor :properties, :as => ::Mexico::FileSystem::PropertyMap,  :from => "PropertyMap"
 
   attr_accessor :document
 
@@ -42,7 +49,14 @@ class ::Mexico::FileSystem::Layer
       if self.respond_to?("#{k}=")
         send("#{k}=", v)
       end
+
+      @properties = Mexico::FileSystem::PropertyMap.new
     end
+
+    if properties.nil?
+      properties = ::Mexico::FileSystem::PropertyMap.new(key: 'layerProperties')
+    end
+
   end
 
   def items
@@ -83,6 +97,10 @@ class ::Mexico::FileSystem::Layer
     self.items.each do |item|
       return false if item.item_links.size > 1
     end
+  end
+
+  def add_property(prop)
+    properties.properties << prop
   end
 
 

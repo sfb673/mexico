@@ -39,13 +39,16 @@ module Mexico::Util
   # @param string [String] The string to be converted to an ID.
   # @return       [String] The resulting ID.
   def self.to_xml_id(string)
+    return nil if string.nil? # @todo auto-assign IDs
     result = string.downcase
     UMLAUTS.each_pair do |u,v|
       result.gsub!(/#{u}/, v)
     end
-    return result.gsub(/[^\w\d]/, '')
+    result.gsub!(/[^\w\d]/, '_')
+    return result.gsub(/_+/, '_')
   end
 
 end
 
 require 'mexico/util/fancy_container'
+require 'mexico/util/fancy_writer'

@@ -1,4 +1,3 @@
-# encoding: utf-8
 # This file is part of the MExiCo gem.
 # Copyright (c) 2012-2014 Peter Menke, SFB 673, Universität Bielefeld
 # http://www.sfb673.org
@@ -17,33 +16,30 @@
 # License along with MExiCo. If not, see
 # <http://www.gnu.org/licenses/>.
 
-# This class provides a corpus representation that is backed up by the filesystem.
-# A central Corpus definition file in the top-level folder contains an
-# XML representation of the corpus structure, and all actual resources are found
-# as files on a file system reachable from the top-level folder.
+require 'spec_helper'
 
-class Mexico::FileSystem::Property
+describe Mexico::FileSystem::Layer do
 
-  include ::ROXML
-  xml_name 'Property'
+  before(:each) do
+    @basepath = File.join File.dirname(__FILE__), '..', '..'
+    @path = File.join @basepath, 'assets', 'fiesta', 'props'
+    @filename = File.join(@path,'props.fst')
+    @fdoc = ::Mexico::FileSystem::FiestaDocument.open(@filename)
 
-  xml_accessor :key, :from => '@key'
-  xml_accessor :value, :from => :content
-
-  def initialize(arg1=nil, arg2=nil)
-    puts "Property init - %s : %s" % [arg1, arg2]
-    if arg1.respond_to?(:has_key?)
-      args.each do |k,v|
-        if self.respond_to?("#{k}=")
-          send("#{k}=", v)
-        end
-      end
-    else
-      unless (arg1.nil? || arg2.nil?)
-        self.key = arg1
-        self.value = arg2
-      end
+    @outfile = File.join(@path,'out.fst')
+    File.open(@outfile, 'w') do |f|
+      f.write @fdoc.to_xml
     end
   end
 
+  context 'Fiesta ' do
+    context 'Layer' do
+      it 'reads props from layers' do
+        @fdoc.layers.first.should respond_to(:properties)
+        @fdoc.layers.first.properties.should have_key('elanTierType')
+        @fdoc.layers.first.properties['elanTierType'].should_not be nil
+        @fdoc.layers.first.properties['elanTierType'].value.should eq 'TIME_SUBDIVISION'
+      end
+    end
+  end
 end

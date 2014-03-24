@@ -30,4 +30,19 @@ class Mexico::FileSystem::Head
   # many HeadSections with keys
   xml_accessor :sections, :as => [::Mexico::FileSystem::Section],     :from => "Section"
 
+  def initialize(args={})
+    @sections = []
+    ::Mexico::FileSystem::Section::SECTION_KEYS.each do |key|
+      @sections << ::Mexico::FileSystem::Section.new(key)
+    end
+  end
+
+  def [](key)
+    sections.find{|x| x.key == key }
+  end
+
+  def section(key)
+    sections.find{|x| x.key == key }
+  end
+
 end
