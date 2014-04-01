@@ -10,10 +10,10 @@ gem 'roxml'
 gem 'builder'
 gem 'colorize'
 
-gem 'rdf', '~> 1.0.7'
-gem 'rdf-turtle', '~> 1.0.8'
+gem 'rdf', '~> 1.1'
+gem 'rdf-turtle', '~> 1.1'
 # gem 'rdf-ntriples'
-gem 'rdf-rdfxml'
+gem 'rdf-rdfxml', '~> 1.1'
 #gem 'poseidon', :require => true, :path => '~/code/poseidon'
 gem 'poseidon', '~> 1.1.1', :require => true, :git => 'git://github.com/sfb673/poseidon.git'
 
