@@ -64,3 +64,9 @@ end
 task :undoc do |t|
   YARD::CLI::Stats.run('--list-undoc')
 end
+
+desc "Open an irb session preloaded with this library"
+task :console do
+  sh "irb -rubygems -I lib -r test.rb"
+end
+
