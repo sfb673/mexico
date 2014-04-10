@@ -10,6 +10,13 @@ Its central organising unit is the **Corpus** class which allows researchers to 
 
 ## Last Changes
 
+## 0.0.12 (Hotfix)
+
+Completed on April 10 2014.
+
++ [**#269**](http://intranet.sfb673.org/issues/269): Fixes a constructor in LayerConnector that did not allow parameter-less initialization (as needed by ROXML).
++ [**#270**](http://intranet.sfb673.org/issues/270): The chat game corpus interface now uses the current setter methods.
+
 ## 0.0.11
 
 Completed on March 24 2014.
