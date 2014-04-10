@@ -40,8 +40,8 @@ class Mexico::Fiesta::Interfaces::B6ChatGameInterface
     t = fiesta_document.add_standard_timeline('s')
     x = Scale.new(identifier: 'spatial_x', name: 'Spatial coordinate X', unit: 'pixel', document: f)
     y = Scale.new(identifier: 'spatial_y', name: 'Spatial coordinate Y', unit: 'pixel', document: f)
-    fiesta_document.scales << x
-    fiesta_document.scales << y
+    fiesta_document.add_scale x
+    fiesta_document.add_scale y
 
     lChats = Layer.new(identifier: 'chats',     name: 'Chats',     document: f)
     lMoves = Layer.new(identifier: 'moves',     name: 'Moves',     document: f)
@@ -56,11 +56,11 @@ class Mexico::Fiesta::Interfaces::B6ChatGameInterface
     # - sentences, with attributes
     # - their parsetrees, with attributes
 
-    fiesta_document.layers << lChats
-    fiesta_document.layers << lMoves
-    fiesta_document.layers << lSents
-    fiesta_document.layers << lParsT
-    fiesta_document.layers << lParsP
+    fiesta_document.add_layer lChats
+    fiesta_document.add_layer lMoves
+    fiesta_document.add_layer lSents
+    fiesta_document.add_layer lParsT
+    fiesta_document.add_layer lParsP
 
     # B6 data is avaiable in XML documents, so we read
     # those into a Nokogiri object.
@@ -92,7 +92,7 @@ class Mexico::Fiesta::Interfaces::B6ChatGameInterface
           i.data = Data.new(item: i, document: f)
           # link layer
           i.layer_links << LayerLink.new(identifier: "move-#{el_counter}-layer", target_object: lMoves, document: f)
-          fiesta_document.items << i
+          fiesta_document.add_item i
         end
 
         if tag_name == 'chat'
@@ -101,7 +101,7 @@ class Mexico::Fiesta::Interfaces::B6ChatGameInterface
           i.point_links << PointLink.new(identifier: "chat-#{el_counter}-t", point: time_val , target_object: t, document: f)
           i.data = Data.new(:string_value => action['message'], item: i, document: f)
           i.layer_links << LayerLink.new(identifier: "chat-#{el_counter}-layer", target_object: lChats, document: f)
-          fiesta_document.items << i
+          fiesta_document.add_item i
           # todo: remember this chat item, the next annotations refer to it
 
           last_chat_elem = action
@@ -141,28 +141,24 @@ class Mexico::Fiesta::Interfaces::B6ChatGameInterface
                                            no:   sentence['no']}),
                                       item: sent_item, document: f
             sidm = sent_item.data.map
-            f.items << sent_item
+            f.add_item sent_item
 
             parsetree_elem = sentence.xpath('./parsetree').first
-            pt_id = parsetree_elem['id']
-            parsetree_item = Item.new identifier: pt_id , document: f
-
-            parsetree_item.item_links << ItemLink.new(identifier: "#{pt_id}-to-sentence", target_object: sent_item, role: 'parent', document: f)
-            parsetree_item.layer_links << LayerLink.new(identifier:"#{pt_id}-to-layer", target_object: lParsT, document: f  )
-
-            parsetree_item.data = Data.new map: Mexico::FileSystem::FiestaMap.new({
-                                                                         tiefe: parsetree_elem['tiefe'],
-                                                                         verzweigung:  parsetree_elem['verzweigung'],
-                                                                         hoeflichkeit:  parsetree_elem['hoeflichkeit']}),
-                                           item: parsetree_item, document: f
-
-            # parsetree_item.data = Mexico::FileSystem::Data.new string_value: "Parsetree"
-
-
-            f.items << parsetree_item
-
-            convert_phrases f, parsetree_item, lParsP, parsetree_elem
-
+            if parsetree_elem.nil?
+              $stderr.puts "There is a parsetree missing in sentence #{s_id}"
+            else
+              pt_id = parsetree_elem['id']
+              parsetree_item = Item.new identifier: pt_id , document: f
+              parsetree_item.item_links << ItemLink.new(identifier: "#{pt_id}-to-sentence", target_object: sent_item, role: 'parent', document: f)
+              parsetree_item.layer_links << LayerLink.new(identifier:"#{pt_id}-to-layer", target_object: lParsT, document: f  )
+              parsetree_item.data = Data.new map: Mexico::FileSystem::FiestaMap.new({
+                                                                           tiefe: parsetree_elem['tiefe'],
+                                                                           verzweigung:  parsetree_elem['verzweigung'],
+                                                                           hoeflichkeit:  parsetree_elem['hoeflichkeit']}),
+                                             item: parsetree_item, document: f
+              f.add_item parsetree_item
+              convert_phrases f, parsetree_item, lParsP, parsetree_elem
+            end
           end
         end
       end

@@ -163,6 +163,20 @@ class Mexico::FileSystem::FiestaDocument
     return nil
   end
 
+  def add_scale(args)
+    if args.is_a?(Hash)
+      new_layer = Mexico::FileSystem::Scale.new(args.merge({document: self}))
+      @scales_container << new_layer
+      return new_layer
+    end
+    if args.is_a?(Mexico::FileSystem::Scale)
+      @scales_container << args
+      return args
+    end
+    # @TODO catch error if parameter has wrong object type
+    return nil
+  end
+
   # This method attempts to link objects from other locations of the XML/object tree
   # into position inside this object, by following the xml ids given in the
   # appropriate fields of this class.
